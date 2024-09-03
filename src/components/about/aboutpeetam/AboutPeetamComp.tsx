@@ -12,7 +12,7 @@ function AboutPeetamComp() {
         />
       </div>
 
-      <div className="w-3/6 h-full flex flex-col justify-around items-center p-4 text-xl gap-6 text-[#FFA12B]">
+      <div className="w-3/6 h-full flex flex-col justify-around items-center p-4 text-md leading-7 tracking-wide gap-6 text-[#FFA12B]">
         <p>{AboutPeetamData[0].p1}</p>
         <p>{AboutPeetamData[0].p2}</p>
         <p>{AboutPeetamData[0].p3}</p>

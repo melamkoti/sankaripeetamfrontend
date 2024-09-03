@@ -1,16 +1,23 @@
 import { FounderData } from "./FounderData";
 import founder from "../../../assets/images/founder.png";
 import quotation from "../../../assets/svg/quotation.svg";
+import LotusFramer from "./LotusFramer";
 
 function FounderComp() {
   return (
-    <div className="w-full h-full bg-white p-12 flex justify-center items-center">
+    <div className="w-full h-full bg-white p-12 py-32 flex justify-center items-center">
       <div className="w-1/2 h-full flex flex-col gap-6 ">
-        <div className="h-4/6 w-full flex justify-center items-center ">
+        <div className="h-4/6  relative w-full flex justify-center items-center ">
+        <div className="w-full absolute -bottom-28 -right-5 transform ">
+
+        <LotusFramer />
+        </div>
+
+        
           <img
             src={founder}
             alt="founder"
-            className="w-3/6 flex justify-center items-center "
+            className="w-3/6 z-50 flex justify-center items-center "
           />
         </div>
 

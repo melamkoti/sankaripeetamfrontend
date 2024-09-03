@@ -6,5 +6,6 @@ export const FounderData = [
         "nameeng": "BRAHMASRI NEMMIKANTI NARSAIAH ACHARYA",
         "poemtel": "కృషితో నాస్తి దుర్భిక్షమ్ | జపతో నాస్తి పాతకమ్ || మౌనేన కలహం నాస్తి | నాస్తి జాగరతో భయం ||",
         "poemeng": "Krushitho Naasthi Durbhiksham | Japatho Naasthi Pathakam || Maunena Kalaham Naasthi | Naasthi Jaagaratho Bhayam ||",
+        
     }
 ]
