@@ -8,23 +8,35 @@ import footerLogo from "../../../assets/images/footer-logo.svg";
 import footerInsta from "../../../assets/images/footer-insta.svg";
 import footerWhatsApp from "../../../assets/images/footer-whatsapp.svg";
 import footerYouTube from "../../../assets/images/footer-youtube.svg";
+import { useState, useEffect } from "react";
 import {
   FooterInfoData,
-  FooterPostsData,
   FooterOthersData,
 } from "./FooterPostsData";
+type FooterEventsType = {
+  img: string;
+  date: string;
+  title: string;
+};
 export default function FooterComp() {
+  const [footerEventsState, setFooterEventsState] = useState<FooterEventsType[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/event")
+      .then((response) => response.json())
+      .then((data) => setFooterEventsState(data))
+      .catch((error) => console.error("Error fetching events data: ", error));
+  }, []);
   return (
     <div
-      className="flex flex-col gap-4 text-white  pt-24 px-12 "
+      className="flex flex-col gap-4 text-white  md:pt-24 md:px-12 pt-12 px-6"
       style={{
         backgroundImage: `url(${footerBgImg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="flex  justify-around">
-        <div className="flex flex-col gap-4 w-1/3">
+      <div className="flex flex-col  justify-around lg:flex-row gap-8">
+        <div className="flex flex-col gap-4 lg:w-1/3">
           <h1 className="text-xl font-semibold">About Us</h1>
           <p>
             Don't stay stuck in the past. Move forward and embrace new
@@ -51,7 +63,7 @@ export default function FooterComp() {
           </div>
           <div className="flex items-center gap-3 text-[#FFB600]">
             <div>
-              <img src={footerLocationImg} className="w-14" alt="" />
+              <img src={footerLocationImg} className="lg:w-14 w-8" alt="" />
             </div>
             <div>
               <p>
@@ -62,7 +74,7 @@ export default function FooterComp() {
             </div>
           </div>
         </div>
-        <div className="flex w-1/3 justify-around">
+        <div className="flex lg:w-1/3 justify-around">
           <ul className="flex flex-col gap-4 text-[#FFB600] ">
             <li className="text-xl font-semibold text-white">
               <p>Information</p>
@@ -97,8 +109,8 @@ export default function FooterComp() {
         <div className="flex flex-col items-start gap-4 ">
           <h1 className="text-xl font-semibold">Recent Posts</h1>
 
-          <div className="flex flex-col   gap-4 text-[#FFB600]">
-            {FooterPostsData.map((item, index) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4 md:gap-12 lg:gap-4 text-[#FFB600]">
+            {footerEventsState.map((item, index) => {
               return (
                 <div
                   className="flex gap-4 justify-start items-center"
@@ -120,7 +132,7 @@ export default function FooterComp() {
           </div>
         </div>
       </div>
-      <div className="py-8 flex justify-around items-center">
+      <div className="py-8 flex flex-col flex-col-reverse gap-4 md:flex-row justify-around items-center">
         <p>COPYRIGHT &copy; - 2024</p>
         <div>
           <img src={footerLogo} alt="" />

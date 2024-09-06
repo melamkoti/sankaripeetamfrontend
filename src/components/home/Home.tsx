@@ -7,18 +7,17 @@ import ProductsPage from "./products/ProductsPage";
 import Welcome from "./welcome/Welcome";
 
 function Home() {
-    return(
-        <div>
-            <Welcome />
-            <FounderComp />
-            <AboutMePage />
-            <OurGoalsPage />
-            <ActivitiesPage />
-            <ProductsPage />
-            <EventsPage />
-
-        </div>
-    )
+  return (
+    <div className="main_head">
+      <Welcome />
+      <FounderComp />
+      <AboutMePage />
+      <OurGoalsPage />
+      <ActivitiesPage />
+      <ProductsPage />
+      <EventsPage />
+    </div>
+  );
 }
 
 export default Home;

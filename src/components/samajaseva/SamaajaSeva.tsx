@@ -2,7 +2,7 @@ import SamaajaSevaComp from "./samajasevapage/SamaajaSevaComp";
 
 export default function SamaajaSeva() {
   return (
-    <div>
+    <div className="main_head">
       <SamaajaSevaComp />
     </div>
   );

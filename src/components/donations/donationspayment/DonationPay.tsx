@@ -1,5 +1,5 @@
 import { DonationPayData } from "./DonationPayData";
-import tickred from "../../assets/svg/tickred.svg";
+import tickred from "../../../assets/svg/tickred.svg";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
@@ -16,13 +16,14 @@ const schema = z.object({
   lastname: z.string().min(3, "Name must be at least 3 letters"),
   message: z.string().min(10, "Must contain at least 10 characters"),
   amount: z.string().nonempty("Amount is required"),
-  family: z.array(
-    z.object({
-      value1: z.string().min(1, "Relation is required"),
-      value2: z.string().min(3, "Name must be at least 3 letters"),
-    })
-  ).min(1, "At least one family member must be added"),
-  
+  family: z
+    .array(
+      z.object({
+        value1: z.string().min(1, "Relation is required"),
+        value2: z.string().min(3, "Name must be at least 3 letters"),
+      })
+    )
+    .min(1, "At least one family member must be added"),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -53,10 +54,10 @@ function DonationPay() {
     }
   };
 
-  const [inputFields, setInputFields] = useState([{ value1: '', value2: '' }]);
+  const [inputFields, setInputFields] = useState([{ value1: "", value2: "" }]);
 
   const handleAddFields = () => {
-    setInputFields([...inputFields, { value1: '', value2: '' }]);
+    setInputFields([...inputFields, { value1: "", value2: "" }]);
   };
 
   const handleChange = (index, event) => {
@@ -82,12 +83,12 @@ function DonationPay() {
   }
 
   return (
-    <div className="flex flex-col gap-8 p-12">
+    <div className="flex flex-col gap-8 p-4 lg:p-12 lg:w-[60vw] mx-auto">
       <p>{DonationPayData[0].maindescp}</p>
 
       {/* content */}
-      <div className="flex flex-col gap-4">
-        <p className="text-2xl font-medium">Content</p>
+      <div className="flex flex-col gap-4 ">
+        <p className="text-2xl font-medium ">Content </p>
 
         <ul className="flex flex-col gap-2">
           {DonationPayData[0].list.map((item, idx) => {
@@ -102,7 +103,7 @@ function DonationPay() {
       </div>
 
       {/* donation input */}
-      <div className="w-4/6 p-2">
+      <div className="w-full md:w-5/6 p-2">
         <form
           className="w-full flex flex-col gap-8"
           onSubmit={handleSubmit(onSubmit)}
@@ -121,7 +122,7 @@ function DonationPay() {
                   {...register("amount")} // Registering the donation amount for validation
                   onChange={(e) => setAmount(e.target.value)}
                   onFocus={clearAmount}
-                  className="outline-none border-[#E26900] border-e-2 p-2 border-y-2 rounded-r-lg w-full"
+                  className="outline-none border-[#E26900] border-e-2 p-2 border-y-2 rounded-r-lg w-full md:w-3/6"
                 />
               </div>
               {errors.amount && (
@@ -131,14 +132,14 @@ function DonationPay() {
               )}
             </div>
 
-            <div className="flex gap-6 w-full">
+            <div className="flex flex-wrap gap-2 ">
               {DonationPayData[0].donationPrices.map((item, idx) => {
                 return (
                   <motion.button
                     type="button"
                     onClick={() => amountUpdate(item.price)}
                     key={idx}
-                    className="rounded-3xl p-2 px-4 border-2 border-[#797979]"
+                    className="rounded-xl py-2 px-4 border-2 border-[#797979]"
                     whileHover={{ scale: 1.08 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -149,13 +150,12 @@ function DonationPay() {
             </div>
           </div>
 
-
           {/* PersonalDetails */}
           <div className="w-full flex flex-col gap-8">
             <p className="text-2xl font-medium">Personal Details</p>
 
             <div className="flex flex-col gap-8 justify-start">
-              <div className="flex w-3/6 flex-col gap-1 relative">
+              <div className="flex md:w-3/6 flex-col gap-1 relative">
                 <label
                   htmlFor="firstname"
                   className="text-lg font-normal text-[#666]"
@@ -175,71 +175,72 @@ function DonationPay() {
                 )}
               </div>
 
-              <p className="text-xl font-medium">Enter Details of your family</p>
+              <p className="text-xl font-medium">
+                Enter Details of your family
+              </p>
 
               <div>
-              {inputFields.map((fields, index) => (
-  <div key={index} className="flex w-full items-start gap-2 mb-4">
-    <div className="w-1/6 flex flex-col ">
+                {inputFields.map((fields, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col md:flex-row w-full items-start gap-2 mb-4"
+                  >
+                    <div className="w-full md:w-2/6 flex flex-col ">
+                      <input
+                        {...register(`family.${index}.value1`)}
+                        type="text"
+                        value={fields.value1}
+                        onChange={(event) => handleChange(index, event)}
+                        placeholder="Relation"
+                        className="border-2 w-full p-2 rounded outline-none border-slate-400 focus:border-[#FFA12B]"
+                      />
+                      {errors.family?.[index]?.value1 && (
+                        <p className="text-red-600 text-xs mt-1 ">
+                          {errors.family[index].value1.message}
+                        </p>
+                      )}
+                    </div>
 
-    <input
-      {...register(`family.${index}.value1`)} 
-      type="text"
-      value={fields.value1}
-      onChange={(event) => handleChange(index, event)}
-      placeholder="Relation"
-      className="border-2 w-full p-2 rounded outline-none border-slate-400 focus:border-[#FFA12B]"
-    />
-    {errors.family?.[index]?.value1 && (
-      <p className="text-red-600 text-xs mt-1">
-        {errors.family[index].value1.message}
-      </p>
-    )}
-    </div>
+                    <div className="w-full flex flex-col md:w-2/6 ">
+                      <input
+                        {...register(`family.${index}.value2`)} // Register Name
+                        type="text"
+                        value={fields.value2}
+                        onChange={(event) => handleChange(index, event)}
+                        placeholder="Name"
+                        className="border-2 w-full p-2 rounded outline-none border-slate-400 focus:border-[#FFA12B]"
+                      />
+                      {errors.family?.[index]?.value2 && (
+                        <p className="text-red-600 text-xs mt-1">
+                          {errors.family[index].value2.message}
+                        </p>
+                      )}
+                    </div>
 
-<div className="flex flex-col w-3/6 ">
-    <input
-      {...register(`family.${index}.value2`)} // Register Name
-      type="text"
-      value={fields.value2}
-      onChange={(event) => handleChange(index, event)}
-      placeholder="Name"
-      className="border-2 w-full p-2 rounded outline-none border-slate-400 focus:border-[#FFA12B]"
-    />
-    {errors.family?.[index]?.value2 && (
-      <p className="text-red-600 text-xs mt-1">
-        {errors.family[index].value2.message}
-      </p>
-    )}
-    </div>
-
-<div className="flex gap-2 mt-1">
-  
-    <button
-      type="button"
-      onClick={handleAddFields}
-      className="border-2 px-1 flex items-center justify-center border-slate-500 text-black p-1 text-xl font-bold text-center rounded-lg"
-    >
-      +
-    </button>
-    {inputFields.length > 1 && (
-      <button
-        type="button"
-        onClick={() => handleRemoveFields(index)}
-        className="p-1 px-2 border-2 border-red-500 text-black text-xl font-bold rounded-lg"
-      >
-        -
-      </button>
-    )}
-</div>
-  </div>
-))}
-
+                    <div className="flex gap-2 mt-1 ">
+                      <button
+                        type="button"
+                        onClick={handleAddFields}
+                        className="border-2 px-1  border-slate-500 text-black p-1 md:text-xl font-semibold text-center rounded-lg"
+                      >
+                        + 
+                      </button>
+                      {inputFields.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveFields(index)}
+                          className="p-1 px-2 border-2 border-red-500 text-black text-xl font-bold rounded-lg"
+                        >
+                          -
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
-              
             </div>
 
-            <div className="w-full">
+            <div className="w-full md:w-3/6">
               <div className="flex flex-col gap-1 relative">
                 <label
                   htmlFor="email"
@@ -261,7 +262,7 @@ function DonationPay() {
               </div>
             </div>
 
-            <div className="w-2/6 flex">
+            <div className="md:w-5/6 lg:w-3/6 flex">
               <div className="rounded-l-lg text-center p-2 w-3/6 bg-[#E26900]">
                 Donation Total:
               </div>
@@ -275,7 +276,7 @@ function DonationPay() {
               onClick={handleSubmit(onSubmit)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-1/6 p-2 text-white rounded-full bg-[#7E4555]"
+              className="w-3/6 md:w-2/6 p-2 text-white rounded-full bg-[#7E4555] mx-auto "
             >
               Donate Now
             </motion.button>

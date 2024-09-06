@@ -61,7 +61,7 @@ export const Example = () => {
       animate={isOpen ? "open" : "closed"}
       custom={height}
       ref={containerRef}
-      className="absolute top-0 left-0"
+      className="absolute top-4 right-0"
       onAnimationStart={onAnimationStart}
       onAnimationComplete={onAnimationComplete}
     >

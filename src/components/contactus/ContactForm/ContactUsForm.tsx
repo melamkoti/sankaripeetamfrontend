@@ -9,11 +9,14 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import kite from "../../../assets/images/kite.png"
+import kite from "../../../assets/images/kite.png";
 
-
-const options = ["General Enquiry 1", "General Enquiry 2", "General Enquiry 3", "General Enquiry 4"] as const;
-
+const options = [
+  "General Enquiry 1",
+  "General Enquiry 2",
+  "General Enquiry 3",
+  "General Enquiry 4",
+] as const;
 
 const schema = z.object({
   email: z
@@ -27,9 +30,9 @@ const schema = z.object({
     .string()
     .length(10, "Phone number must contain 10 digits")
     .regex(/^\d{10}$/, "Phone number must be digits only"),
-    selectedOption: z.enum(options, {
-      required_error: "Please select an option",
-    }),
+  selectedOption: z.enum(options, {
+    required_error: "Please select an option",
+  }),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -41,8 +44,6 @@ function ContactUsForm() {
     formState: { errors },
     reset,
   } = useForm<FormFields>({ resolver: zodResolver(schema) });
-  
-
 
   const onSubmit = async (data: FormFields) => {
     try {
@@ -56,16 +57,15 @@ function ContactUsForm() {
       console.error("Error submitting form:", error);
     }
   };
-  
 
   return (
-    <div className="flex flex-col justify-center items-center p-20 px-28 gap-8 bg-[#f8f8f8]">
+    <div className="flex flex-col justify-center items-center lg:p-20 lg:px-28 p-4 gap-8 bg-[#f8f8f8] ">
       <p className="text-lg text-[#717171] tracking-wide">
         Any question or remarks? Just write us a message!
       </p>
 
-      <div className="flex rounded-xl bg-white w-full p-2">
-        <div className="w-2/6 border-2 bg-[#7E4555] text-white flex flex-col justify-evenly items-start p-12 rounded-xl shadow-lg  gap-12">
+      <div className="flex flex-col lg:flex-row rounded-xl bg-white w-full p-2">
+        <div className="lg:w-2/6 md:min-w-[350px] p-3 w-full border-2 bg-[#7E4555] text-white flex flex-col justify-evenly items-start lg:p-12 rounded-xl shadow-lg  gap-12">
           <div className="gap-2">
             <p className="text-2xl font-semibold tracking-wide">
               Contact Information
@@ -81,7 +81,11 @@ function ContactUsForm() {
               <p>+91 9705752677</p>
             </div>
             <div className="flex gap-2 justify-center items-center ">
-              <img src={email} alt="phonecall" className="w-6 flex items-start" />
+              <img
+                src={email}
+                alt="phonecall"
+                className="w-6 flex items-start"
+              />
               <p>guruji@sankaripeetam.in turst.sspc@gmail.com</p>
             </div>
             <div className="flex gap-2 justify-center items-start">
@@ -135,11 +139,18 @@ function ContactUsForm() {
           </div>
         </div>
 
-        <div className="w-4/6 relative">
-        <img src={kite} alt="kite" className="absolute bottom-1/4 z-10 right-1/3" />
-          <form className="flex flex-col gap-12 p-4" onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex w-full justify-around items-center gap-2 ">
-              <div className="flex w-2/6 flex-col gap-1 relative">
+        <div className="lg:w-4/6 relative">
+          <img
+            src={kite}
+            alt="kite"
+            className="hidden absolute bottom-1/4 z-10 right-1/3"
+          />
+          <form
+            className="flex flex-col gap-12 p-4"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="flex flex-col md:flex-row w-full justify-around items-center gap-8 lg:gap-2">
+              <div className="flex w-full lg:w-2/6 flex-col gap-1 relative">
                 <label
                   htmlFor="name"
                   className="text-lg font-normal text-[#666]"
@@ -158,7 +169,7 @@ function ContactUsForm() {
                   </p>
                 )}
               </div>
-              <div className="flex w-2/6 flex-col gap-1 relative">
+              <div className="flex w-full lg:w-2/6 flex-col gap-1 relative">
                 <label
                   htmlFor="name"
                   className="text-lg font-normal text-[#666]"
@@ -178,8 +189,8 @@ function ContactUsForm() {
                 )}
               </div>
             </div>
-            <div className="flex w-full justify-around items-center gap-2">
-              <div className="flex w-2/6 flex-col gap-1 relative">
+            <div className="flex flex-col md:flex-row w-full justify-around items-center gap-8 lg:gap-2">
+              <div className="flex w-full lg:w-2/6 flex-col gap-1 relative">
                 <label
                   htmlFor="email"
                   className="text-lg font-normal text-[#666]"
@@ -198,7 +209,7 @@ function ContactUsForm() {
                   </p>
                 )}
               </div>
-              <div className="flex w-2/6 flex-col gap-1 relative">
+              <div className="flex flex-col  w-full lg:w-2/6 flex-col gap-1 relative">
                 <label
                   htmlFor="phonenum"
                   className="text-lg font-normal  text-[#666]"
@@ -219,9 +230,9 @@ function ContactUsForm() {
               </div>
             </div>
 
-            <div className="flex flex-col w-full px-12 gap-4 relative">
-              <p className="text-xl ml-3 font-semibold">Select Category</p>
-              <div className="flex justify-around items-center ">
+            <div className="flex flex-col w-full lg:px-6 gap-4 relative ">
+              <p className="text-xl ml-1 font-semibold">Select Category</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 ">
                 {options.map((option, index) => (
                   <label key={index} className="flex items-center">
                     <input
@@ -242,28 +253,35 @@ function ContactUsForm() {
             </div>
 
             <div className="flex w-5/6 mx-auto flex-col gap-1 relative">
-                <label
-                  htmlFor="message"
-                  className="text-lg font-normal text-[#666]"
-                >
-                  Message
-                </label>
-                <input
-                  {...register("message")}
-                  placeholder="text message here"
-                  id="message"
-                  className="border-b-2 border-slate-700 outline-none p-2 "
-                />
-                {errors.message && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.message.message}
-                  </p>
-                )}
-              </div>
+              <label
+                htmlFor="message"
+                className="text-lg font-normal text-[#666]"
+              >
+                Message
+              </label>
+              <input
+                {...register("message")}
+                placeholder="text message here"
+                id="message"
+                className="border-b-2 border-slate-700 outline-none p-2 "
+              />
+              {errors.message && (
+                <p className="text-red-600 text-xs absolute -bottom-4 left-1">
+                  {errors.message.message}
+                </p>
+              )}
+            </div>
 
-              <div className="flex justify-end p-2">
-                <motion.button whileHover={{scale: 1.12}} whileTap={{scale: 0.93}} onClick={handleSubmit(onSubmit)} className="rounded-xl p-2 px-4 bg-[#7E4555] text-white">Send Message</motion.button >
-              </div>
+            <div className="flex justify-end p-2">
+              <motion.button
+                whileHover={{ scale: 1.12 }}
+                whileTap={{ scale: 0.93 }}
+                onClick={handleSubmit(onSubmit)}
+                className="rounded-xl p-2 px-4 bg-[#7E4555] text-white"
+              >
+                Send Message
+              </motion.button>
+            </div>
           </form>
         </div>
       </div>
@@ -272,6 +290,3 @@ function ContactUsForm() {
 }
 
 export default ContactUsForm;
-
-
-

@@ -16,7 +16,7 @@ export default function AdyatmikamComp() {
           ADHYATMIKAM
         </h1>
       </div>
-      <div className="flex flex-col gap-3 pt-24 px-24 text-base font-semibold ">
+      <div className="flex flex-col gap-3 md:pt-24 md:px-24 p-5 pt-14 text-base font-semibold ">
         <p>
           Adhyatmikam (Spirituality) is something that is beyond the material
           possessions, society and one's physical being. But at the same time it
@@ -56,10 +56,10 @@ export default function AdyatmikamComp() {
           <p>Gnana Ratnapahaaraaya Tasmath Jagratha Jagratha ||</p>
         </div>
       </div>
-      <div className="grid grid-cols-3 p-24 gap-10 w-[70vw] mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:p-24 p-8 gap-10 md:w-[90vw] mx-auto">
         {AdyatmikamData.map((item, index) => {
           return (
-            <div className="flex flex-col gap-3" key={index}>
+            <div className="flex flex-col gap-3 border-l-4 border-t border-[#AD3501] shadow-lg py-4 px-2 rounded-lg justify-center items-center" key={index}>
               <div className="min-w-16 ">
                 <img className="w-16" src={item.img} alt="" />
               </div>

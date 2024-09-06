@@ -1,7 +1,7 @@
 import EventsComp from "./eventspage/EventsComp";
 
 export default function Events() {
-  return <div>
+  return <div className="main_head">
     <EventsComp />
   </div>;
 }

@@ -3,7 +3,7 @@ import AboutPeetamComp from "./aboutpeetam/AboutPeetamComp";
 
 function AboutPage() {
   return (
-    <div>
+    <div className="main_head">
       <AboutMain />
       <AboutPeetamComp />
     </div>

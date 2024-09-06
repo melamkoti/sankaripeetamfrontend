@@ -17,7 +17,7 @@ export default function SamaajaSevaComp() {
           SAMAAJA SEVA
         </h1>
       </div>
-      <div className="flex flex-col gap-3 pt-24 px-36 text-base  ">
+      <div className="flex flex-col gap-3 lg:pt-24 lg:px-36 md:pt-16 md:px-20 px-12 pt-10 text-base  ">
         <h1 className="text-xl font-semibold">SAMAAJA SEVA (Service towards Society)</h1>
         <p>
           Bhu seva (Service towards Land), Jala seva (Service towards Water),
@@ -63,12 +63,12 @@ export default function SamaajaSevaComp() {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 p-24 gap-20  mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:w-[70vw] sm:p-10 p-5 lg:gap-20 gap-10 mx-auto ">
         {SamajasevaData.map((item, index) => {
           return (
-            <div className="flex flex-col gap-3" key={index}>
-              <div className=" ">
-                <img className="" src={item.img} alt="" />
+            <div className="flex flex-col gap-3 mx-auto rounded-md" key={index}>
+              <div className="rounded-md ">
+                <img className="rounded-md" src={item.img} alt="" />
               </div>
             </div>
           );

@@ -22,3 +22,77 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# import { motion } from "framer-motion";
+# import { NavLink, useNavigate } from "react-router-dom"; // Import useNavigate
+# import { NavTypes } from "../../utils/types/Types.ts";
+
+# const variants = {
+#   open: {
+#     y: 0,
+#     opacity: 1,
+#     transition: {
+#       y: { type: "spring", stiffness: 100, velocity: -50 },
+#     },
+#   },
+#   closed: {
+#     y: 100,
+#     opacity: 0,
+#     transition: {
+#       y: { type: "spring", stiffness: 100 },
+#     },
+#   },
+# };
+
+# export const MenuItem = ({
+#   item,
+#   closeMenu,
+# }: {
+#   item: NavTypes;
+#   closeMenu: () => void;
+# }) => {
+#   const navigate = useNavigate(); // Initialize the navigate function
+
+#   const handleItemClick = () => {
+#     if (item.childNav) {
+#       // Navigate to the first child item by default
+#       const firstChildRoute = `${item.route}/${item.childNav[0]}`;
+#       navigate(firstChildRoute);
+#     } else {
+#       // Navigate to the item route
+#       navigate(item.route);
+#     }
+#     closeMenu(); // Close the menu after navigation
+#   };
+
+#   return (
+#     <motion.div
+#       variants={variants}
+#       whileHover={{ scale: 1.1 }}
+#       whileTap={{ scale: 0.95 }}
+#     >
+#       <span
+#         className="nav-li shadow-md px-4 py-2 mb-4 text-sm font-semibold text-[#1C1E53] cursor-pointer"
+#         onClick={handleItemClick}
+#       >
+#         {item.navLink}
+#       </span>
+
+#       {/* Render dropdown if there are childNav items */}
+#       {item.childNav && (
+#         <div className="pl-4">
+#           {item.childNav.map((child: string, index: number) => (
+#             <NavLink
+#               key={index}
+#               to={`${item.route}/${child}`}
+#               className="block text-sm text-[#1C1E53] p-2 shadow-md bg-slate-100 border-b"
+#               onClick={closeMenu}
+#             >
+#               {child}
+#             </NavLink>
+#           ))}
+#         </div>
+#       )}
+#     </motion.div>
+#   );
+# };

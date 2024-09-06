@@ -6,7 +6,7 @@ import petall1 from "../../../assets/svg/petall1.svg";
 import petalr2 from "../../../assets/svg/petalr2.svg";
 import petall2 from "../../../assets/svg/petall2.svg";
 
-export function LotusFramer() {
+function LotusFramer() {
     const controlsR1 = useAnimation();
     const controlsL1 = useAnimation();
     const controlsR2 = useAnimation();
@@ -70,34 +70,34 @@ export function LotusFramer() {
                 <img
                     src={petalmain}
                     alt="petalmain"
-                    className="w-1/4 absolute mt-8 z-10"
+                    className="w-2/6 md:w-1/4 absolute mt-8 z-10"
                 />
 
                 <motion.img
                     src={petalr1}
                     alt="petalr1"
-                    className="w-1/4 absolute "
+                    className="w-2/6 md:w-1/4 absolute "
                     animate={controlsR1}
                     initial={{ rotate: 0, opacity: 0 }}
                 />
                 <motion.img
                     src={petall1}
                     alt="petall1"
-                    className="w-1/4 absolute "
+                    className="w-2/6 md:w-1/4 absolute "
                     animate={controlsL1}
                     initial={{ rotate: 0, opacity: 0 }}
                 />
                 <motion.img
                     src={petalr2}
                     alt="petalr2"
-                    className="w-1/4 absolute "
+                    className="w-2/6 md:w-1/4 absolute "
                     animate={controlsR2}
                     initial={{ rotate: 0, opacity: 0 }}
                 />
                 <motion.img
                     src={petall2}
                     alt="petall2"
-                    className="w-1/4 absolute "
+                    className="w-2/6 md:w-1/4 absolute "
                     animate={controlsL2}
                     initial={{ rotate: 0, opacity: 0 }}
                 />

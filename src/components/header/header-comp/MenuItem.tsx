@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { NavTypes } from "../../utils/types/Types.ts";
+import { useState } from "react";
+
 const variants = {
   open: {
     y: 0,
@@ -17,6 +19,7 @@ const variants = {
     },
   },
 };
+
 export const MenuItem = ({
   item,
   closeMenu,
@@ -24,6 +27,21 @@ export const MenuItem = ({
   item: NavTypes;
   closeMenu: () => void;
 }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleItemClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (item.childNav) {
+      e.preventDefault(); 
+      setIsDropdownOpen((prev) => !prev);
+      const firstChildRoute = `${item.route}/${item.childNav[0]}`;
+      navigate(firstChildRoute);
+    } else {
+      navigate(item.route);
+      closeMenu();
+    }
+  };
+
   return (
     <motion.div
       variants={variants}
@@ -32,11 +50,26 @@ export const MenuItem = ({
     >
       <NavLink
         to={item.route}
-        className="nav-li shadow-md px-4 py-2 text-sm font-semibold text-[#1C1E53]"
-        onClick={closeMenu}
+        className="nav-li shadow-md px-4 py-2 mb-4 text-sm font-semibold text-[#1C1E53]"
+        onClick={handleItemClick}
       >
         {item.navLink}
       </NavLink>
+
+      {item.childNav && isDropdownOpen && (
+        <div className="pl-4">
+          {item.childNav.map((child: string, index: number) => (
+            <NavLink
+              key={index}
+              to={`${item.route}/${child}`}
+              className="block text-sm text-[#1C1E53] p-2 border-slate-400"
+              onClick={closeMenu}
+            >
+              {child}
+            </NavLink>
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 };

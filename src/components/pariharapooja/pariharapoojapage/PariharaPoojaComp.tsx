@@ -27,12 +27,12 @@ export default function PariharaPoojaComp() {
           <p>Abhyasanusarini Vidyaa | Buddhihi Karmanusarini ||</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 p-24 gap-10 shadow-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 p-5 md:p-24 gap-10 shadow-lg">
         {PariharaPoojaData.map((item, index) => {
           return (
             <div className="flex gap-3 shadow-lg p-3 rounded-xl" key={index}>
-              <div className="min-w-16 ">
-                <img className="w-16" src={lampImg} alt="" />
+              <div className="md:min-w-16 min-w-10">
+                <img className="md:w-16 w-10" src={lampImg} alt="" />
               </div>
               <div className=" flex flex-col gap-2">
               <h1 className="text-md font-semibold ">{index + 1 + ". " + item.title}</h1>
