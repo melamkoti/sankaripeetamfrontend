@@ -1,8 +1,26 @@
-import { EventsData } from "./EventsData";
 import calender from "../../../assets/svg/calendar.png";
 import { motion } from "framer-motion";
-
+import { useState, useEffect } from "react";
+type EventsType = {
+  title: string;
+  description: string;
+  image: string;
+  eventDate: Date;
+};
 function EventsComp() {
+  const [eventsState, setEventsState] = useState<EventsType[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/event/upcoming-events")
+      .then((response) => response.json())
+      .then((data) => {
+        const parsedData = data.map((event: any) => ({
+          ...event,
+          eventDate: new Date(event.eventDate),
+        }));
+        setEventsState(parsedData);
+      })
+      .catch((error) => console.error("Error fetching events data: ", error));
+  }, []);
   return (
     <div className="bg-[#FFF0E3] p-8 md:p-12 flex flex-col justify-center items-center gap-6">
       <div className="flex flex-col md:gap-2 justify-center items-center">
@@ -15,7 +33,7 @@ function EventsComp() {
       </div>
 
       <div className="flex w-full lg:w-5/6 flex-col justify-center items-center gap-4">
-        {EventsData.map((item, idx) => {
+        {eventsState.map((item, idx) => {
           return (
             <motion.div
               key={idx}
@@ -26,7 +44,7 @@ function EventsComp() {
                 <div className="w-4/6 md:w-1/6 md:h-3/6 overflow-hidden rounded-xl">
                   <motion.img
                     whileHover={{ scale: 1.05 }}
-                    src={item.img}
+                    src={`http://localhost:3000${item.image}`}
                     alt="img"
                     className="w-full rounded-xl max-h-1/6 object-cover object-center"
                   />
@@ -43,7 +61,9 @@ function EventsComp() {
                       alt="calender"
                       className="w-4 md:w-6 object-cover object-center"
                     />
-                    <p className="text-[#FD8F8F]">{item.date}</p>
+                    <p className="text-[#FD8F8F]">
+                      {item.eventDate.toLocaleDateString()}
+                    </p>
                   </div>
                 </div>
               </div>
