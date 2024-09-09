@@ -11,11 +11,11 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import kite from "../../../assets/images/kite.png";
 
-const options = [
-  "General Enquiry 1",
-  "General Enquiry 2",
-  "General Enquiry 3",
-  "General Enquiry 4",
+const EnquiryCategory = [
+  "GENERAL_ENQUIRY_1",
+  "GENERAL_ENQUIRY_2",
+  "GENERAL_ENQUIRY_3",
+  "GENERAL_ENQUIRY_4",
 ] as const;
 
 const schema = z.object({
@@ -23,14 +23,14 @@ const schema = z.object({
     .string()
     .nonempty("Email is required")
     .email("Invalid email address"),
-  firstname: z.string().min(3, "Name must be at least 3 letters"),
+  firstName: z.string().min(3, "Name must be at least 3 letters"),
   message: z.string().min(10, "Must contain at least 10 characters"),
-  lastname: z.string().min(3, "Name must be at least 3 letters"),
-  phonenum: z
+  lastName: z.string().min(3, "Name must be at least 3 letters"),
+  phoneNumber: z
     .string()
     .length(10, "Phone number must contain 10 digits")
     .regex(/^\d{10}$/, "Phone number must be digits only"),
-  selectedOption: z.enum(options, {
+  category: z.enum(EnquiryCategory, {
     required_error: "Please select an option",
   }),
 });
@@ -47,10 +47,7 @@ function ContactUsForm() {
 
   const onSubmit = async (data: FormFields) => {
     try {
-      const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts",
-        data
-      );
+      const response = await axios.post("http://localhost:3000/contact", data);
       console.log("Response:", response);
       reset();
     } catch (error) {
@@ -152,39 +149,39 @@ function ContactUsForm() {
             <div className="flex flex-col md:flex-row w-full justify-around items-center gap-8 lg:gap-2">
               <div className="flex w-full lg:w-2/6 flex-col gap-1 relative">
                 <label
-                  htmlFor="name"
+                  htmlFor="firstName"
                   className="text-lg font-normal text-[#666]"
                 >
                   First Name
                 </label>
                 <input
-                  {...register("firstname")}
+                  {...register("firstName")}
                   placeholder="Enter your First Name"
-                  id="firstname"
+                  id="firstName"
                   className="border-b-2 border-slate-700 outline-none p-2 "
                 />
-                {errors.firstname && (
+                {errors.firstName && (
                   <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.firstname.message}
+                    {errors.firstName.message}
                   </p>
                 )}
               </div>
               <div className="flex w-full lg:w-2/6 flex-col gap-1 relative">
                 <label
-                  htmlFor="name"
+                  htmlFor="lastName"
                   className="text-lg font-normal text-[#666]"
                 >
                   Last Name
                 </label>
                 <input
-                  {...register("lastname")}
-                  placeholder="Enter your First Name"
-                  id="lastname"
+                  {...register("lastName")}
+                  placeholder="Enter your Last Name"
+                  id="lastName"
                   className="border-b-2 border-black outline-none p-2 "
                 />
-                {errors.lastname && (
+                {errors.lastName && (
                   <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.lastname.message}
+                    {errors.lastName.message}
                   </p>
                 )}
               </div>
@@ -209,45 +206,46 @@ function ContactUsForm() {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col  w-full lg:w-2/6 flex-col gap-1 relative">
+              <div className="flex  w-full lg:w-2/6 flex-col gap-1 relative">
                 <label
-                  htmlFor="phonenum"
-                  className="text-lg font-normal  text-[#666]"
+                  htmlFor="phoneNumber"
+                  className="text-lg font-normal text-[#666]"
                 >
                   Phone Number
                 </label>
                 <input
-                  {...register("phonenum")}
+                  {...register("phoneNumber")}
                   placeholder="Enter your phone number"
-                  id="phonenum"
+                  id="phoneNumber"
                   className="border-b-2 border-black outline-none p-2 "
                 />
-                {errors.phonenum && (
+                {errors.phoneNumber && (
                   <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.phonenum.message}
+                    {errors.phoneNumber.message}
                   </p>
                 )}
               </div>
             </div>
 
+            {/* Category Selection */}
             <div className="flex flex-col w-full lg:px-6 gap-4 relative ">
               <p className="text-xl ml-1 font-semibold">Select Category</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 ">
-                {options.map((option, index) => (
+                {EnquiryCategory.map((EnquiryCategory, index) => (
                   <label key={index} className="flex items-center">
                     <input
                       type="radio"
-                      value={option}
-                      {...register("selectedOption")}
+                      value={EnquiryCategory}
+                      {...register("category")}
                       className="mr-2 z-20"
                     />
-                    {option}
+                    {EnquiryCategory}
                   </label>
                 ))}
               </div>
-              {errors.selectedOption && (
+              {errors.category && (
                 <p className="text-red-600 text-xs left-16 -bottom-4 absolute">
-                  {errors.selectedOption.message}
+                  {errors.category.message}
                 </p>
               )}
             </div>
@@ -259,11 +257,11 @@ function ContactUsForm() {
               >
                 Message
               </label>
-              <input
+              <textarea
                 {...register("message")}
-                placeholder="text message here"
+                placeholder="Enter your message here"
                 id="message"
-                className="border-b-2 border-slate-700 outline-none p-2 "
+                className="border-b-2 border-slate-700 outline-none p-2"
               />
               {errors.message && (
                 <p className="text-red-600 text-xs absolute -bottom-4 left-1">
@@ -276,7 +274,7 @@ function ContactUsForm() {
               <motion.button
                 whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.93 }}
-                onClick={handleSubmit(onSubmit)}
+                type="submit"
                 className="rounded-xl p-2 px-4 bg-[#7E4555] text-white"
               >
                 Send Message

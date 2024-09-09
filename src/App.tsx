@@ -13,10 +13,13 @@ import UpComingEvents from "./components/upcomingevents/UpComingEvents";
 import ContactUs from "./components/contactus/ContactUsPage";
 import DonationPaymentPage from "./components/donations/donationspayment/DonationPaymentPage";
 import Poojalu from "./components/poojalu/Poojalu";
-
+import Cart from './components/cart/CartPage';
+import ScrollToTop from "./components/ScrollToTop";
+import WhatsUpComp from "./components/WhatsUpComp";
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop/>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -33,12 +36,14 @@ function App() {
         </Route>
         <Route path="/products" element={<Products />} />
         <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/donate" element={<DonateNow />} />
         <Route
           path="/donationPayment"
           element={<DonationPaymentPage />}
         ></Route>
       </Routes>
+      <WhatsUpComp/>
       <Footer />
     </BrowserRouter>
   );

@@ -1,13 +1,25 @@
 import activitiesbg from "../../../assets/images/activitiesbg.jpg";
-import { ActivitesData } from "./ActvitiesData";
 import { motion } from "framer-motion";
-
+import { useState, useEffect } from "react";
+type ActivitiesType = {
+  color: string;
+  image: string;
+  title: string;
+  description: string;
+};
 function ActivitiesComp() {
+  const [activitiesState, setActivitiesState] = useState<ActivitiesType[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/activities")
+      .then((response) => response.json())
+      .then((data) => setActivitiesState(data))
+      .catch((error) => console.error("Error fetching events data: ", error));
+  }, []);
   return (
     <div
       className=" flex flex-col justify-start w-full p-8 md:p-12 lg:p-20 gap-12"
       style={{
-        backgroundImage:`url(${activitiesbg})`,
+        backgroundImage: ` url(${activitiesbg})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
@@ -18,9 +30,8 @@ function ActivitiesComp() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 text-white w-full gap-8 lg:gap-0 h-full">
-        {ActivitesData.map((item, idx) => {
+        {activitiesState.map((item, idx) => {
           return (
-            // <div></div>
             <motion.div
               key={idx}
               whileHover={{
@@ -34,11 +45,15 @@ function ActivitiesComp() {
               }  `}
               style={{ backgroundColor: item.color }}
             >
-              <img src={item.img} alt="image" className="w-12" />
+              <img
+                src={` http://localhost:3000${item.image}`}
+                alt="image"
+                className="w-12"
+              />
 
               <div className="text-center md:text-left">
                 <p>{item.title}</p>
-                <p>{item.content}</p>
+                <p>{item.description}</p>
               </div>
 
               <a href="#">Learn More &#8594;</a>
