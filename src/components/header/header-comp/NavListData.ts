@@ -1,4 +1,5 @@
 import cartImg from "../../../assets/svg/cart.svg";
+import wishlistImg from "../../../assets/svg/wishlist .png";
 export const NavListData = [
   { navLink: "HOME", route: "/" },
   { navLink: "ABOUT", route: "/aboutus" },
@@ -20,6 +21,13 @@ export const NavListData = [
     imageSrc: cartImg,
     altText: "Image Description",
     route: "/cart",
+  },
+  {
+    navLink: "WISHLIST",
+    isImage: true,
+    imageSrc: wishlistImg,
+    altText: "Image Description",
+    route: "/wishlist",
   },
   { navLink: "DONATE NOW", route: "/donate" },
 ];

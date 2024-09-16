@@ -1,7 +1,15 @@
 import { motion } from "framer-motion";
 import { NavLink, useNavigate } from "react-router-dom";
-import { NavTypes } from "../../utils/types/Types.ts";
 import { useState } from "react";
+import { z } from "zod";
+
+export const navSchema = z.object({
+  navLink: z.string(),
+  route: z.string(),
+  childNav: z.string().array().optional(),
+});
+
+type NavSchema = z.infer<typeof navSchema>;
 
 const variants = {
   open: {
@@ -24,7 +32,7 @@ export const MenuItem = ({
   item,
   closeMenu,
 }: {
-  item: NavTypes;
+  item: NavSchema;
   closeMenu: () => void;
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -32,7 +40,7 @@ export const MenuItem = ({
 
   const handleItemClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (item.childNav) {
-      e.preventDefault(); 
+      e.preventDefault();
       setIsDropdownOpen((prev) => !prev);
       const firstChildRoute = `${item.route}/${item.childNav[0]}`;
       navigate(firstChildRoute);
@@ -58,7 +66,7 @@ export const MenuItem = ({
 
       {item.childNav && isDropdownOpen && (
         <div className="pl-4">
-          {item.childNav.map((child: string, index: number) => (
+          {item.childNav.map((child, index) => (
             <NavLink
               key={index}
               to={`${item.route}/${child}`}

@@ -28,6 +28,11 @@ const schema = z.object({
 
 type FormFields = z.infer<typeof schema>;
 
+type InputField = {
+  value1: string;
+  value2: string;
+};
+
 function DonationPay() {
   const [amount, setAmount] = useState("");
 
@@ -60,14 +65,16 @@ function DonationPay() {
     setInputFields([...inputFields, { value1: "", value2: "" }]);
   };
 
-  const handleChange = (index, event) => {
+  const handleChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, value } = event.target;
     const newInputFields = [...inputFields];
-    newInputFields[index][name] = value;
+    newInputFields[index][name as keyof InputField] = value;
     setInputFields(newInputFields);
   };
-
-  const handleRemoveFields = (index) => {
+  const handleRemoveFields = (index: number) => {
     const newInputFields = inputFields.filter((_, i) => i !== index);
     setInputFields(newInputFields);
   };
@@ -223,7 +230,7 @@ function DonationPay() {
                         onClick={handleAddFields}
                         className="border-2 px-1  border-slate-500 text-black p-1 md:text-xl font-semibold text-center rounded-lg"
                       >
-                        + 
+                        +
                       </button>
                       {inputFields.length > 1 && (
                         <button

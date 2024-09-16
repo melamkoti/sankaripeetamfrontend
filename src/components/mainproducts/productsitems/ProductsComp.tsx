@@ -1,17 +1,14 @@
-import { useState } from "react";
-import ProductsCards from "./ProductsCards";
+import { useState, ChangeEvent } from "react";
 
 function ProductsComp() {
-  const [sortOption, setSortOption] = useState("Default Sorting");
+  const [sortOption, setSortOption] = useState<string>("Default Sorting");
 
-  const handleSortChange = (event) => {
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortOption(event.target.value);
   };
   return (
     <div className="flex p-8 lg:p-12">
       <div className="flex flex-col w-full gap-12 ">
-
-      {/* headersection */}
         <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-center">
           <p className="text-xl font-medium">Showing 8 of 20 products </p>
 
@@ -28,14 +25,8 @@ function ProductsComp() {
           </select>
         </div>
 
-
-        {/* porductscards */}
-
-        <div className="p-2 md:p-10 lg:p-16 flex justify-center items-center">
-        <ProductsCards />
-        </div>
+        <div className="p-2 md:p-10 lg:p-16 flex justify-center items-center"></div>
       </div>
-
     </div>
   );
 }

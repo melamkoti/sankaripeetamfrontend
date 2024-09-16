@@ -1,10 +1,34 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import axios from "axios";
 import { NavListData } from "./NavListData";
 import downarrow from "../../../assets/svg/downarrow.svg";
 import { NavListItem } from "../../utils/types/Types";
 
 export default function NavListComp() {
+  const [productCount, setProductCount] = useState(0);
+
+  useEffect(() => {
+    // Fetch the product count when the component mounts
+    fetchProductCount();
+  }, []);
+
+  const fetchProductCount = async () => {
+    const userId = 1;
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/cart/item/${userId}`,
+        {
+          params: { userId: 1 },
+        }
+      );
+
+      setProductCount(response.data.productCount);
+    } catch {
+      console.log("Faild to fetch product");
+    }
+  };
+
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -33,19 +57,27 @@ export default function NavListComp() {
   return (
     <ul className="flex flex-wrap w-full text-[#f87005] text-md font-semibold justify-center items-center lg:gap-10 gap-4 h-full">
       {NavListData.map((item: NavListItem, index) => (
-        <div
+        <li
           key={index}
-          className="flex items-center"
+          className="relative flex items-center"
           onMouseEnter={() => item.childNav && handleMouseEnter(item.navLink)}
+          onMouseLeave={() => item.childNav && handleMouseLeave()}
         >
           <div className="flex items-end">
             {item.isImage ? (
-              <img
-                src={item.imageSrc}
-                alt={item.altText}
-                className="h-7 cursor-pointer"
-                onClick={() => handleNavLinkClick(item)}
-              />
+              <div className="relative">
+                <img
+                  src={item.imageSrc}
+                  alt={item.altText}
+                  className="h-7 cursor-pointer"
+                  onClick={() => handleNavLinkClick(item)}
+                />
+                {item.navLink === "CART" && productCount >= 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
+                    {productCount}
+                  </span>
+                )}
+              </div>
             ) : (
               <span
                 className={`duration-300 hover:text-white cursor-pointer ${
@@ -66,7 +98,7 @@ export default function NavListComp() {
 
           {item.childNav && (
             <div
-              className={`absolute w-screen top-full left-0 shadow-xl shadow-[#f87005]/30 backdrop-blur-3xl bg-black bg-opacity-60 min-w-[140px] w-full text-white font-normal text-sm ${
+              className={`absolute top-full left-0 shadow-xl shadow-[#f87005]/30 backdrop-blur-3xl bg-black bg-opacity-60 min-w-[140px] w-full text-white font-normal text-sm ${
                 item.navLink === activeDropdown ? "block" : "hidden"
               } p-4 rounded-md`}
               onMouseLeave={handleMouseLeave}
@@ -88,7 +120,7 @@ export default function NavListComp() {
               </ul>
             </div>
           )}
-        </div>
+        </li>
       ))}
     </ul>
   );
