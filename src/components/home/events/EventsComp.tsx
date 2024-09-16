@@ -1,26 +1,38 @@
 import calender from "../../../assets/svg/calendar.png";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+
+interface ApiEventResponse {
+  title: string;
+  description: string;
+  image: string;
+  eventDate: string;
+}
+
 type EventsType = {
   title: string;
   description: string;
   image: string;
   eventDate: Date;
 };
+
 function EventsComp() {
   const [eventsState, setEventsState] = useState<EventsType[]>([]);
+
   useEffect(() => {
     fetch("http://localhost:3000/event/upcoming-events")
       .then((response) => response.json())
-      .then((data) => {
-        const parsedData = data.map((event: any) => ({
+      .then((data: ApiEventResponse[]) => {
+        // Type the fetched data
+        const parsedData = data.map((event) => ({
           ...event,
-          eventDate: new Date(event.eventDate),
+          eventDate: new Date(event.eventDate), // Convert string to Date object
         }));
         setEventsState(parsedData);
       })
       .catch((error) => console.error("Error fetching events data: ", error));
   }, []);
+
   return (
     <div className="bg-[#FFF0E3] p-8 md:p-12 flex flex-col justify-center items-center gap-6">
       <div className="flex flex-col md:gap-2 justify-center items-center">
@@ -33,53 +45,51 @@ function EventsComp() {
       </div>
 
       <div className="flex w-full lg:w-5/6 flex-col justify-center items-center gap-4">
-        {eventsState.map((item, idx) => {
-          return (
-            <motion.div
-              key={idx}
-              whileHover={{ scale: 1.02 }}
-              className="w-full h-full flex flex-col md:flex-row gap-4 md:gap-0 bg-white justify-center items-center rounded-xl p-4"
-            >
-              <div className="w-5/6 flex flex-col items-center justify-center  md:flex-row gap-4 md:gap-8">
-                <div className="w-4/6 md:w-1/6 md:h-3/6 overflow-hidden rounded-xl">
-                  <motion.img
-                    whileHover={{ scale: 1.05 }}
-                    src={`http://localhost:3000${item.image}`}
-                    alt="img"
-                    className="w-full rounded-xl max-h-1/6 object-cover object-center"
+        {eventsState.map((item, idx) => (
+          <motion.div
+            key={idx}
+            whileHover={{ scale: 1.02 }}
+            className="w-full h-full flex flex-col md:flex-row gap-4 md:gap-0 bg-white justify-center items-center rounded-xl p-4"
+          >
+            <div className="w-5/6 flex flex-col items-center justify-center md:flex-row gap-4 md:gap-8">
+              <div className="w-4/6 md:w-1/6 md:h-3/6 overflow-hidden rounded-xl">
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
+                  src={`http://localhost:3000${item.image}`}
+                  alt="img"
+                  className="w-full rounded-xl max-h-1/6 object-cover object-center"
+                />
+              </div>
+
+              <div className="w-full flex flex-col justify-center items-center md:items-start gap-2 lg:gap-4">
+                <p className="text-[#44233B] text-xl font-semibold">
+                  {item.title}
+                </p>
+
+                <div className="flex gap-2 w-full md:gap-4">
+                  <img
+                    src={calender}
+                    alt="calender"
+                    className="w-4 md:w-6 object-cover object-center"
                   />
-                </div>
-
-                <div className="w-full flex flex-col justify-center items-center md:items-start gap-2 lg:gap-4">
-                  <p className="text-[#44233B] text-xl font-semibold">
-                    {item.title}
+                  <p className="text-[#FD8F8F]">
+                    {item.eventDate.toLocaleDateString()}
                   </p>
-
-                  <div className="flex gap-2 w-full md:gap-4">
-                    <img
-                      src={calender}
-                      alt="calender"
-                      className="w-4 md:w-6 object-cover object-center"
-                    />
-                    <p className="text-[#FD8F8F]">
-                      {item.eventDate.toLocaleDateString()}
-                    </p>
-                  </div>
                 </div>
               </div>
+            </div>
 
-              <div className="w-3/6  flex justify-end">
-                <motion.button
-                  whileHover={{ scale: 1.06 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-[#61CE70] w-full md:w-4/6 lg:w-3/6 rounded-full p-2 px-4"
-                >
-                  join us
-                </motion.button>
-              </div>
-            </motion.div>
-          );
-        })}
+            <div className="w-3/6 flex justify-end">
+              <motion.button
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#61CE70] w-full md:w-4/6 lg:w-3/6 rounded-full p-2 px-4"
+              >
+                join us
+              </motion.button>
+            </div>
+          </motion.div>
+        ))}
       </div>
 
       <div>

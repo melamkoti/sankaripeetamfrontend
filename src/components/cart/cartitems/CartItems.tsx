@@ -1,148 +1,143 @@
-import { useState } from 'react';
-import { ProductsData } from "../../home/products/ProductsData";
-import { motion } from "framer-motion";
-import quantityDecrement from "../../../assets/svg/quantityDecrement.png";
-import quantityIncrement from "../../../assets/svg/quantityIncrement.png";
-import deleteimg from "../../../assets/svg/delete.png";
+import { useState, useEffect } from "react";
+import EmptyCart from "../emptycart/EmptyCart";
+
+type CartProductType = {
+  id: number;
+  qty: number;
+  product: {
+    id: number;
+    title: string;
+    price: number;
+    image: string;
+  };
+};
 
 function CartItems() {
-  const [cartItems, setCartItems] = useState(
-    ProductsData.map((item) => ({ ...item, quantity: 1 }))
-  );
+  const [cartItems, setCartItems] = useState<CartProductType[]>([]);
+  const userId = 1;
 
-  const handleQuantityIncrement = (id) => {
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/cart/${userId}`);
+        const data = await response.json();
+        setCartItems(data);
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
+
+  const handleQuantityIncrement = async (id: number) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === id ? { ...item, qty: (item.qty ?? 0) + 1 } : item
       )
     );
+
+    const currentItem = cartItems.find((item) => item.id === id);
+    if (currentItem) {
+      try {
+        await fetch(`http://localhost:3000/cart/update/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ qty: (currentItem.qty ?? 0) + 1 }),
+        });
+      } catch (error) {
+        console.error("Error updating cart quantity:", error);
+      }
+    }
   };
 
-  const handleQuantityDecrement = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
+  const handleQuantityDecrement = async (id: number) => {
+    setCartItems((prevItems) => {
+      const currentItem = prevItems.find((item) => item.id === id);
 
-  // Handle deleting an item from the cart
-  const handleDeleteCartItem = (id) => {
-    setCartItems((prevItems) => prevItems.filter((cartItem) => cartItem.id !== id));
+      if (currentItem && currentItem.qty === 1) {
+        try {
+          fetch(`http://localhost:3000/cart/delete/${id}`, {
+            method: "DELETE",
+          });
+        } catch (error) {
+          console.error("Error deleting cart item:", error);
+        }
+        return prevItems.filter((item) => item.id !== id);
+      }
+
+      if (currentItem && currentItem.qty > 1) {
+        try {
+          const updatedQty = currentItem.qty - 1;
+          fetch(`http://localhost:3000/cart/update/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ qty: updatedQty }),
+          });
+        } catch (error) {
+          console.error("Error updating cart quantity:", error);
+        }
+
+        return prevItems.map((item) =>
+          item.id === id ? { ...item, qty: item.qty - 1 } : item
+        );
+      }
+
+      return prevItems;
+    });
   };
 
   return (
-    <div className="flex flex-col justify-center items-center p-8 md:p-16 lg:p-24 gap-12">
+    <div className="cart-container p-6 md:p-12 lg:p-20">
+      <h2 className="text-4xl font-semibold text-center mb-6">Your Cart</h2>
 
-
-      <div className="w-full flex flex-col gap-4">
-        {cartItems.map((item, idx) => (
-          <div
-            key={idx}
-            className="flex flex-col md:flex-row w-full p-2  border-slate-200 h-full md:gap-6 gap-3 items-center justify-between rounded-md shadow-md"
-          >
-            <div className="flex items-center justify-start w-full md:w-2/6 h-full md:gap-4">
-              <div className="w-1/3 md:w-2/4 lg:w-1/4 h-full">
-                <img
-                  src={item.img}
-                  alt="addeditem"
-                  className="rounded-lg w-full "
-                />
-              </div>
-              <div className="flex md:w-3/6 items-start justify-start">
-                <p className="text-lg lg:text-2xl font-semibold text-md">{item.title}</p>
-              </div>
-            </div>
-  
-            <div className="flex flex-col w-full md:w-3/6 lg:w-2/6  items-center justify-center">
-              <div className="flex justify-between gap-8 items-center w-full">
-                <div className="flex  justify-around lg:justify-between items-center w-full lg:w-3/5">
-                  <div className="flex justify-center border border-slate-500 px-2 rounded-full shadow-md">
-                    <div className="flex flex-col items-center justify-center">
-                      <img
-                        src={quantityDecrement}
-                        alt="decrement"
-                        className="w-4 cursor-pointer"
-                        onClick={() => handleQuantityDecrement(item.id)}
-                      />
-                    </div>
-                    <div className="flex justify-center items-center">
-                      <input
-                        type="number"
-                        value={item.quantity}  // Using item.quantity instead of item.qty
-                        className="focus:outline-none appearance-none text-center ml-4 w-8 lg:w-12"
-                        readOnly
-                      />
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                      <img
-                        src={quantityIncrement}
-                        alt="increment"
-                        className="w-4 cursor-pointer"
-                        onClick={() => handleQuantityIncrement(item.id)}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-md lg:text-lg">MRP: {item.price}/-</p>
-                  </div>
-                </div>
-
+      {cartItems.length === 0 ? (
+        <EmptyCart />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  gap-6 ">
+          {cartItems.map((item) => (
+            <div
+              key={item.id}
+              className="cart-item p-4 m-2 border  shadow-lg rounded-lg "
+            >
+              <img
+                src={`http://localhost:3000${item.product.image}`}
+                alt={item.product.title}
+                className="w-60 h-60 object-cover rounded-md  mx-auto"
+              />
+              <div className="flex justify-between items-center mt-4">
                 <div>
-                  <motion.button
-                    whileHover={{ scale: 1.3 }}
-                    whileTap={{ scale: 1.3 }}
+                  <h3 className="text-lg font-semibold">
+                    {item.product.title}
+                  </h3>
+                  <p className="text-md">Price: ₹{item.product.price}</p>
+                </div>
+
+                <div className="flex items-center">
+                  <button
+                    className="px-3 py-1 border rounded-l bg-gray-300"
+                    onClick={() => handleQuantityDecrement(item.id)}
+                    disabled={item.qty === 0}
                   >
-                    <img
-                      src={deleteimg}
-                      alt="delete"
-                      className="w-8 flex items-center cursor-pointer"
-                      onClick={() => handleDeleteCartItem(item.id)}
-                    />
-                  </motion.button>
+                    -
+                  </button>
+                  <p className="px-4">{item.qty}</p>
+                  <button
+                    className="px-3 py-1 border rounded-r bg-gray-300"
+                    onClick={() => handleQuantityIncrement(item.id)}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      <div className='flex w-full '>
-        <input placeholder='Apply Coupon Code' type='text' className='w-full outline-none border-2 focus:border-[#FFA12B] border-slate-300 p-2 rounded-l-lg'  />
-        <button type='button' className='p-3 text-lg px-4 border-y-2 border-r-2 font-semibold border border-slate-300 rounded-r-lg'>Apply</button>
-      </div>
-
-      <div className='w-full flex flex-col gap-3'>
-        <div className='flex w-full justify-between items-center'>
-            <p className='text-2xl font-semibold'>SubTotal</p>
-            <p className='text-lg font-medium'>₹ 999.00 </p>
-
+          ))}
         </div>
-        <div className='flex w-full justify-between items-center'>
-            <p className='text-2xl font-semibold'>Discount</p>
-            <p className='text-lg font-medium'>- ₹100.00 </p>
-
-        </div>
-        <div className='flex w-full justify-between items-center'>
-            <p className='text-2xl font-semibold'>Tax</p>
-            <p className='text-lg font-medium'>₹ 50.00 </p>
-
-        </div>
-        <div className='flex w-full justify-between items-center mt-8'>
-            <p className='text-2xl font-semibold'>Total</p>
-            <p className='text-lg font-medium'>₹ 849.00 </p>
-
-        </div>
-      </div>
-
-      <div className='w-full flex flex-col gap-2'>
-        <button className='rounded-lg p-3 w-full bg-[#7E4555] text-white'>Proceed to checkout</button>
-        <button className='p-3 rounded-lg border-slate-300 border-2 w-full'>Continue Shopping</button>
-      </div>
-
-
+      )}
     </div>
   );
 }

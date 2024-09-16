@@ -1,25 +1,41 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
 import wishlist from "../../../assets/svg/wishlist.png";
 import wishlistadd from "../../../assets/svg/wishlistadd.png";
 
 type ProductType = {
+  id: number;
   image: string;
   qty: string;
   title: string;
   price: string;
 };
 
+async function addToCart(productId: number, qty: number = 1) {
+  const userId = 1;
+
+  try {
+    await axios.post("http://localhost:3000/cart", {
+      productId,
+      userId,
+      qty,
+    });
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+  }
+}
+
 function ProductsComp() {
   const [productState, setProductState] = useState<ProductType[]>([]);
   const [wishlistStates, setWishlistStates] = useState<boolean[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/product")
-      .then((response) => response.json())
-      .then((data) => {
-        setProductState(data);
-        setWishlistStates(Array(data.length).fill(false));
+    axios
+      .get("http://localhost:3000/product")
+      .then((response) => {
+        setProductState(response.data);
+        setWishlistStates(Array(response.data.length).fill(false));
       })
       .catch((error) => console.error("Error fetching product data: ", error));
   }, []);
@@ -60,6 +76,7 @@ function ProductsComp() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="p-2 bg-[#7E4555] text-xs md:text-md rounded-xl px-2 md:px-4 text-white"
+              onClick={() => addToCart(item.id)}
             >
               Add to Cart
             </motion.button>

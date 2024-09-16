@@ -1,22 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useRef, ChangeEvent } from "react";
 
-const OTPInput = ({ onChange }) => {
-  const inputs = useRef([]);
+interface OTPInputProps {
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+}
 
-  const handleChange = (e, index) => {
+const OTPInput: React.FC<OTPInputProps> = ({ onChange = () => {} }) => {
+  const inputs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const { value } = e.target;
     if (value.length > 1) {
-      e.target.value = value.slice(0, 1); 
+      e.target.value = value.slice(0, 1);
     }
 
     if (index < inputs.current.length - 1 && value) {
-      
-      inputs.current[index + 1].focus();
-    } else if (value === '' && index > 0) {
-      inputs.current[index - 1].focus();
+      inputs.current[index + 1]?.focus();
+    } else if (value === "" && index > 0) {
+      inputs.current[index - 1]?.focus();
     }
 
-    onChange(e); // Notify parent of change
+    onChange(e);
   };
 
   return (
@@ -36,4 +39,3 @@ const OTPInput = ({ onChange }) => {
 };
 
 export default OTPInput;
-

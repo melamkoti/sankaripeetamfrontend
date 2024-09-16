@@ -29,7 +29,7 @@ function ActivitiesComp() {
         <p className=" text-3xl font-semibold text-white">Description</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 text-white w-full gap-8 lg:gap-0 h-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 text-white w-full gap-8 lg:gap-6 h-full ">
         {activitiesState.map((item, idx) => {
           return (
             <motion.div
@@ -40,7 +40,7 @@ function ActivitiesComp() {
                   duration: 0.25,
                 },
               }}
-              className={`flex flex-col items-center md:items-start justify-around gap-4 rounded-xl  lg:w-5/6 h-full p-4 lg:px-6  ${
+              className={`flex flex-col items-center md:items-start justify-around gap-4 rounded-xl  lg:w-5/6 h-full p-4 lg:px-6 	 ${
                 item.color === "#ffffff" ? "text-[#44233B]" : ""
               }  `}
               style={{ backgroundColor: item.color }}
