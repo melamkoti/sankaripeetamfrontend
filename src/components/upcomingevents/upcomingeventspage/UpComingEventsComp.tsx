@@ -13,7 +13,7 @@ export default function EventsComp() {
   const [upEvents, setUpEvents] = useState<EventsType[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/event/upcoming-events")
+    fetch("http://localhost:3000/api/event/upcoming-events")
       .then((response) => response.json())
       .then((data: EventsType[]) => {
         const parsedData = data.map((event: EventsType) => ({

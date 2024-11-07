@@ -2,7 +2,7 @@ import welcomemain from "../../../assets/images/welcomemainimg.png";
 
 function Welcome() {
   return (
-    <div className="h-[70vh] max-w-screen ">
+    <div className="h-[90vh] max-w-screen ">
       <div className="h-full ">
         <img
           src={welcomemain}

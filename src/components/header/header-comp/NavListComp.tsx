@@ -9,7 +9,6 @@ export default function NavListComp() {
   const [productCount, setProductCount] = useState(0);
 
   useEffect(() => {
-    // Fetch the product count when the component mounts
     fetchProductCount();
   }, []);
 
@@ -59,9 +58,8 @@ export default function NavListComp() {
       {NavListData.map((item: NavListItem, index) => (
         <li
           key={index}
-          className="relative flex items-center"
+          className=" flex items-center"
           onMouseEnter={() => item.childNav && handleMouseEnter(item.navLink)}
-          onMouseLeave={() => item.childNav && handleMouseLeave()}
         >
           <div className="flex items-end">
             {item.isImage ? (
@@ -69,7 +67,7 @@ export default function NavListComp() {
                 <img
                   src={item.imageSrc}
                   alt={item.altText}
-                  className="h-7 cursor-pointer"
+                  className="h-7 cursor-pointer text-white"
                   onClick={() => handleNavLinkClick(item)}
                 />
                 {item.navLink === "CART" && productCount >= 0 && (

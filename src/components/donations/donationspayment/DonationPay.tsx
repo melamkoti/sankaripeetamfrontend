@@ -24,6 +24,7 @@ const schema = z.object({
       })
     )
     .min(1, "At least one family member must be added"),
+  pancard: z.string().min(10, "Must Contain at least 10 characters").optional(), // PAN card field (optional validation here)
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -35,7 +36,7 @@ type InputField = {
 
 function DonationPay() {
   const [amount, setAmount] = useState("");
-
+  const [panEnabled, setPanEnabled] = useState(false); // State to control PAN card input
   const {
     register,
     handleSubmit,
@@ -46,14 +47,16 @@ function DonationPay() {
 
   const onSubmit = async (data: FormFields) => {
     try {
-      console.log(data);
-      console.log("data");
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts",
+        "http://localhost:3000/donation/create-order",
         data
       );
-      console.log("Response:", response);
+      if (response.status === 200) {
+        console.log("donation successfull", response.data);
+      }
       reset();
+
+      console.log("Response:", response, "text");
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -82,11 +85,19 @@ function DonationPay() {
   function amountUpdate(newAmount: string) {
     setAmount(newAmount);
     setValue("amount", newAmount);
+    const numericAmount = parseFloat(newAmount); // Convert to a number
+    if (numericAmount >= 10000) {
+      setPanEnabled(true);
+    } else {
+      setPanEnabled(false);
+      setValue("pancard", ""); // Reset PAN card value if disabled
+    }
   }
 
   function clearAmount() {
     setAmount("");
     setValue("amount", "");
+    setPanEnabled(false); // Disable PAN card input when clearing amount
   }
 
   return (
@@ -127,7 +138,7 @@ function DonationPay() {
                 <input
                   value={amount}
                   {...register("amount")} // Registering the donation amount for validation
-                  onChange={(e) => setAmount(e.target.value)}
+                  onChange={(e) => amountUpdate(e.target.value)}
                   onFocus={clearAmount}
                   className="outline-none border-[#E26900] border-e-2 p-2 border-y-2 rounded-r-lg w-full md:w-3/6"
                 />
@@ -155,6 +166,31 @@ function DonationPay() {
                 );
               })}
             </div>
+          </div>
+          {/* PAN Card Input */}
+          <div className="w-full flex flex-col gap-2">
+            <label
+              htmlFor="pancard"
+              className="text-lg font-normal text-[#666]"
+            >
+              PAN Card (required for donations of ₹10,000 or more)
+            </label>
+            <input
+              {...register("pancard")}
+              id="pancard"
+              type="text"
+              maxLength={10}
+              placeholder="Enter your PAN Card number"
+              className={`border-2 p-2 rounded-lg outline-none border-slate-400 ${
+                panEnabled ? "focus:border-[#FFA12B]" : "bg-gray-100"
+              }`}
+              disabled={!panEnabled}
+            />
+            {errors.pancard && (
+              <p className="text-red-600 text-xs mt-1">
+                {errors.pancard.message}
+              </p>
+            )}
           </div>
 
           {/* PersonalDetails */}
@@ -187,7 +223,7 @@ function DonationPay() {
               </p>
 
               <div>
-                {inputFields.map((fields, index) => (
+                {inputFields.map((_, index) => (
                   <div
                     key={index}
                     className="flex flex-col md:flex-row w-full items-start gap-2 mb-4"
@@ -196,7 +232,6 @@ function DonationPay() {
                       <input
                         {...register(`family.${index}.value1`)}
                         type="text"
-                        value={fields.value1}
                         onChange={(event) => handleChange(index, event)}
                         placeholder="Relation"
                         className="border-2 w-full p-2 rounded outline-none border-slate-400 focus:border-[#FFA12B]"
@@ -212,7 +247,6 @@ function DonationPay() {
                       <input
                         {...register(`family.${index}.value2`)} // Register Name
                         type="text"
-                        value={fields.value2}
                         onChange={(event) => handleChange(index, event)}
                         placeholder="Name"
                         className="border-2 w-full p-2 rounded outline-none border-slate-400 focus:border-[#FFA12B]"
@@ -264,6 +298,27 @@ function DonationPay() {
                 {errors.email && (
                   <p className="text-red-600 text-xs absolute -bottom-4 left-1">
                     {errors.email.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="w-full md:w-3/6 mt-4">
+              <div className="flex flex-col gap-1 relative">
+                <label
+                  htmlFor="message"
+                  className="text-lg font-normal text-[#666]"
+                >
+                  Message
+                </label>
+                <textarea
+                  {...register("message")}
+                  placeholder="Enter your Purpose of donation"
+                  id="message"
+                  className="border-2 outline-none border-slate-400 focus:border-[#FFA12B] rounded-lg p-2 h-24 w-full resize-none"
+                />
+                {errors.message && (
+                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
+                    {errors.message.message}
                   </p>
                 )}
               </div>

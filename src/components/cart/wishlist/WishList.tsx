@@ -10,7 +10,7 @@ type whishlistType = {
 function WishListItems() {
   const [wishlistState, setWishlistState] = useState<whishlistType[]>([]);
   useEffect(() => {
-    fetch("http://localhost:3000/product/wishlist/add")
+    fetch("http://localhost:3000/wishlist/add")
       .then((data) => {
         return data.json();
       })

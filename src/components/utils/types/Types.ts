@@ -21,3 +21,18 @@ export interface NavListItem {
   imageSrc?: string;
   altText?: string;
 }
+
+export interface Content {
+  title: string;
+  description: string;
+}
+
+export interface CardProps {
+  id: number;
+  images: string[]; // Array of image URLs
+  content: Content;
+}
+
+export interface CardSliderProps {
+  cards: CardProps; // Array of Card objects
+}

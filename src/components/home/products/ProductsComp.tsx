@@ -32,7 +32,7 @@ function ProductsComp() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/product")
+      .get("http://localhost:3000/api/product")
       .then((response) => {
         setProductState(response.data);
         setWishlistStates(Array(response.data.length).fill(false));

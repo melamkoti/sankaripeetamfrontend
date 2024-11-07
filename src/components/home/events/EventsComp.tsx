@@ -1,6 +1,7 @@
 import calender from "../../../assets/svg/calendar.png";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { format } from "date-fns";
 
 interface ApiEventResponse {
   title: string;
@@ -20,13 +21,12 @@ function EventsComp() {
   const [eventsState, setEventsState] = useState<EventsType[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/event/upcoming-events")
+    fetch("http://localhost:3000/api/event/upcoming-events")
       .then((response) => response.json())
       .then((data: ApiEventResponse[]) => {
-        // Type the fetched data
         const parsedData = data.map((event) => ({
           ...event,
-          eventDate: new Date(event.eventDate), // Convert string to Date object
+          eventDate: new Date(event.eventDate),
         }));
         setEventsState(parsedData);
       })
@@ -73,7 +73,7 @@ function EventsComp() {
                     className="w-4 md:w-6 object-cover object-center"
                   />
                   <p className="text-[#FD8F8F]">
-                    {item.eventDate.toLocaleDateString()}
+                    <p>{format(new Date(item.eventDate), "dd/MM/yyyy")}</p>
                   </p>
                 </div>
               </div>

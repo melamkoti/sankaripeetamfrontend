@@ -2,20 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-  .main_head{
-    @apply pt-[100px];
+@layer components {
+  .main_head {
+    @apply pt-[70px];
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  
+
   /* Hide scrollbar for IE, Edge and Firefox */
   .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
-  
 }
 
 .nav {
