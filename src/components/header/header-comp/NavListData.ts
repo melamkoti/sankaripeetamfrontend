@@ -1,5 +1,7 @@
-import cartImg from "../../../assets/svg/cart.svg";
-import wishlistImg from "../../../assets/svg/wishlist .png";
+// import { Outlet } from "react-router-dom";
+// import cartImg from "../../../assets/svg/cart.svg";
+//import wishlistImg from "../../../assets/svg/wishlist.png";
+import userImg from "../../../assets/svg/user.svg";
 export const NavListData = [
   { navLink: "HOME", route: "/" },
   { navLink: "ABOUT", route: "/aboutus" },
@@ -13,21 +15,29 @@ export const NavListData = [
     route: "/activities",
     childNav: ["parihara", "adyatmikam", "samajaseva", "poojalu"],
   },
-  { navLink: "PRODUCTS", route: "/products" },
+  { navLink: "VAASTU", route: "/vastu" },
   { navLink: "CONTACT US", route: "/contactus" },
   {
-    navLink: "CART",
+    navLink: "USER",
     isImage: true,
-    imageSrc: cartImg,
+    imageSrc: userImg,
     altText: "Image Description",
-    route: "/cart",
+    route: "/user",
   },
-  {
-    navLink: "WISHLIST",
-    isImage: true,
-    imageSrc: wishlistImg,
-    altText: "Image Description",
-    route: "/wishlist",
-  },
+
+  // {
+  //   navLink: "CART",
+  //   isImage: true,
+  //   imageSrc: cartImg,
+  //   altText: "Image Description",
+  //   route: "/cart",
+  // },
+  // {
+  //   navLink: "WISHLIST",
+  //   isImage: true,
+  //   imageSrc: wishlistImg,
+  //   altText: "Image Description",
+  //   route: "/wishlist",
+  // },
   { navLink: "DONATE NOW", route: "/donate" },
 ];

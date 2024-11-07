@@ -166,6 +166,8 @@ import footerLogo from "../../../assets/images/footer-logo.svg";
 import footerInsta from "../../../assets/images/footer-insta.svg";
 import footerWhatsApp from "../../../assets/images/footer-whatsapp.svg";
 import footerYouTube from "../../../assets/images/footer-youtube.svg";
+import { format } from "date-fns";
+
 import { useState, useEffect } from "react";
 import { FooterInfoData, FooterOthersData } from "./FooterPostsData";
 type FooterEventsType = {
@@ -178,13 +180,12 @@ export default function FooterComp() {
     []
   );
   useEffect(() => {
-    fetch("http://localhost:3000/post")
+    fetch("http://localhost:3000/api/post")
       .then((response) => response.json())
       .then((data) => {
-        // Convert the date string to a Date object
         const parsedData = data.map((event: any) => ({
           ...event,
-          date: new Date(event.date), // Convert date string to Date object
+          date: new Date(event.date),
         }));
         setFooterPostsState(parsedData);
       })
@@ -290,8 +291,9 @@ export default function FooterComp() {
                   <div>
                     <p className="flex gap-1">
                       <img src={footerClaenderImg} alt="" />
-                      {item.date.toLocaleDateString()}
+                      <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
                     </p>
+
                     <p>{item.title}</p>
                   </div>
                 </div>
@@ -301,7 +303,7 @@ export default function FooterComp() {
         </div>
       </div>
       <div className="py-8 flex flex-col flex-col-reverse gap-4 md:flex-row justify-around items-center">
-        <p>COPYRIGHT &copy; - 2024</p>
+        <p> &copy; 2024 Sankaripeetam, Hyderabad </p>
         <div>
           <img src={footerLogo} alt="" />
         </div>

@@ -10,7 +10,7 @@ type ActivitiesType = {
 function ActivitiesComp() {
   const [activitiesState, setActivitiesState] = useState<ActivitiesType[]>([]);
   useEffect(() => {
-    fetch("http://localhost:3000/activities")
+    fetch("http://localhost:3000/api/activities")
       .then((response) => response.json())
       .then((data) => setActivitiesState(data))
       .catch((error) => console.error("Error fetching events data: ", error));

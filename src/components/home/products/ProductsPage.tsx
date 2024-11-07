@@ -2,7 +2,7 @@ import ProductsComp from "./ProductsComp";
 
 function ProductsPage() {
   return (
-    <div>
+    <div className="main_head">
       <ProductsComp />
     </div>
   );

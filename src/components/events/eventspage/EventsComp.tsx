@@ -21,7 +21,7 @@ export default function EventsComp() {
   const [pastEventsState, setPastEventsState] = useState<PastEventsType[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/event/old-events")
+    fetch("http://localhost:3000/api/event/old-events")
       .then((response) => response.json())
       .then((data: EventData[]) => {
         const parsedData: PastEventsType[] = data.map((event) => ({

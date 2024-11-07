@@ -4,24 +4,27 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import eyehide from "../../assets/svg/eyehide.svg";
 import eyeshow from "../../assets/svg/eyeshow.svg";
-import googleicon from "../../assets/svg/googleicon.svg"
+import googleicon from "../../assets/svg/googleicon.svg";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../auth/AuthContext";
 
 const schema = z.object({
   email: z
     .string()
     .nonempty("Email is required")
     .email("Invalid email address"),
-  name: z.string().min(3, "Name must be atleast 3 letters"),
   password: z.string().min(6, "must contain 6 characters"),
 });
 
 type FormFields = z.infer<typeof schema>;
-
 function SignUpCreate() {
+  const authContext = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -33,140 +36,162 @@ function SignUpCreate() {
   const onSubmit = async (data: FormFields) => {
     try {
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts",
+        "http://localhost:3000/user/login",
         data
       );
+      if (response.status === 200) {
+        const { token, email, name } = response.data;
+        console.log(name);
+
+        if (authContext) {
+          authContext.login(token, email, name);
+        }
+        toast.success("  successfully Singed In");
+      } else if (response.status === 404) {
+        toast.error("User not found");
+      } else if (response.status === 401) {
+        toast.error("Invalid credentials");
+      }
       console.log("Response:", response);
       reset();
     } catch (error) {
       console.error("Error submitting form:", error);
+      toast.error("Signup failed. Please try again.");
     }
   };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/donationpayment", { replace: true });
+    }
+  }, []);
 
   function togglepassword() {
     setShowPassword(!showPassword);
   }
 
   return (
-    <div className="flex h-screen">
+    <div className=" h-screen main_head">
       <div
-        className="w-3/6 "
+        className="h-screen flex justify-end items-center"
         style={{
           backgroundImage: `url(${signinimg})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
-      ></div>
+      >
+        <div className="flex flex-col  lg:w-2/6 w-4/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-6 p-8 z-10 md:mr-32 m-6 rounded-xl ">
+          <p className="md:text-3xl text-2xl font-semibold">Sign In</p>
 
-      <div className="flex flex-col w-3/6  justify-center items-center gap-6 p-24 ">
-        <p className="text-3xl font-semibold">Sign In</p>
-
-        <div className="w-full flex flex-col gap-2">
-          <form
-            className="w-full flex flex-col gap-8"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1 relative">
-                <label
-                  htmlFor="email"
-                  className="text-lg font-normal text-[#666]"
-                >
-                  Email Address
-                </label>
-                <input
-                  {...register("email")}
-                  placeholder="Enter your Email"
-                  id="email"
-                  className=" border-2 outline-none border-slate-400 focus:border-[#FFA12B]  rounded-lg p-2 bg-transparent"
-                />
-                {errors.email && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex flex-col gap-1 relative">
-                <label
-                  htmlFor="password"
-                  className="text-lg font-normal text-[#666]"
-                >
-                  Password
-                </label>
-
-                <div className="relative">
-                  <input
-                    {...register("password")}
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter Your Password"
-                    id="password"
-                    className="border-2 outline-none border-slate-400 focus:border-[#FFA12B] w-full p-2 rounded-lg bg-transparent "
-                  />
-                  <button
-                    type="button"
-                    onClick={togglepassword}
-                    className="absolute right-4 bottom-3.5 "
+          <div className=" w-full ">
+            <form
+              className="w-full flex flex-col md:gap-6"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-1 relative">
+                  <label
+                    htmlFor="email"
+                    className="text-lg font-normal text-[#666]"
                   >
-                    <img
-                      src={showPassword ? eyeshow : eyehide}
-                      alt=""
-                      className="w-4"
-                    />
-                  </button>
+                    Email Address
+                  </label>
+                  <input
+                    {...register("email")}
+                    placeholder="Enter your Email"
+                    id="email"
+                    className=" border-2 outline-none border-slate-400 focus:border-[#FFA12B]  rounded-lg p-2 bg-transparent"
+                  />
+                  {errors.email && (
+                    <p className="text-red-600 text-xs absolute -bottom-4 left-1">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
 
-                {errors.password && (
-                  <p className="text-red-600 text-xs absolute bottom-2 left-1">
-                    {errors.password.message}
-                  </p>
-                )}
-                <a
-                  className="text-[#FFA12B] text-sm underline underline-offset-2 text-right"
-                  href="#"
-                >
-                  Forgot your Password?
-                </a>
+                <div className="flex flex-col gap-1 relative">
+                  <label
+                    htmlFor="password"
+                    className="text-lg font-normal text-[#666]"
+                  >
+                    Password
+                  </label>
+
+                  <div className="relative">
+                    <input
+                      {...register("password")}
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter Your Password"
+                      id="password"
+                      className="border-2 outline-none border-slate-400 focus:border-[#FFA12B] w-full p-2 rounded-lg bg-transparent "
+                    />
+                    <button
+                      type="button"
+                      onClick={togglepassword}
+                      className="absolute right-4 bottom-3.5 "
+                    >
+                      <img
+                        src={showPassword ? eyeshow : eyehide}
+                        alt=""
+                        className="w-4"
+                      />
+                    </button>
+                  </div>
+
+                  {errors.password && (
+                    <p className="text-red-600 text-xs absolute bottom-2 left-1">
+                      {errors.password.message}
+                    </p>
+                  )}
+                  <NavLink
+                    to={"/forgot"}
+                    className="text-[#FFA12B] text-sm underline underline-offset-2 text-right"
+                  >
+                    Forgot your Password?
+                  </NavLink>
+                </div>
               </div>
-            </div>
 
-            <div className="w-full flex flex-col justify-center items-center gap-1">
-              <motion.button
-                className="bg-[#FFA12B] w-3/6 mx-auto rounded-3xl p-2 font-semibold text-white"
-                onSubmit={handleSubmit(onSubmit)}
-                whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
-              >
-                Sign In
-              </motion.button>
-
-              <p className="mx-auto">
-                Don't have an account?{" "}
-                <a
-                  href="#"
-                  className="text-[#FFA12B] underline underline-offset-2"
+              <div className="w-full flex flex-col justify-center items-center gap-1">
+                <motion.button
+                  className="bg-[#FFA12B] w-full  rounded-3xl p-2 font-semibold text-white mt-2"
+                  type="submit"
+                  whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
+                  whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
                 >
-                  Sign Up
-                </a>
-              </p>
-            </div>
-          </form>
+                  Sign In
+                </motion.button>
+
+                <p className="mx-auto md:mt-4  text-sm md:text-xl">
+                  Don't have an account?{" "}
+                  <NavLink
+                    to={"/signup"}
+                    className="text-[#FFA12B] underline underline-offset-2"
+                  >
+                    Sign Up
+                  </NavLink>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <div className="flex items-center w-full">
+            <hr className="flex-1 border-t-2 border-gray-300" />
+            <span className="mx-4 font-semibold text-xl text-[#666]">OR</span>
+            <hr className="flex-1 border-t-2 border-gray-300" />
+          </div>
+
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
+            className=" border-2 border-[#FFA12B] w-full flex justify-center items-center md:gap-4 gap-2 rounded-3xl md:p-2 p-1 shadow-xl"
+          >
+            <img src={googleicon} alt="googleicon" className="md:w-6 w-4 " />
+            <p className=" text-[#363636] md:font-semibold">
+              Continue with Google
+            </p>
+          </motion.button>
         </div>
-
-        <div className="flex items-center w-full">
-          <hr className="flex-1 border-t-2 border-gray-300" />
-          <span className="mx-4 font-semibold text-xl text-[#666]">OR</span>
-          <hr className="flex-1 border-t-2 border-gray-300" />
-        </div>
-
-        <motion.button type="submit"  whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.95, transition: { duration: 0.1 } }} className=" border-2 border-[#FFA12B] w-full flex justify-center items-center gap-4 rounded-3xl p-2 shadow-xl">
-          <img src={googleicon} alt="googleicon" className="w-6" />
-          <p className="text-xl text-[#363636] font-bold">Continue with Google</p> 
-
-
-        </motion.button>
-
       </div>
     </div>
   );

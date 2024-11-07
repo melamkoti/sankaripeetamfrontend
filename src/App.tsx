@@ -1,9 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
 import AboutUs from "./components/about/AboutPage";
 import Header from "./components/header/Header";
-import Products from "./components/home/products/ProductsPage";
+import Vastu from "./components/vaastu/VastuPage";
+import Boomi from "./components/vaastu/BoomiPage";
 import DonateNow from "./components/donations/Donations";
 import PariharaPooja from "./components/pariharapooja/PariharaPooja";
 import Adyatmikam from "./components/adyatmikam/Adyatmikam";
@@ -13,40 +16,67 @@ import UpComingEvents from "./components/upcomingevents/UpComingEvents";
 import ContactUs from "./components/contactus/ContactUsPage";
 import DonationPaymentPage from "./components/donations/donationspayment/DonationPaymentPage";
 import Poojalu from "./components/poojalu/Poojalu";
-import Cart from "./components/cart/CartPage";
 import ScrollToTop from "./components/ScrollToTop";
 import WhatsUpComp from "./components/WhatsUpComp";
-import WishList from "./components/cart/wishlist/WishList";
+import Signup from "./components/signups/SignUpCreate";
+import Singin from "./components/signups/SignIn";
+import ForgotPassword from "./components/signups/ForgotPassword";
+import SetPassword from "./components/signups/SetPassword";
+import PasswordComplete from "./components/signups/PasswordComplete";
+import { AuthProvider } from "./auth/AuthContext";
+import PrivateRoute from "./middleware/PrivateRoute";
+import UserProfile from "./components/user/UserProfile";
+
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/events" element={""}>
-          <Route path="previousevents" element={<PreviousEvents />} />
-          <Route path="upcomingevents" element={<UpComingEvents />} />
-        </Route>
-        <Route path="/activities" element={""}>
-          <Route path="parihara" element={<PariharaPooja />} />
-          <Route path="adyatmikam" element={<Adyatmikam />} />
-          <Route path="samajaseva" element={<SamaajaSeva />} />
-          <Route path="poojalu" element={<Poojalu />} />
-        </Route>
-        <Route path="/products" element={<Products />} />
-        <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<WishList />} />
-        <Route path="/donate" element={<DonateNow />} />
-        <Route
-          path="/donationPayment"
-          element={<DonationPaymentPage />}
-        ></Route>
-      </Routes>
-      <WhatsUpComp />
-      <Footer />
+      <AuthProvider>
+        <ScrollToTop />
+        <Header />
+        <ToastContainer />
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Singin />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
+          <Route path="/setpassword" element={<SetPassword />} />
+          <Route path="/complete" element={<PasswordComplete />} />
+
+          <Route path="/" element={<Home />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/events" element={""}>
+            <Route path="previousevents" element={<PreviousEvents />} />
+            <Route path="upcomingevents" element={<UpComingEvents />} />
+          </Route>
+          <Route path="/activities" element={""}>
+            <Route path="parihara" element={<PariharaPooja />} />
+            <Route path="adyatmikam" element={<Adyatmikam />} />
+            <Route path="samajaseva" element={<SamaajaSeva />} />
+            <Route path="poojalu" element={<Poojalu />} />
+          </Route>
+          <Route path="/vastu" element={<Vastu />} />
+          <Route path="/boomi" element={<Boomi />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/donate" element={<DonateNow />} />
+          <Route
+            path="/donationpayment"
+            element={
+              <PrivateRoute>
+                <DonationPaymentPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/user"
+            element={
+              <PrivateRoute>
+                <UserProfile user="sdfa" />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+        <WhatsUpComp />
+        <Footer />
+      </AuthProvider>
     </BrowserRouter>
   );
 }
