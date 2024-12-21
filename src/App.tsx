@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/footer/Footer";
@@ -24,15 +24,20 @@ import ForgotPassword from "./components/signups/ForgotPassword";
 import SetPassword from "./components/signups/SetPassword";
 import PasswordComplete from "./components/signups/PasswordComplete";
 import { AuthProvider } from "./auth/AuthContext";
-import PrivateRoute from "./middleware/PrivateRoute";
+import ProtectedRoute from "./middleware/PrivateRoute";
 import UserProfile from "./components/user/UserProfile";
+import  AdminApp  from "./admin/AdminApp";
 
 function App() {
+  const location = useLocation();
+
+
+  const isAdminRoute = location.pathname.startsWith('/admin')
   return (
-    <BrowserRouter>
       <AuthProvider>
         <ScrollToTop />
-        <Header />
+        {!isAdminRoute &&  <Header />
+ }
         <ToastContainer />
         <Routes>
           <Route path="/signup" element={<Signup />} />
@@ -58,26 +63,34 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/donate" element={<DonateNow />} />
           <Route
-            path="/donationpayment"
-            element={
-              <PrivateRoute>
-                <DonationPaymentPage />
-              </PrivateRoute>
-            }
-          />
+          path="/donationpayment"
+          element={
+            <ProtectedRoute allowedRoles={["User", "Admin"]}>
+              <DonationPaymentPage />
+            </ProtectedRoute>
+          }
+        />
           <Route
-            path="/user"
-            element={
-              <PrivateRoute>
-                <UserProfile user="sdfa" />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-        <WhatsUpComp />
-        <Footer />
+          path="/user"
+          element={
+            <ProtectedRoute allowedRoles={["User", "Admin"]}>
+              <UserProfile  user="sfda"/>
+            </ProtectedRoute>
+          }
+        />
+
+          {/* Admin panel route */}
+          <Route
+          path="/admin/*"
+          element={
+            <ProtectedRoute allowedRoles={["Admin"]}>
+              <AdminApp />
+            </ProtectedRoute>
+          }
+        />        </Routes>
+       {!isAdminRoute &&  <WhatsUpComp />} 
+        {!isAdminRoute && <Footer />}
       </AuthProvider>
-    </BrowserRouter>
   );
 }
 

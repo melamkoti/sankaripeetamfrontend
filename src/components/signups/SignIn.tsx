@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import eyehide from "../../assets/svg/eyehide.svg";
 import eyeshow from "../../assets/svg/eyeshow.svg";
 import googleicon from "../../assets/svg/googleicon.svg";
@@ -40,13 +40,23 @@ function SignUpCreate() {
         data
       );
       if (response.status === 200) {
-        const { token, email, name } = response.data;
+        const { token, email, name, role } = response.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("email", email);
+        localStorage.setItem("name", name);
+        localStorage.setItem("role", role);
         console.log(name);
 
         if (authContext) {
-          authContext.login(token, email, name);
+          authContext.login(token, email, name, role);
         }
-        toast.success("  successfully Singed In");
+        toast.success("  successfully Signed In");
+        // Navigate based on user role
+      if (role === "Admin") {
+        navigate("/admin/");
+      } else {
+        navigate("/donationpayment");
+      }
       } else if (response.status === 404) {
         toast.error("User not found");
       } else if (response.status === 401) {
@@ -59,18 +69,18 @@ function SignUpCreate() {
       toast.error("Signup failed. Please try again.");
     }
   };
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/donationpayment", { replace: true });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/donationpayment", { replace: true });
+  //   }
+  // }, []);
 
   function togglepassword() {
     setShowPassword(!showPassword);
   }
 
   return (
-    <div className=" h-screen main_head">
+    <div className="  main_head">
       <div
         className="h-screen flex justify-end items-center"
         style={{
@@ -79,19 +89,19 @@ function SignUpCreate() {
           backgroundSize: "cover",
         }}
       >
-        <div className="flex flex-col  lg:w-2/6 w-4/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-6 p-8 z-10 md:mr-32 m-6 rounded-xl ">
-          <p className="md:text-3xl text-2xl font-semibold">Sign In</p>
+        <div className="flex flex-col  lg:w-2/6 w-4/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10 md:mr-32 mx-4 rounded-xl ">
+          <p className="md:text-2xl text-2xl font-semibold">Sign In</p>
 
           <div className=" w-full ">
             <form
-              className="w-full flex flex-col md:gap-6"
+              className="w-full flex flex-col md:gap-2"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 <div className="flex flex-col gap-1 relative">
                   <label
                     htmlFor="email"
-                    className="text-lg font-normal text-[#666]"
+                    className="text-sm font-normal text-[#666]"
                   >
                     Email Address
                   </label>
@@ -99,7 +109,7 @@ function SignUpCreate() {
                     {...register("email")}
                     placeholder="Enter your Email"
                     id="email"
-                    className=" border-2 outline-none border-slate-400 focus:border-[#FFA12B]  rounded-lg p-2 bg-transparent"
+                    className=" border outline-none border-slate-400 focus:border-[#FFA12B]  rounded-md p-2 bg-transparent"
                   />
                   {errors.email && (
                     <p className="text-red-600 text-xs absolute -bottom-4 left-1">
@@ -111,7 +121,7 @@ function SignUpCreate() {
                 <div className="flex flex-col gap-1 relative">
                   <label
                     htmlFor="password"
-                    className="text-lg font-normal text-[#666]"
+                    className="text-sm font-normal text-[#666]"
                   >
                     Password
                   </label>
@@ -122,7 +132,7 @@ function SignUpCreate() {
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter Your Password"
                       id="password"
-                      className="border-2 outline-none border-slate-400 focus:border-[#FFA12B] w-full p-2 rounded-lg bg-transparent "
+                      className="border outline-none border-slate-400 focus:border-[#FFA12B] w-full p-2 rounded-md bg-transparent "
                     />
                     <button
                       type="button"
@@ -161,7 +171,7 @@ function SignUpCreate() {
                   Sign In
                 </motion.button>
 
-                <p className="mx-auto md:mt-4  text-sm md:text-xl">
+                <p className="mx-auto md:mt-4  text-sm md:text-sm">
                   Don't have an account?{" "}
                   <NavLink
                     to={"/signup"}
@@ -184,7 +194,7 @@ function SignUpCreate() {
             type="submit"
             whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
-            className=" border-2 border-[#FFA12B] w-full flex justify-center items-center md:gap-4 gap-2 rounded-3xl md:p-2 p-1 shadow-xl"
+            className=" border border-[#FFA12B] w-full flex justify-center items-center md:gap-4 gap-2 rounded-3xl md:p-2 p-1 shadow-xl"
           >
             <img src={googleicon} alt="googleicon" className="md:w-6 w-4 " />
             <p className=" text-[#363636] md:font-semibold">

@@ -4,7 +4,7 @@ import JathakamCard from "./JathakamCard";
 function BoomiPage() {
   return (
     <div className="main_head ">
-      <JathakamCard />
+      <JathakamCard  bhumi={true}/>
       <Boomi />
     </div>
   );

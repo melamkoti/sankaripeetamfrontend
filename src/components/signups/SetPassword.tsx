@@ -85,7 +85,7 @@ function SetPassword() {
               <div className="flex flex-col gap-1 relative">
                 <label
                   htmlFor="newpassword"
-                  className="text-lg font-normal text-[#666]"
+                  className="text-sm font-normal text-[#666]"
                 >
                   Password
                 </label>
@@ -96,7 +96,7 @@ function SetPassword() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter Your Password"
                     id="newpassword"
-                    className="border-2 outline-none border-slate-400 focus:border-[#FFA12B]  w-full p-2 rounded-lg bg-transparent "
+                    className="border outline-none border-slate-400 focus:border-[#FFA12B]  w-full p-2 rounded-md bg-transparent "
                   />
                   <button
                     type="button"

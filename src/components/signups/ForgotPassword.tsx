@@ -42,7 +42,7 @@ function ForgotPassword() {
   };
 
   return (
-    <div className=" h-screen main_head">
+    <div className="main_head">
       <div
         className="h-screen flex justify-end items-center "
         style={{
@@ -57,7 +57,7 @@ function ForgotPassword() {
           </button>
           <div className="w-full flex flex-col justify-center items-center gap-2 ">
             <p className="text-3xl   font-semibold">Forgot Your Password</p>
-            <p className="md:text-lg  font-normal text-[#666]">
+            <p className="md:text-lg  font-normal text-[#666] text-center">
               Enter your email to send you an OTP for verification
             </p>
           </div>
@@ -70,7 +70,7 @@ function ForgotPassword() {
               <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="email"
-                  className="text-lg font-normal text-[#666]"
+                  className="text-sm font-normal text-[#666]"
                 >
                   Email Address
                 </label>
@@ -78,7 +78,7 @@ function ForgotPassword() {
                   {...register("email")}
                   placeholder="Enter your Email"
                   id="email"
-                  className="w-full border-2 outline-none border-slate-400 focus:border-[#FFA12B]  rounded-lg p-3 bg-transparent"
+                  className="w-full border outline-none border-slate-400 focus:border-[#FFA12B]  rounded-md p-3 bg-transparent"
                 />
                 {errors.email && (
                   <p className="text-red-600 text-sm absolute -bottom-5 left-2">
