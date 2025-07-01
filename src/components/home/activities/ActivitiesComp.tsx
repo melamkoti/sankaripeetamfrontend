@@ -1,20 +1,27 @@
 import activitiesbg from "../../../assets/images/activitiesbg.jpg";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { UserModuleAPI } from "../../../services/AppEndPoints";
 type ActivitiesType = {
   color: string;
   image: string;
   title: string;
   description: string;
+  isEnable: boolean;
 };
 function ActivitiesComp() {
   const [activitiesState, setActivitiesState] = useState<ActivitiesType[]>([]);
+
+  const ActivitiesApiService = UserModuleAPI.AllActivityGet;
+
   useEffect(() => {
-    fetch("http://localhost:3000/api/activities")
-      .then((response) => response.json())
-      .then((data) => setActivitiesState(data))
+    axios
+      .get(ActivitiesApiService)
+      .then((response) => setActivitiesState(response.data))
       .catch((error) => console.error("Error fetching events data: ", error));
   }, []);
+
   return (
     <div
       className=" flex flex-col justify-start w-full p-8 md:p-12 lg:p-20 gap-12"
@@ -40,16 +47,22 @@ function ActivitiesComp() {
                   duration: 0.25,
                 },
               }}
-              className={`flex flex-col items-center md:items-start justify-around gap-4 rounded-xl  lg:w-5/6 h-full p-4 lg:px-6 	 ${
-                item.color === "#ffffff" ? "text-[#44233B]" : ""
-              }  `}
+              className={`flex flex-col items-center md:items-start justify-around gap-4 rounded-xl  lg:w-5/6 h-full p-4 lg:px-6 
+ ${
+  item.isEnable
+    ? "opacity-100 pointer-events-auto cursor-pointer hover:shadow-lg transition-shadow duration-300"
+    : "opacity-30 pointer-events-none cursor-not-allowed"
+}
+
+                	 ${item.color === "#ffffff" ? "text-[#44233B]" : ""}  `}
               style={{ backgroundColor: item.color }}
             >
-              <img
-                src={` http://localhost:3000${item.image}`}
-                alt="image"
-                className="w-12"
-              />
+             
+            <img 
+              src={item.image} 
+              alt={item.title} 
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
 
               <div className="text-center md:text-left">
                 <p>{item.title}</p>

@@ -1,4 +1,4 @@
-import EventsComp from "./eventspage/EventsComp";
+import EventsComp from "./oldevents/EventsComp";
 
 export default function Events() {
   return <div className="main_head">

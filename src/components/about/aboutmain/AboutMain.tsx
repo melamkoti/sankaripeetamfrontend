@@ -11,7 +11,7 @@ function AboutMain() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <p className="text-2xl md:text-4xl font-semibold text-white tracking-wider">
+      <p className="text-2xl md:text-4xl font-semibold text-white tracking-wider text-center">
         ABOUT SANATANA SANKARI PEETAM
       </p>
     </div>

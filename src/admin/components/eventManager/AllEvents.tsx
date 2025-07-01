@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import EditEventModal from "./EditEventModel";
-
+import { UserModuleAPI } from "../../../services/AppEndPoints";
+import { toast } from "react-toastify";
 type Event = {
   id: number;
   title: string;
@@ -14,13 +15,16 @@ type Event = {
 const AllEvents = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [editEvent, setEditEvent] = useState<Event | null>(null);
+const EeventsGetService = UserModuleAPI.AllEventsGet;
+const EeventsDeleteService = UserModuleAPI.IndividualEventDelete;
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/event");
+      const response = await axios.get(EeventsGetService);
       setEvents(response.data);
+      toast.success("Events fetched successfully!");
     } catch (error) {
-      console.error("Error fetching events:", error);
+      toast.error("Failed to fetch events." + error);
     }
   };
 
@@ -31,10 +35,11 @@ const AllEvents = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/event/${id}`);
+      await axios.delete(`${EeventsDeleteService}/${id}`);
       setEvents((prev) => prev.filter((event) => event.id !== id));
+      toast.success("Event deleted successfully!");
     } catch (error) {
-      console.error("Error deleting event:", error);
+      toast.error("Failed to delete event." + error);
     }
   };
 
@@ -43,7 +48,7 @@ const AllEvents = () => {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-6 shadow-md rounded-md">
+    <div className="max-w-4xl mx-auto bg-white md:p-6 p-2 shadow-md rounded-md">
       <h2 className="text-lg md:text-2xl font-bold mb-4 text-center">
         All Events
       </h2>
@@ -54,11 +59,11 @@ const AllEvents = () => {
             <p>{event.description}</p>
             <p>{new Date(event.eventDate).toLocaleDateString()}</p>
             <img
-              src={`http://localhost:3000${event.image}`}
+              src={event.image}
               alt={event.title}
               className="w-full h-32 object-cover rounded-md"
             />
-            <div className="flex  justify-between items-center	mt-4 ">
+            <div className="flex  justify-between items-center	mt-4 gap-2">
               <button className="bg-blue-500 text-white px-4 py-1 rounded-md text-sm ">
                 <a
                   className="underline"
@@ -66,7 +71,7 @@ const AllEvents = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Watch on YouTube
+                 YouTube
                 </a>
               </button>
 

@@ -10,7 +10,7 @@ export const Card: React.FC<{ card: CardProps }> = ({ card }) => {
             key={index}
             src={img}
             alt={`img-${index}`}
-            className={`w-full h-auto object-cover rounded-md shadow-lg md:hover:scale-150 hover:scale-110 duration-700	 hover:z-10 `}
+            className={`w-full h-auto object-cover rounded-md shadow-lg md:hover:scale-120 hover:scale-110 duration-700	 hover:z-10 `}
           />
         ))}
       </div>

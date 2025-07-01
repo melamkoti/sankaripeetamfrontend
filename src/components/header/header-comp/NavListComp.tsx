@@ -1,33 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { NavListData } from "./NavListData";
 import downarrow from "../../../assets/svg/downarrow.svg";
 import { NavListItem } from "../../utils/types/Types";
 
 export default function NavListComp() {
-  const [productCount, setProductCount] = useState(0);
-
-  useEffect(() => {
-    fetchProductCount();
-  }, []);
-
-  const fetchProductCount = async () => {
-    const userId = 1;
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/cart/item/${userId}`,
-        {
-          params: { userId: 1 },
-        }
-      );
-
-      setProductCount(response.data.productCount);
-    } catch {
-      console.log("Faild to fetch product");
-    }
-  };
-
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -54,7 +31,7 @@ export default function NavListComp() {
   };
 
   return (
-    <ul className="flex flex-wrap w-full text-[#f87005] text-md font-semibold justify-center items-center lg:gap-10 gap-4 h-full">
+    <ul className="flex flex-wrap w-full text-[#f87005] text-md font-semibold justify-center items-center lg:gap-10 gap-4 h-full ">
       {NavListData.map((item: NavListItem, index) => (
         <li
           key={index}
@@ -62,32 +39,16 @@ export default function NavListComp() {
           onMouseEnter={() => item.childNav && handleMouseEnter(item.navLink)}
         >
           <div className="flex items-end">
-            {item.isImage ? (
-              <div className="relative">
-                <img
-                  src={item.imageSrc}
-                  alt={item.altText}
-                  className="h-7 cursor-pointer text-white"
-                  onClick={() => handleNavLinkClick(item)}
-                />
-                {item.navLink === "CART" && productCount >= 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
-                    {productCount}
-                  </span>
-                )}
-              </div>
-            ) : (
-              <span
-                className={`duration-300 hover:text-white cursor-pointer ${
-                  item.navLink === "DONATE NOW"
-                    ? "bg-orange-500 text-white px-4 py-2 rounded-full"
-                    : ""
-                }`}
-                onClick={() => handleNavLinkClick(item)}
-              >
-                {item.navLink}
-              </span>
-            )}
+            <span
+              className={`duration-300 hover:text-white cursor-pointer ${
+                item.navLink === "DONATE NOW"
+                  ? "bg-orange-500 text-white px-4 py-2 rounded-full"
+                  : ""
+              }`}
+              onClick={() => handleNavLinkClick(item)}
+            >
+              {item.navLink}
+            </span>
 
             {item.childNav && (
               <img src={downarrow} alt="downarrow" className="w-4 block ml-2" />

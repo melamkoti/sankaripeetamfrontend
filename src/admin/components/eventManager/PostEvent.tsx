@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { UserModuleAPI } from "../../../services/AppEndPoints";
+import { toast } from "react-toastify";
 const PostEvent = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -8,11 +9,13 @@ const PostEvent = () => {
   const [image, setImage] = useState<File | null>(null);
   const [youtubeLink, setYoutubeLink] = useState("");
   const [loading, setLoading] = useState(false);
+  const [imageError, setImageError] = useState<string | null>(null);
 
+  const EventPostService = UserModuleAPI.AllEventsPost;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !description || !eventDate || !image || !youtubeLink) {
+    if (!title || !description || !eventDate || !image ) {
       alert("All fields are required!");
       return;
     }
@@ -23,26 +26,58 @@ const PostEvent = () => {
     formData.append("eventDate", eventDate);
     formData.append("image", image);
     formData.append("youtubeLink", youtubeLink);
-
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:3000/api/event", formData, {
+      const data = await axios.post(EventPostService, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      alert("Event submitted successfully!");
+      console.log("Form Data:", data);
+
+      toast.success("Event submitted successfully!");
     } catch (error) {
       console.error("Error submitting event:", error);
-      alert("Error submitting event!");
+      toast.error("Error submitting event: ");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const minWidth = 300; // set your desired min width
+      const minHeight = 300; // set your desired min height
+
+      if (img.width < minWidth || img.height < minHeight) {
+        setImage(null);
+        setImageError(`Image must be at least ${minWidth}px by ${minHeight}px`);
+      } else {
+        setImage(file);
+        setImageError(null);
+      }
+
+      URL.revokeObjectURL(objectUrl); // clean up memory
+    };
+
+    img.onerror = () => {
+      setImage(null);
+      setImageError("Invalid image file.");
+      URL.revokeObjectURL(objectUrl);
+    };
+
+    img.src = objectUrl;
+  };
+
   return (
-    <div className="max-w-md mx-auto bg-white p-6 shadow-md rounded-md border-2">
+    <div className="max-w-md mx-auto bg-white p-2 shadow-md rounded-md border-2">
       <h2 className="text-lg font-bold mb-4 text-center">Create a New Event</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-2">
         {/* Title */}
         <div>
           <label htmlFor="title" className="block font-medium mb-1">
@@ -95,11 +130,16 @@ const PostEvent = () => {
             type="file"
             id="image"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files?.[0] || null)}
+            // onChange={(e) => setImage(e.target.files?.[0] || null)}
+                onChange={handleImageChange}
+
             className="w-full border border-gray-300 p-2 rounded-md"
           />
+           {imageError && (
+          <p className="text-red-500 text-sm mt-1">{imageError}</p>
+        )}
         </div>
-
+       
         {/* YouTube Link */}
         <div>
           <label htmlFor="youtubeLink" className="block font-medium mb-1">

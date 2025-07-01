@@ -16,7 +16,7 @@ export default function AdyatmikamComp() {
           ADHYATMIKAM
         </h1>
       </div>
-      <div className="flex flex-col gap-3 md:pt-24 md:px-24 p-5 pt-14 text-base font-semibold ">
+      <div className="flex flex-col gap-3 md:pt-24 md:px-24 p-4 pt-14 text-base font-semibold  text-justify">
         <p>
           Adhyatmikam (Spirituality) is something that is beyond the material
           possessions, society and one's physical being. But at the same time it

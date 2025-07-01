@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-interface UserProfileProps {
-  user: string;
+type LogoutTypes = {
+  handlePopup: () => void;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
+
+const UserProfile: React.FC<LogoutTypes> = ({handlePopup}) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -15,36 +15,51 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
     localStorage.removeItem("email");
     // Redirect to login page
     navigate("/login", { replace: true });
+    handlePopup()
   };
 
   const userName = localStorage.getItem("name") || "User";
   const userEmail = localStorage.getItem("email") || "user@example.com";
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-md w-80 mx-auto mt-10">
-      {/* User Image */}
-      <div className="w-24 h-24 mb-4">
-        <img
-          src={user}
-          alt={`${userName}'s avatar`}
-          className="w-full h-full rounded-full object-cover border-2 border-gray-200"
-        />
+    
+    <div className="max-w-md w-full ">
+  <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-2xl shadow-lg border border-amber-100 overflow-hidden relative">
+   
+    {/* Profile content */}
+    <div className="relative z-10 flex flex-col items-center">
+     
+       <div className="w-28 h-28 mb-6 bg-gradient-to-b from-red-600 to-amber-500 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-inner border-2 border-amber-300">
+        {userName.charAt(0).toUpperCase()}
       </div>
 
-      {/* User Name */}
-      <h2 className="text-2xl font-semibold text-gray-800">{userName}</h2>
+      {/* Devotee Name */}
+      <h2 className="text-3xl font-bold text-amber-900 mb-1 text-center font-serif">
+        {userName}
+        <span className="block w-16 h-1 bg-red-600 mx-auto mt-2 rounded-full"></span>
+      </h2>
 
-      {/* User Email */}
-      <p className="text-gray-600 mt-2">{userEmail}</p>
+      {/* Contact */}
+      <p className="text-amber-800 mb-6 flex items-center font-medium">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        {userEmail}
+      </p>
 
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="mt-6 bg-red-500 text-white py-2 px-6 rounded-lg hover:bg-red-600 transition duration-200"
+        className="mt-4 bg-gradient-to-r from-red-700 to-amber-700 text-white py-3 px-8 rounded-full font-medium shadow-lg hover:shadow-amber-200/50 hover:scale-105 transition-all duration-300 flex items-center border border-amber-300"
       >
-        Logout
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+         Logout
       </button>
     </div>
+  </div>
+</div>
   );
 };
 

@@ -11,7 +11,7 @@ function AboutMePage() {
             <div className="w-full md:w-1/2 flex flex-col justify-around items-center gap-8">
 
             <div className="flex flex-col gap-2 justify-center items-center md:items-start">
-               <p className="text-2xl font-semibold">About Me</p>
+               <p className="text-2xl font-semibold">My Thoughts</p>
                <p className="text-xs lg:text-sm text-justify md:text-left font-normal">{AboutMeData[0].aboutcontent}</p>
             </div>
 

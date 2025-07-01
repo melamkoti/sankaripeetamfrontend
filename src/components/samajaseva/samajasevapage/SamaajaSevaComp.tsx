@@ -17,7 +17,7 @@ export default function SamaajaSevaComp() {
           SAMAAJA SEVA
         </h1>
       </div>
-      <div className="flex flex-col gap-3 lg:pt-24 lg:px-36 md:pt-16 md:px-20 px-12 pt-10 text-base  ">
+      <div className="flex flex-col gap-3 lg:pt-24 lg:px-36 md:pt-16 md:px-20 px-4 pt-10 text-base text-justify ">
         <h1 className="text-xl font-semibold">SAMAAJA SEVA (Service towards Society)</h1>
         <p>
           Bhu seva (Service towards Land), Jala seva (Service towards Water),

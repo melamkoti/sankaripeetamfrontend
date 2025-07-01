@@ -6,7 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-
+import { UserModuleAPI } from "../../../services/AppEndPoints";
 const schema = z.object({
   email: z
     .string()
@@ -44,11 +44,12 @@ function DonationPay() {
     formState: { errors },
     reset,
   } = useForm<FormFields>({ resolver: zodResolver(schema) });
-
+const DonationApiService = UserModuleAPI.DonationAmoutPost;
   const onSubmit = async (data: FormFields) => {
+    console.log(data, "Response")
     try {
       const response = await axios.post(
-        "http://localhost:3000/donation/create-order",
+        DonationApiService,
         data
       );
       if (response.status === 200) {

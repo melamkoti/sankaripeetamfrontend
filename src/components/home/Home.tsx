@@ -7,6 +7,7 @@ import OurGoalsPage from "./ourgoals/OurGoalsPage";
 // import ProductsPage from "./products/ProductsPage";
 import PujaCard from "./pujacards/PujaCard";
 import Welcome from "./welcome/Welcome";
+// import Welcome from "./welcome/Welcome";
 
 function Home() {
   return (

@@ -2,23 +2,23 @@ import { useState } from "react";
 import Post from "../components/postmanager/Post";
 import AllPosts from "../components/postmanager/AllPosts";
 
-const EventManager = () => {
+const PostManager = () => {
   const [view, setView] = useState<"post" | "all">("post");
 
   return (
-    <div className="main_head">
-      <div className="flex gap-4 p-6 rounded-md">
+    <div className="">
+      <div className="flex gap-4 p-4 rounded-md">
         <button
           onClick={() => setView("post")}
           className="border p-4 rounded-lg shadow-md font-bold"
         >
-          Post Event
+          Post Planing
         </button>
         <button
           onClick={() => setView("all")}
           className="border p-4 rounded-lg shadow-md font-bold"
         >
-          All Events
+          All Plannings
         </button>
       </div>
 
@@ -27,4 +27,4 @@ const EventManager = () => {
   );
 };
 
-export default EventManager;
+export default PostManager;

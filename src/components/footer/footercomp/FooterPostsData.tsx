@@ -1,9 +1,8 @@
-
 export const FooterInfoData = [
-  "Donation",
-  "Events",
-  "Holis",
-  "Poojas",
-  "Services",
+  { name: "Donation", path: "/donate" },
+  { name: "Events", path: "/events/upcomingevents" },
 ];
-export const FooterOthersData = ["About", "Contact Us", "Products", "Cart"];
+export const FooterOthersData = [
+  { name: "About", path: "/aboutus" },
+  { name: "Contact Us", path: "/contactus" },
+];

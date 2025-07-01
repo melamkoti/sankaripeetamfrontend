@@ -1,47 +1,75 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { UserModuleAPI } from "../../../services/AppEndPoints";
+import { toast } from "react-toastify";
 const Post = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState<File | null>(null);
+  const [date, setDate] = useState("");
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
 
+  const [imageError, setImageError] = useState<string | null>(null);
+
+  const PostService = UserModuleAPI.AllPostsPost;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !description || !image) {
+    if (!title || !description || !date || !image) {
       alert("All fields are required!");
       return;
     }
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
+    formData.append("date", date);
     formData.append("image", image);
 
     setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/activities",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      alert("Post submitted successfully!");
-      console.log(response.data);
+      await axios.post(PostService, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      toast.success("Post submitted successfully!");
     } catch (error) {
-      console.error("Error uploading post:", error);
-      alert("Error submitting post!");
+      console.error("Error submitting post:", error);
+      toast.error("Error submitting post ");
     } finally {
       setLoading(false);
     }
   };
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const minWidth = 300; // set your desired min width
+      const minHeight = 300; // set your desired min height
+
+      if (img.width < minWidth || img.height < minHeight) {
+        setImage(null);
+        setImageError(`Image must be at least ${minWidth}px by ${minHeight}px`);
+      } else {
+        setImage(file);
+        setImageError(null);
+      }
+
+      URL.revokeObjectURL(objectUrl); // clean up memory
+    };
+
+    img.onerror = () => {
+      setImage(null);
+      setImageError("Invalid image file.");
+      URL.revokeObjectURL(objectUrl);
+    };
+
+    img.src = objectUrl;
+  };
   return (
     <div className="max-w-md mx-auto bg-white p-6 shadow-md rounded-md border-2">
-      <h2 className="text-lg font-bold mb-4 text-center">
-        Create a New Activity
-      </h2>
+      <h2 className="text-lg font-bold mb-4 text-center">Create a New Post</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title Field */}
         <div>
@@ -72,7 +100,7 @@ const Post = () => {
           />
         </div>
 
-        {/* Image Upload Field */}
+        {/* Date Upload Field */}
         <div>
           <label htmlFor="image" className="block font-medium mb-1">
             Upload Image
@@ -81,11 +109,26 @@ const Post = () => {
             type="file"
             id="image"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files?.[0] || null)}
+            // onChange={(e) => setImage(e.target.files?.[0] || null)}
+            onChange={handleImageChange}
+            className="w-full border border-gray-300 p-2 rounded-md"
+          />
+          {imageError && (
+            <p className="text-red-500 text-sm mt-1">{imageError}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="date" className="block font-medium mb-1">
+            Post Date
+          </label>
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="w-full border border-gray-300 p-2 rounded-md"
           />
         </div>
-
         {/* Submit Button */}
         <button
           type="submit"

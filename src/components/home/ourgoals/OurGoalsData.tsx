@@ -1,6 +1,12 @@
 export const OurGoalsData = [
     {
-        "ourgoalscontent": "The Parents of Sri Brahmasri Nemmikanti Narasaiahcharyulu migrated from Allagadda village in Kurnool district of Andhra Pradesh. Their family used to run traditional sculpture school. His grandfather was an expert in Goldsmithing as well as in Ayurveda.  He used to do free service to people in surrounding villages and cure their health problems. His expertise in Nerve Knowledge is so precise, that he cured the patients who were in comma and those who were declared as almost dead, using his powerful Ayurveda knowledge. Eventhough the main herbs required were not available nearby, he collected the minimal herbs and plants surrounding the village and used them to cure thereby  giving a new lease of life to the those comma patients.",
-        "MissionsTowardsSocietycontent": "The Parents of Sri Brahmasri Nemmikanti Narasaiahcharyulu migrated from Allagadda village in Kurnool district of Andhra Pradesh. Their family used to run traditional sculpture school. His grandfather was an expert in Goldsmithing as well as in Ayurveda.  He used to do free service to people in surrounding villages and cure their health problems. His expertise in Nerve Knowledge is so precise, that he cured the patients who were in comma and those who were declared as almost dead, using his powerful Ayurveda knowledge. Eventhough the main herbs required were not available nearby, he collected the minimal herbs and plants surrounding the village and used them to cure thereby  giving a new lease of life to the those comma patients."
+        p1: "1. Spread Sanatana Dharma and divine knowledge through discourses, yagnas, and upasanas.",
+        p2:"2. Organize satsangs, workshops, and events promoting moral and spiritual values.",
+        p3:"3. Promote Viswakarma heritage and craftsmanship, especially in sculpture and temple architecture.",
+        p4:"4. Support artists and students practicing Silpakala.",
+        p5:"5. Regular free meal distribution (అన్నదానం) to devotees and needy.",
+        p6:"6. Support poor families through health camps, financial help, and basic needs.",
+        p7:"7. Conduct awareness and skill development programs for rural women.",
+        p8:"8. Encourage everyone to live with peace (శాంతి) and purpose (ప్రయోజనం)",
     }
 ]

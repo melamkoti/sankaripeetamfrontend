@@ -10,17 +10,17 @@ const PujaCard = () => {
     }
   };
   return (
-    <div className="p-12 bg-red-500 relative overflow-x-hidden">
-      <h1 className="text-end pb-6 text-4xl font-semibold font-mukta px-44 text-white ">
+    <div className="md:p-12 p-6 bg-[#f7b90c] relative overflow-x-hidden ">
+      <h1 className="text-end pb-6 md:text-4xl text-2xl font-semibold font-mukta md:px-44 text-white">
         SWAMIJI PREVIOUS PUJA & PRATISTA
       </h1>
 
       {/* Absolute overlay div */}
-      <div className="bg-red-500 absolute z-10 top-0 bottom-0 left-0  w-[500px] border-none flex justify-center items-center">
+      <div className="bg-[#f7b90c] absolute z-10 top-0 bottom-0 left-0  lg:w-[500px] border-none flex justify-center items-center">
         {/* Overlay space for the starting position of the scroll */}{" "}
         <button
           onClick={handleScrollRight}
-          className="absolute top-1/2  bg-white rounded-full p-2 shadow-lg z-10 cursor-pointer"
+          className="absolute top-1/2 left-1  lg:left-12 bg-white rounded-full p-2 shadow-lg z-10 cursor-pointer"
         >
           <span className="text-xl font-bold">{"<"}</span>
         </button>
@@ -28,7 +28,7 @@ const PujaCard = () => {
 
       {/* Scrollable cards container */}
       <div
-        className="flex gap-5 pl-[500px] overflow-x-auto hide-scrollbar"
+        className="flex gap-5 lg:pl-[500px] overflow-x-auto hide-scrollbar "
         ref={scrollContainerRef}
       >
         {CardData.map((item, index) => (

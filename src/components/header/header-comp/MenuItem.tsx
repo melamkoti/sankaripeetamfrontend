@@ -58,7 +58,7 @@ export const MenuItem = ({
     >
       <NavLink
         to={item.route}
-        className="nav-li shadow-md px-4 py-2 mb-4 text-sm font-semibold text-[#1C1E53]"
+        className="nav-li shadow-md px-4 py-2 mb-4 text-sm font-semibold text-[#1C1E53] "
         onClick={handleItemClick}
       >
         {item.navLink}
@@ -78,6 +78,7 @@ export const MenuItem = ({
           ))}
         </div>
       )}
+      
     </motion.div>
   );
 };

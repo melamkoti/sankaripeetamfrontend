@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { UserModuleAPI } from "../../../services/AppEndPoints";
+import { toast } from "react-toastify";
 type Event = {
   id: number;
   title: string;
@@ -24,21 +25,21 @@ const EditEventModal = ({
     image: event.image,
     youtubeLink: event.youtubeLink,
   });
-
+const EventUpdateService = UserModuleAPI.IndividualEventPut;
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/api/event/${event.id}`, formData);
-      alert("Event updated successfully!");
+      await axios.put(`${EventUpdateService}/${event.id}`, formData);
+      toast.success("Event updated successfully!");
       onClose();
     } catch (error) {
-      console.error("Error updating event:", error);
+      toast.error("Error updating event: " + error);
     }
   };
 
   return (
     <div className="fixed  inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-md shadow-md w-2/6">
+      <div className="bg-white p-6 rounded-md shadow-md w-2/6 w-5/6">
         <h2 className="text-lg font-bold mb-4 text-center">Edit Event</h2>
         <form onSubmit={handleUpdate} className="space-y-1">
           {/* Name */}

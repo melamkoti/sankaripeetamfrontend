@@ -1,38 +1,45 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import EditActivityModal from "./EditActivityModel";
-
+import { UserModuleAPI } from "../../../services/AppEndPoints";
+import { toast } from "react-toastify";
 type Activity = {
   id: number;
   title: string;
   description: string;
+  color: string;
   image: string;
+  isEnable: boolean;
 };
 
 const AllActivity = () => {
   const [events, setEvents] = useState<Activity[]>([]);
   const [editEvent, setEditEvent] = useState<Activity | null>(null);
+const EventGetService = UserModuleAPI.AllActivityGet;
+  const deleteAcitivityService = UserModuleAPI.IndividualActivityDelete;
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/activities");
+      const response = await axios.get(EventGetService);
       setEvents(response.data);
+      toast.success("Activities fetched successfully!");
     } catch (error) {
-      console.error("Error fetching events:", error);
+      toast.error("Failed to fetch activities." + error);
     }
   };
 
   const handleDelete = async (id: number) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this event?"
+      "Are you sure you want to delete this Activity?"
     );
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/activities/${id}`);
+      await axios.delete(`${deleteAcitivityService}/${id}`);
       setEvents((prev) => prev.filter((event) => event.id !== id));
+      toast.success("Activity deleted successfully!");
     } catch (error) {
-      console.error("Error deleting event:", error);
+      toast.error("Failed to delete activity." + error);
     }
   };
 
@@ -41,7 +48,7 @@ const AllActivity = () => {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-6 shadow-md rounded-md">
+    <div className="max-w-4xl mx-auto bg-white md:p-6 p-2 shadow-md rounded-md">
       <h2 className="text-lg md:text-2xl font-bold mb-4 text-center">
         All Activities
       </h2>
@@ -49,7 +56,7 @@ const AllActivity = () => {
         {events.map((event) => (
           <div key={event.id} className="bg-gray-300 p-4 rounded-md shadow-md">
             <img
-              src={`http://localhost:3000${event.image}`}
+              src={event.image}
               alt={event.title}
               className="w-12 z-20"
             />

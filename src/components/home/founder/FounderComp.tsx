@@ -1,7 +1,7 @@
 import { FounderData } from "./FounderData";
 import founder from "../../../assets/images/founder.png";
 import quotation from "../../../assets/svg/quotation.svg";
-import LotusFramer from "./LotusFramer";
+// import LotusFramer from "./LotusFramer";
 import { motion } from "framer-motion";
 
 function FounderComp() {
@@ -9,8 +9,8 @@ function FounderComp() {
     <div className="w-full h-full bg-white p-8 py-28 md:p-12 md:py-32 gap-16 lg:gap-0 flex flex-col md:flex-row justify-center items-center">
       <div className="md:w-1/2 h-full flex flex-col gap-6 ">
         <div className="md:h-4/6  relative w-full flex justify-center items-center ">
-          <div className="w-full absolute -bottom-64 -right-2 md:-bottom-52 md:-right-2  lg:-bottom-28 lg:-right-5 transform ">
-            <LotusFramer />
+          <div className="w-full absolute -bottom-64 -right-2 md:-bottom-52 md:-right-2  lg:-bottom-28 lg:-right-5 transform  ">
+            {/* <LotusFramer /> */}
           </div>
 
           <motion.img

@@ -1,7 +1,6 @@
 // import { Outlet } from "react-router-dom";
 // import cartImg from "../../../assets/svg/cart.svg";
 //import wishlistImg from "../../../assets/svg/wishlist.png";
-import userImg from "../../../assets/svg/user.svg";
 export const NavListData = [
   { navLink: "HOME", route: "/" },
   { navLink: "ABOUT", route: "/aboutus" },
@@ -17,13 +16,13 @@ export const NavListData = [
   },
   { navLink: "VAASTU", route: "/vastu" },
   { navLink: "CONTACT US", route: "/contactus" },
-  {
-    navLink: "USER",
-    isImage: true,
-    imageSrc: userImg,
-    altText: "Image Description",
-    route: "/user",
-  },
+  // {
+  //   navLink: "USER",
+  //   isImage: true,
+  //   imageSrc: userImg,
+  //   altText: "Image Description",
+  //   route: "/user",
+  // },
 
   // {
   //   navLink: "CART",

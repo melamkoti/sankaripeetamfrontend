@@ -4,19 +4,23 @@ import location from "../../../assets/svg/location.svg";
 import insta from "../../../assets/svg/insta.svg";
 import twitter from "../../../assets/svg/twitter.svg";
 import discord from "../../../assets/svg/discord.svg";
+
 import { motion } from "framer-motion";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import kite from "../../../assets/images/kite.png";
+import { UserModuleAPI } from "../../../services/AppEndPoints";
+import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
-const EnquiryCategory = [
-  "GENERAL_ENQUIRY_1",
-  "GENERAL_ENQUIRY_2",
-  "GENERAL_ENQUIRY_3",
-  "GENERAL_ENQUIRY_4",
-] as const;
+// const EnquiryCategory = [
+//   "GENERAL_ENQUIRY_1",
+//   "GENERAL_ENQUIRY_2",
+//   "GENERAL_ENQUIRY_3",
+//   "GENERAL_ENQUIRY_4",
+// ] as const;
 
 const schema = z.object({
   email: z
@@ -30,9 +34,9 @@ const schema = z.object({
     .string()
     .length(10, "Phone number must contain 10 digits")
     .regex(/^\d{10}$/, "Phone number must be digits only"),
-  category: z.enum(EnquiryCategory, {
-    required_error: "Please select an option",
-  }),
+  // category: z.enum(EnquiryCategory, {
+  //   required_error: "Please select an option",
+  // }),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -44,20 +48,23 @@ function ContactUsForm() {
     formState: { errors },
     reset,
   } = useForm<FormFields>({ resolver: zodResolver(schema) });
-
+  const ContactApiService = UserModuleAPI.AllContactDetailsPost;
   const onSubmit = async (data: FormFields) => {
     try {
-      const response = await axios.post("http://localhost:3000/contact", data);
+      const response = await axios.post(ContactApiService, data);
+      toast.success("Contact details sent successfully!");
       console.log("Response:", response);
       reset();
     } catch (error) {
+      toast.error("Error submitting form: ");
+
       console.error("Error submitting form:", error);
     }
   };
 
   return (
-    <div className="flex flex-col justify-center items-center lg:p-20 lg:px-28 p-4 gap-8 bg-[#f8f8f8] ">
-      <p className="text-lg text-[#717171] tracking-wide">
+    <div className="flex flex-col justify-center items-center lg:p-20 lg:px-28  md:p-4 gap-8 bg-[#f8f8f8] ">
+      <p className="text-lg text-[#717171] tracking-wide p-2">
         Any question or remarks? Just write us a message!
       </p>
 
@@ -75,7 +82,11 @@ function ContactUsForm() {
           <div className="flex flex-col items-start justify-center gap-8 w-full">
             <div className="flex gap-2 justify-center items-center ">
               <img src={phonecall} alt="phonecall" className="w-6" />
-              <p>+91 9705752677</p>
+              <div className="flex flex-col">
+                {" "}
+                <p>+91 9989492655</p>
+                <p>+91 9705752677</p>
+              </div>
             </div>
             <div className="flex gap-2 justify-center items-center ">
               <img
@@ -83,7 +94,7 @@ function ContactUsForm() {
                 alt="phonecall"
                 className="w-6 flex items-start"
               />
-              <p>guruji@sankaripeetam.in turst.sspc@gmail.com</p>
+              <p>turst.sspc@gmail.com</p>
             </div>
             <div className="flex gap-2 justify-center items-start">
               <img
@@ -100,39 +111,62 @@ function ContactUsForm() {
           </div>
 
           <div className="flex gap-4 justify-center items-center">
+            {/* Instagram Button */}
             <motion.div
               className="p-2 bg-[#ffb600] rounded-full"
               whileHover={{ scale: 1.2 }}
             >
-              <motion.img
-                src={insta}
-                alt="insta"
-                className="w-6"
-                whileHover={{ scale: 1.1 }}
-              />
+              <NavLink
+                to="https://www.instagram.com/sankaripeetam/#"
+                target="_blank"
+                className="cursor-pointer"
+              >
+                <motion.img
+                  src={insta}
+                  alt="Instagram"
+                  className="w-6"
+                  whileHover={{ scale: 1.1 }}
+                />
+              </NavLink>
             </motion.div>
-            <motion.div
-              className="p-2 bg-[#ffb600] rounded-full"
-              whileHover={{ scale: 1.2 }}
+
+            {/* Facebook Button */}
+            <NavLink
+              to="https://www.facebook.com/people/Sanathana-Sankari-Peetam/61556567276927/?mibextid=LQQJ4d"
+              target="_blank"
+              className="cursor-pointer"
             >
-              <motion.img
-                src={twitter}
-                alt="insta"
-                className="w-6"
-                whileHover={{ scale: 1.1 }}
-              />
-            </motion.div>
-            <motion.div
-              className="p-2 bg-[#ffb600] rounded-full"
-              whileHover={{ scale: 1.2 }}
+              <motion.div
+                className="p-2 bg-[#ffb600] rounded-full"
+                whileHover={{ scale: 1.2 }}
+              >
+                <motion.img
+                  src={twitter} // Note: You might want to rename this to 'facebook' if that's what it represents
+                  alt="Facebook"
+                  className="w-6"
+                  whileHover={{ scale: 1.1 }}
+                />
+              </motion.div>
+            </NavLink>
+
+            {/* YouTube Button */}
+            <NavLink
+              to="https://www.youtube.com/@SankariPeetam"
+              target="_blank"
+              className="cursor-pointer"
             >
-              <motion.img
-                src={discord}
-                alt="insta"
-                className="w-6"
-                whileHover={{ scale: 1.1 }}
-              />
-            </motion.div>
+              <motion.div
+                className="p-2 bg-[#ffb600] rounded-full"
+                whileHover={{ scale: 1.2 }}
+              >
+                <motion.img
+                  src={discord} // Note: You might want to rename this to 'youtube' if that's what it represents
+                  alt="YouTube"
+                  className="w-6"
+                  whileHover={{ scale: 1.1 }}
+                />
+              </motion.div>
+            </NavLink>
           </div>
         </div>
 
@@ -143,7 +177,7 @@ function ContactUsForm() {
             className="hidden absolute bottom-1/4 z-10 right-1/3"
           />
           <form
-            className="flex flex-col gap-12 p-4"
+            className="flex flex-col gap-12 p-2"
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="flex flex-col md:flex-row w-full justify-around items-center gap-8 lg:gap-2">
@@ -228,7 +262,7 @@ function ContactUsForm() {
             </div>
 
             {/* Category Selection */}
-            <div className="flex flex-col w-full lg:px-6 gap-4 relative ">
+            {/* <div className="flex flex-col w-full lg:px-6 gap-4 relative ">
               <p className="text-xl ml-1 font-semibold">Select Category</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 ">
                 {EnquiryCategory.map((EnquiryCategory, index) => (
@@ -248,7 +282,7 @@ function ContactUsForm() {
                   {errors.category.message}
                 </p>
               )}
-            </div>
+            </div> */}
 
             <div className="flex w-5/6 mx-auto flex-col gap-1 relative">
               <label
