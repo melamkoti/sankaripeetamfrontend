@@ -4,17 +4,19 @@ import Events from "./pages/Events";
 import Post from "./pages/Post";
 import Activities from "./pages/Activities";
 import Users from "./pages/Users";
+import Gallery from "./pages/Gallery"
 import { NotFound } from "./components/NotFound";
 const AdminApp = () => {
   return (
     <>
       <AdminNavbar />
-      <div className="p-2">
+      <div className="p-2 h-screen">
         <Routes>
           <Route path="" element={<Events />} />
           <Route path="activities" element={<Activities />} />
           <Route path="post" element={<Post />} />
           <Route path="users" element={<Users />} />
+          <Route path="gallery" element={<Gallery />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

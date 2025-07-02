@@ -1,29 +1,55 @@
 import { AboutMeData } from "./AboutMeData";
-import founder from "../../../assets/images/founder.png"
+import footerLogo from "../../../assets/images/footer-logo.svg";
 
 function AboutMePage() {
-    return(
-        <div className="w-full flex flex-col md:flex-row gap-16 lg:gap-0 justify-center items-center p-8 lg:p-16">
-            <div className="w-full md:w-1/2">
-                <img src={founder} alt="founder" className="lg:w-4/6 mx-auto md:mx-0 object-cover object-center" />
-            </div>
+  return (
+   <div className="w-full p-6 md:p-10 lg:p-16 bg-gradient-to-b from-[#fffbe6] to-[#fffdf4]">
+  {/* Page Title */}
+  <h1 className="text-3xl md:text-4xl font-bold text-center text-[#b91c1c] font-mukta tracking-wide">
+    About the Peetam
+  </h1>
 
-            <div className="w-full md:w-1/2 flex flex-col justify-around items-center gap-8">
+  {/* Divider */}
+  <div className="w-24 h-1 bg-[#FFD700] mx-auto mt-2 mb-8 rounded-full shadow-md" />
 
-            <div className="flex flex-col gap-2 justify-center items-center md:items-start">
-               <p className="text-2xl font-semibold">My Thoughts</p>
-               <p className="text-xs lg:text-sm text-justify md:text-left font-normal">{AboutMeData[0].aboutcontent}</p>
-            </div>
+  {/* Main Content */}
+  <div className="w-full flex flex-col md:flex-row gap-16 lg:gap-0 justify-center items-center">
+    {/* Founder Image */}
+    <div className="w-full md:w-1/2 flex justify-center">
+      <div className="border-4 border-[#FFD700] rounded-xl shadow-lg p-2 bg-white ">
+        <img
+          src={footerLogo}
+          alt="founder"
+          className="lg:w-4/6 w-[250px] object-cover object-center rounded-lg"
+        />
+      </div>
+    </div>
 
-            <div className="flex flex-col gap-2 justify-center items-center md:items-start">
-               <p className="text-2xl font-semibold">My Ashramam</p>
-               <p className="text-xs lg:text-sm text-justify md:text-left font-normal">{AboutMeData[0].aashramcontent}</p>
-            </div>
-
-            </div>
-
+    {/* Content Section */}
+    <div className="w-full md:w-1/2 flex flex-col justify-around items-center md:items-start gap-10">
+      {/* Section Card */}
+      {[
+        { title: "His Thoughts", content: AboutMeData[0].aboutcontent },
+        { title: "His Ashramam", content: AboutMeData[0].aashramcontent },
+        { title: "About the Peetam", content: AboutMeData[0].peetamcontent },
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="bg-white/80 backdrop-blur-md border-l-4 border-[#FFD700] shadow-md p-4 rounded-md w-full"
+        >
+          <p className="text-xl font-semibold text-[#b91c1c] font-mukta mb-2">
+            {item.title}
+          </p>
+          <p className="text-sm lg:text-base text-gray-700 text-justify leading-relaxed font-light font-sans">
+            {item.content}
+          </p>
         </div>
-    )
+      ))}
+    </div>
+  </div>
+</div>
+
+  );
 }
 
 export default AboutMePage;

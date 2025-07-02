@@ -10,7 +10,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import kite from "../../../assets/images/kite.png";
 import { UserModuleAPI } from "../../../services/AppEndPoints";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
@@ -52,11 +51,33 @@ function ContactUsForm() {
   const onSubmit = async (data: FormFields) => {
     try {
       const response = await axios.post(ContactApiService, data);
-      toast.success("Contact details sent successfully!");
-      console.log("Response:", response);
-      reset();
-    } catch (error) {
-      toast.error("Error submitting form: ");
+
+      if (response.status === 201) {
+        toast.success("Contact details sent successfully!");
+        console.log("Response:", response.data);
+        reset();
+      } else {
+        toast.warning(
+          response.data.message || "Something unexpected happened."
+        );
+      }
+    } catch (error: any) {
+      // Check for backend error message
+      if (error.response) {
+        const status = error.response.status;
+        const message = error.response.data?.message || "Server error occurred";
+
+        if (status === 400) {
+          toast.warning(message); // e.g., Email already exists
+        } else if (status === 500) {
+          toast.error("Internal server error. Please try again later.");
+        } else {
+          toast.error(message);
+        }
+      } else {
+        // Network or unexpected error
+        toast.error("Unable to submit the form. Please check your internet.");
+      }
 
       console.error("Error submitting form:", error);
     }
@@ -69,7 +90,7 @@ function ContactUsForm() {
       </p>
 
       <div className="flex flex-col lg:flex-row rounded-xl bg-white w-full p-2">
-        <div className="lg:w-2/6 md:min-w-[350px] p-3 w-full border-2 bg-[#7E4555] text-white flex flex-col justify-evenly items-start lg:p-12 rounded-xl shadow-lg  gap-12">
+        <div className="lg:w-2/6 md:min-w-[350px] p-3 w-full border-2 bg-[#7E4555] text-white flex flex-col justify-evenly items-start lg:p-12  shadow-lg  gap-12">
           <div className="gap-2">
             <p className="text-2xl font-semibold tracking-wide">
               Contact Information
@@ -111,7 +132,6 @@ function ContactUsForm() {
           </div>
 
           <div className="flex gap-4 justify-center items-center">
-            {/* Instagram Button */}
             <motion.div
               className="p-2 bg-[#ffb600] rounded-full"
               whileHover={{ scale: 1.2 }}
@@ -130,7 +150,6 @@ function ContactUsForm() {
               </NavLink>
             </motion.div>
 
-            {/* Facebook Button */}
             <NavLink
               to="https://www.facebook.com/people/Sanathana-Sankari-Peetam/61556567276927/?mibextid=LQQJ4d"
               target="_blank"
@@ -149,7 +168,6 @@ function ContactUsForm() {
               </motion.div>
             </NavLink>
 
-            {/* YouTube Button */}
             <NavLink
               to="https://www.youtube.com/@SankariPeetam"
               target="_blank"
@@ -169,147 +187,115 @@ function ContactUsForm() {
             </NavLink>
           </div>
         </div>
-
-        <div className="lg:w-4/6 relative">
-          <img
-            src={kite}
-            alt="kite"
-            className="hidden absolute bottom-1/4 z-10 right-1/3"
-          />
-          <form
-            className="flex flex-col gap-12 p-2"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div className="flex flex-col md:flex-row w-full justify-around items-center gap-8 lg:gap-2">
-              <div className="flex w-full lg:w-2/6 flex-col gap-1 relative">
+        <div className="w-full lg:w-2/3 p-8 md:p-14">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="firstName"
-                  className="text-lg font-normal text-[#666]"
+                  className="text-sm font-medium text-[#333]"
                 >
                   First Name
                 </label>
                 <input
                   {...register("firstName")}
-                  placeholder="Enter your First Name"
+                  placeholder="Your first name"
                   id="firstName"
-                  className="border-b-2 border-slate-700 outline-none p-2 "
+                  className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7E4555]"
                 />
                 {errors.firstName && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
+                  <p className="text-xs text-red-600">
                     {errors.firstName.message}
                   </p>
                 )}
               </div>
-              <div className="flex w-full lg:w-2/6 flex-col gap-1 relative">
+
+              <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="lastName"
-                  className="text-lg font-normal text-[#666]"
+                  className="text-sm font-medium text-[#333]"
                 >
                   Last Name
                 </label>
                 <input
                   {...register("lastName")}
-                  placeholder="Enter your Last Name"
+                  placeholder="Your last name"
                   id="lastName"
-                  className="border-b-2 border-black outline-none p-2 "
+                  className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7E4555]"
                 />
                 {errors.lastName && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
+                  <p className="text-xs text-red-600">
                     {errors.lastName.message}
                   </p>
                 )}
               </div>
             </div>
-            <div className="flex flex-col md:flex-row w-full justify-around items-center gap-8 lg:gap-2">
-              <div className="flex w-full lg:w-2/6 flex-col gap-1 relative">
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="email"
-                  className="text-lg font-normal text-[#666]"
+                  className="text-sm font-medium text-[#333]"
                 >
                   Email
                 </label>
                 <input
                   {...register("email")}
-                  placeholder="Enter your Email"
+                  placeholder="Your email"
                   id="email"
-                  className="border-b-2 border-slate-700 outline-none p-2 "
+                  className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7E4555]"
                 />
                 {errors.email && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.email.message}
-                  </p>
+                  <p className="text-xs text-red-600">{errors.email.message}</p>
                 )}
               </div>
-              <div className="flex  w-full lg:w-2/6 flex-col gap-1 relative">
+
+              <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="phoneNumber"
-                  className="text-lg font-normal text-[#666]"
+                  className="text-sm font-medium text-[#333]"
                 >
-                  Phone Number
+                  Phone
                 </label>
                 <input
                   {...register("phoneNumber")}
-                  placeholder="Enter your phone number"
+                  placeholder="Your phone number"
                   id="phoneNumber"
-                  className="border-b-2 border-black outline-none p-2 "
+                  className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7E4555]"
                 />
                 {errors.phoneNumber && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
+                  <p className="text-xs text-red-600">
                     {errors.phoneNumber.message}
                   </p>
                 )}
               </div>
             </div>
 
-            {/* Category Selection */}
-            {/* <div className="flex flex-col w-full lg:px-6 gap-4 relative ">
-              <p className="text-xl ml-1 font-semibold">Select Category</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 ">
-                {EnquiryCategory.map((EnquiryCategory, index) => (
-                  <label key={index} className="flex items-center">
-                    <input
-                      type="radio"
-                      value={EnquiryCategory}
-                      {...register("category")}
-                      className="mr-2 z-20"
-                    />
-                    {EnquiryCategory}
-                  </label>
-                ))}
-              </div>
-              {errors.category && (
-                <p className="text-red-600 text-xs left-16 -bottom-4 absolute">
-                  {errors.category.message}
-                </p>
-              )}
-            </div> */}
-
-            <div className="flex w-5/6 mx-auto flex-col gap-1 relative">
+            <div className="flex flex-col gap-2 relative">
               <label
                 htmlFor="message"
-                className="text-lg font-normal text-[#666]"
+                className="text-sm font-medium text-[#333]"
               >
                 Message
               </label>
               <textarea
                 {...register("message")}
-                placeholder="Enter your message here"
+                placeholder="Type your message here..."
                 id="message"
-                className="border-b-2 border-slate-700 outline-none p-2"
+                rows={4}
+                className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7E4555]"
               />
               {errors.message && (
-                <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                  {errors.message.message}
-                </p>
+                <p className="text-xs text-red-600">{errors.message.message}</p>
               )}
             </div>
 
-            <div className="flex justify-end p-2">
+            <div className="flex justify-end">
               <motion.button
-                whileHover={{ scale: 1.12 }}
-                whileTap={{ scale: 0.93 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 type="submit"
-                className="rounded-xl p-2 px-4 bg-[#7E4555] text-white"
+                className="bg-[#7E4555] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#672b3f] transition"
               >
                 Send Message
               </motion.button>

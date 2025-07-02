@@ -1,4 +1,4 @@
-import activitiesbg from "../../../assets/images/activitiesbg.jpg";
+// import activitiesbg from "../../../assets/images/activitiesbg.jpg";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -24,12 +24,12 @@ function ActivitiesComp() {
 
   return (
     <div
-      className=" flex flex-col justify-start w-full p-8 md:p-12 lg:p-20 gap-12"
-      style={{
-        backgroundImage: ` url(${activitiesbg})`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }}
+      className=" flex flex-col justify-start w-full p-8 md:p-12 lg:p-20 gap-12 bg-[#f7b90c]"
+      // style={{
+      //   backgroundImage: ` url(${activitiesbg})`,
+      //   backgroundPosition: "center",
+      //   backgroundSize: "cover",
+      // }}
     >
       <div className="flex flex-col md:w-1/6 justify-center md:justify-start items-center md:items-start ">
         <p className="text-[#DB4242] text-lg font-semibold ">Activities</p>
@@ -69,7 +69,7 @@ function ActivitiesComp() {
                 <p>{item.description}</p>
               </div>
 
-              <a href="#">Learn More &#8594;</a>
+              <a href="/activities/parihara">For More Details go to Activities &#8594;</a>
             </motion.div>
           );
         })}

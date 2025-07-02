@@ -14,13 +14,13 @@ function Home() {
     <div className="main_head">
       <Welcome />
       <FounderComp />
-      <CardSlider />
+      <OurGoalsPage />
+      <PujaCard />
 
       <AboutMePage />
-      <PujaCard />
-      <OurGoalsPage />
       <ActivitiesPage />
-      {/* <ProductsPage /> */}
+      <CardSlider />
+
       <EventsPage />
     </div>
   );

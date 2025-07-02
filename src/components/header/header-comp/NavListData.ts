@@ -14,7 +14,10 @@ export const NavListData = [
     route: "/activities",
     childNav: ["parihara", "adyatmikam", "samajaseva", "poojalu"],
   },
+
   { navLink: "VAASTU", route: "/vastu" },
+  { navLink: "GALLERY", route: "/gallery" },
+
   { navLink: "CONTACT US", route: "/contactus" },
   // {
   //   navLink: "USER",

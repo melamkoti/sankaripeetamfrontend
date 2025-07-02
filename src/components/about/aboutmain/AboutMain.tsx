@@ -3,7 +3,7 @@ import aboutusmain from "../../../assets/images/aboutusmain.png";
 function AboutMain() {
   return (
     <div
-      className="flex justify-center items-end p-12 h-[70vh] min-w-screen"
+      className="flex justify-center items-end p-12 h-[90vh] min-w-screen radix-lg"
       style={{
         backgroundImage: `url(${aboutusmain})`,
         backgroundPosition: "center",

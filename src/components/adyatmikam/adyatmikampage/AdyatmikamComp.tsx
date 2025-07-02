@@ -12,7 +12,7 @@ export default function AdyatmikamComp() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <h1 className="text-4xl tracking-wider font-semibold text-white py-3">
+        <h1 className="text-2xl md:text-4xl font-semibold md:font-bold tracking-wider z-10 text-white">
           ADHYATMIKAM
         </h1>
       </div>
@@ -59,7 +59,10 @@ export default function AdyatmikamComp() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:p-24 p-8 gap-10 md:w-[90vw] mx-auto">
         {AdyatmikamData.map((item, index) => {
           return (
-            <div className="flex flex-col gap-3 border-l-4 border-t border-[#AD3501] shadow-lg py-4 px-2 rounded-lg justify-center items-center" key={index}>
+            <div
+              className="flex flex-col gap-3 border-l-4 border-t border-[#AD3501] shadow-lg py-4 px-2 rounded-lg justify-center items-center"
+              key={index}
+            >
               <div className="min-w-16 ">
                 <img className="w-16" src={item.img} alt="" />
               </div>

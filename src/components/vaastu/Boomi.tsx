@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 const Boomi = () => {
   const [feet, setFeet] = useState<number | "">("");
@@ -31,8 +30,8 @@ const Boomi = () => {
   }, []);
 
   return (
-    <div className=" my-24 max-w-2xl mx-auto border-2 rounded-md ">
-      <div className=" flex justify-end  p-4  ">
+    <div className=" my-24  mx-auto border-2 rounded-md ">
+      {/* <div className=" flex justify-end  p-4  ">
         <div className="flex justify-end border border-[#10356A] rounded-md">
           <NavLink
             to="/vastu"
@@ -42,7 +41,7 @@ const Boomi = () => {
                 : "bg-white text-black p-3 rounded-md"
             }
           >
-            <p>జాతక చక్రం</p>
+            <p>గృహ గణితం</p>
           </NavLink>
           <NavLink
             to="/boomi"
@@ -52,10 +51,10 @@ const Boomi = () => {
                 : "bg-white text-black p-3 rounded-md"
             }
           >
-            <p>భూమి సమీక్ష</p>
+            <p>దేవాలయ గణితం</p>
           </NavLink>
         </div>
-      </div>
+      </div> */}
       <div className="flex items-center mb-6 text-center mt-8">
         <label className="w-1/4 text-gray-700 font-medium">పాదం :</label>
         <input

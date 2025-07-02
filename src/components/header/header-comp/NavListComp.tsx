@@ -31,7 +31,7 @@ export default function NavListComp() {
   };
 
   return (
-    <ul className="flex flex-wrap w-full text-[#f87005] text-md font-semibold justify-center items-center lg:gap-10 gap-4 h-full ">
+    <ul className="flex flex-wrap w-full text-[#f87005] text-md font-semibold justify-center items-center lg:gap-10 gap-4 h-full  ">
       {NavListData.map((item: NavListItem, index) => (
         <li
           key={index}

@@ -11,7 +11,7 @@ import googleicon from "../../assets/svg/googleicon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../auth/AuthContext";
-
+import { UserModuleAPI } from "../../services/AppEndPoints";
 const schema = z.object({
   email: z
     .string()
@@ -25,7 +25,7 @@ function SignUpCreate() {
   const authContext = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
+const UserLoginApiService = UserModuleAPI.SingInPost; // API endpoint for user login
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ function SignUpCreate() {
   const onSubmit = async (data: FormFields) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/login",
+        UserLoginApiService,
         data
       );
       if (response.status === 200) {

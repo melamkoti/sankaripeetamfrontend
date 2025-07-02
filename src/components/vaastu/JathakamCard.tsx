@@ -20,7 +20,7 @@ const JathakamCard: React.FC<JathakamCardProps> = ({bhumi}) => {
         }}
       >
         <h1 className="md:text-6xl text-4xl tracking-wider font-semibold text-white z-10">
-          {bhumi ? "భూమి సమీక్ష":"జాతక చక్రం"}
+          {bhumi ? "గృహవాస్తు గణితం":"వాస్తు సంగ్రహం"}
         </h1>
       </div>
     </div>

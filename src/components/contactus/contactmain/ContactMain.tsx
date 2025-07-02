@@ -1,4 +1,4 @@
-import contactusmain from "../../../assets/images/contactusmain.jpg";
+import contactusmain from "../../../assets/images/contact.jpg";
 
 function ContactMain() {
   return (
