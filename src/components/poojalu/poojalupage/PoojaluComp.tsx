@@ -1,4 +1,4 @@
-import poojaluBannerImg from "../../../assets/images/poojalu-banner.png";
+import poojaluBannerImg from "../../../assets/images/pujaluuu.webp";
 
 import { useState } from "react";
 
@@ -258,9 +258,9 @@ const PoojaluComp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-amber-100 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-amber-100 ">
       <div
-        className="h-[100vh] flex justify-center items-center"
+        className="h-[100vh] flex justify-center items-center py-0 px-0"
         style={{
           backgroundImage: `url(${poojaluBannerImg})`,
           backgroundSize: "cover",
@@ -268,11 +268,11 @@ const PoojaluComp = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <h1 className="text-4xl tracking-wider font-semibold  z-50 text-white">
-          ASHRAMA PUJALU
-        </h1>
+        
+         <h1 className="text-2xl md:text-4xl font-semibold md:font-bold tracking-wider z-10 text-red-600">
+ ASHRAMA PUJALU        </h1>
       </div>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto py-8 px-4">
         <h1 className="text-3xl font-bold text-center text-orange-800 mb-8">
           Temple Poojalu
         </h1>

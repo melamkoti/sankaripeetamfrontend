@@ -9,7 +9,7 @@ import eyehide from "../../assets/svg/eyehide.svg";
 import eyeshow from "../../assets/svg/eyeshow.svg";
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-
+import { UserModuleAPI } from "../../services/AppEndPoints";
 const schema = z.object({
   newpassword: z.string().min(6, "must contain 6 characters"),
 });
@@ -23,7 +23,7 @@ function SetPassword() {
 
   const token = searchParams.get("token");
   const email = searchParams.get("email");
-
+const UserResetPasswordService = UserModuleAPI.ResetPasswordPost; // API endpoint for resetting password
   const {
     register,
     handleSubmit,
@@ -34,7 +34,7 @@ function SetPassword() {
   const onSubmit = async (data: FormFields) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/reset-password",
+        UserResetPasswordService,
         {
           token,
           email,

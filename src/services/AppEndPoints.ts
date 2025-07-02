@@ -1,8 +1,10 @@
 //-------------BASEURL's----------------
 const BaseAPIURL = "http://localhost:3000/";
+// const BaseAPIURL = "https://api.sankaripeetam.org/";
 
 const UserRegisterAPI = {
   RegisterPost: BaseAPIURL + "user/signup",
+  RegisterEmailPost: BaseAPIURL + "user/signupemail",
   SingInPost: BaseAPIURL + "user/login",
   UserDetailsGet: BaseAPIURL + "user/me",
   ForgetPasswordPost: BaseAPIURL + "user/forgot-password",
@@ -37,7 +39,10 @@ const DonationAPI = {
   DonationAmoutPost: BaseAPIURL + "donation/create-order",
   AllDonationGet: BaseAPIURL + "donation",
 };
-
+const GalleryAPI = {
+  AllGalleryPost: BaseAPIURL + "api/gallery",
+  AllGalleryGet: BaseAPIURL + "api/gallery",
+};
 export const UserModuleAPI = {
   ...UserRegisterAPI,
   ...EventsAPI,
@@ -45,4 +50,5 @@ export const UserModuleAPI = {
   ...PostsAPI,
   ...ContactAPI,
   ...DonationAPI,
+  ...GalleryAPI
 };

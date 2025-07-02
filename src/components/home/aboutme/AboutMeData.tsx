@@ -1,6 +1,12 @@
+
+
 export const AboutMeData = [
-    {
-        "aboutcontent": "Promoting awareness about the benefits of organic farming among farmers and the general public.  His teachings inspire us to lead a life rooted in simplicity, compassion, and awareness.",
-        "aashramcontent": "The Parents of Sri Brahmasri Nemmikanti Narasaiahcharyulu migrated from Allagadda village in Kurnool district of Andhra Pradesh. Their family used to run traditional sculpture school. His grandfather was an expert in Goldsmithing as well as in Ayurveda.  He used to do free service to people in surrounding villages and cure their health problems. His expertise in Nerve Knowledge is so precise, that he cured the patients who were in comma and those who were declared as almost dead, using his powerful Ayurveda knowledge. Eventhough the main herbs required were not available nearby, he collected the minimal herbs and plants surrounding the village and used them to cure thereby  giving a new lease of life to the those comma patients."
-    }
-]
+  {
+    aboutcontent:
+      "His spiritual journey began at a very early age with devotion to Sanatana Dharma...",
+    aashramcontent:
+      "Our ashramam is a center for meditation, Vedic studies, and selfless service...",
+    peetamcontent:
+      "Sanathana Saankari Peetam was established to preserve and promote the Vedic way of life, guiding people on a path of dharma, devotion, and peace...",
+  },
+];

@@ -6,7 +6,7 @@ import Home from "./components/home/Home";
 import AboutUs from "./components/about/AboutPage";
 import Header from "./components/header/Header";
 import Vastu from "./components/vaastu/VastuPage";
-import Boomi from "./components/vaastu/BoomiPage";
+import DevalayaPage from "./components/vaastu/DevalayaPage";
 import DonateNow from "./components/donations/Donations";
 import PariharaPooja from "./components/pariharapooja/PariharaPooja";
 import Adyatmikam from "./components/adyatmikam/Adyatmikam";
@@ -32,54 +32,57 @@ import CancellationRefund from "./components/razarpay/Cancelation&Refund";
 import RazarpayContact from "./components/razarpay/RazarpayContact";
 import Shipping from "./components/razarpay/Shipping";
 import TermsAndConditions from "./components/razarpay/Terms&condition";
+import GalleryComponent from "./components/gallery/Gallery";
 
 function App() {
   const location = useLocation();
 
   const isAdminRoute = location.pathname.startsWith("/admin");
   return (
-    <>
-    <AuthProvider>
-      <ScrollToTop />
-      {!isAdminRoute && <Header />}
-      <ToastContainer />
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Singin />} />
-        <Route path="/forgot" element={<ForgotPassword />} />
-        <Route path="/setpassword" element={<SetPassword />} />
-        <Route path="/complete" element={<PasswordComplete />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/events" element={""}>
-          <Route path="previousevents" element={<PreviousEvents />} />
-          <Route path="upcomingevents" element={<UpComingEvents />} />
-        </Route>
-        <Route path="/activities" element={""}>
-          <Route path="parihara" element={<PariharaPooja />} />
-          <Route path="adyatmikam" element={<Adyatmikam />} />
-          <Route path="samajaseva" element={<SamaajaSeva />} />
-          <Route path="poojalu" element={<Poojalu />} />
-        </Route>
-        <Route path="/vastu" element={<Vastu />} />
-        <Route path="/boomi" element={<Boomi />} />
-        <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/donate" element={<DonateNow />} />
-        <Route
-          path="/donationpayment"
-          element={
-            <ProtectedRoute allowedRoles={["User", "Admin"]}>
-              <DonationPaymentPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/privacy&policy" element={<PrivacyPolicy/>}/>
-        <Route path="/cancellation&refund" element={<CancellationRefund/>}/>
-        <Route path="/contact" element={<RazarpayContact/>}/>
-        <Route path="/shipping" element={<Shipping/>}/>
-        <Route path="/terms&conditions" element={<TermsAndConditions/>}/>
-
-        {/* <Route
+    <div
+      style={{ backgroundColor: "#FFF8DC", fontFamily: "Mulish, sans-serif" }}
+    >
+      <AuthProvider>
+        <ScrollToTop />
+        {!isAdminRoute && <Header />}
+        <ToastContainer />
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Singin />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
+          <Route path="/setpassword" element={<SetPassword />} />
+          <Route path="/complete" element={<PasswordComplete />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/events" element={""}>
+            <Route path="previousevents" element={<PreviousEvents />} />
+            <Route path="upcomingevents" element={<UpComingEvents />} />
+          </Route>
+          <Route path="/activities" element={""}>
+            <Route path="parihara" element={<PariharaPooja />} />
+            <Route path="adyatmikam" element={<Adyatmikam />} />
+            <Route path="samajaseva" element={<SamaajaSeva />} />
+            <Route path="poojalu" element={<Poojalu />} />
+          </Route>
+          <Route path="/vastu" element={<Vastu />} />
+          <Route path="/devalaya" element={<DevalayaPage/>} />
+          <Route path="/gallery" element={<GalleryComponent />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/donate" element={<DonateNow />} />
+          <Route
+            path="/donationpayment"
+            element={
+              <ProtectedRoute allowedRoles={["User", "Admin"]}>
+                <DonationPaymentPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/privacy&policy" element={<PrivacyPolicy />} />
+          <Route path="/cancellation&refund" element={<CancellationRefund />} />
+          <Route path="/contact" element={<RazarpayContact />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/terms&conditions" element={<TermsAndConditions />} />
+          {/* <Route
           path="/user"
           element={
             <ProtectedRoute allowedRoles={["User", "Admin"]}>
@@ -87,20 +90,20 @@ function App() {
             </ProtectedRoute>
           }
         /> */}
-        {/* Admin panel route */}
-        <Route
-          path="/admin/*"
-          element={
-            <ProtectedRoute allowedRoles={["Admin"]}>
-              <AdminApp />
-            </ProtectedRoute>
-          }
-        />{" "}
-      </Routes>
-      {!isAdminRoute && <WhatsUpComp />}
-      {!isAdminRoute && <Footer />}
-    </AuthProvider>
-    </>
+          {/* Admin panel route */}
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute allowedRoles={["Admin"]}>
+                <AdminApp />
+              </ProtectedRoute>
+            }
+          />{" "}
+        </Routes>
+        {!isAdminRoute && <WhatsUpComp />}
+        {!isAdminRoute && <Footer />}
+      </AuthProvider>
+    </div>
   );
 }
 

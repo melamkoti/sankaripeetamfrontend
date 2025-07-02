@@ -1,21 +1,21 @@
 import Boomi from "./Boomi";
-import Jathakam from "./Jahtakam";
+import Devalaya from "./Devalayaganitham";
 import JathakamCard from "./JathakamCard";
 
-function VastuPage() {
+function DevalayaPage() {
   return (
-    <div>
-      <JathakamCard />
+    <>
+      <JathakamCard bhumi={false} />
       <div className="flex flex-col  lg:flex-row item-center justify-center gap-8">
         <div>
-      <Jathakam />
+          <Devalaya />
         </div>
         <div>
           <Boomi />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-export default VastuPage;
+export default DevalayaPage;

@@ -42,14 +42,14 @@ const navigate = useNavigate();
   }, []);
 
   return (
-   <div className="bg-[#FFF0E3] p-8 md:p-12 flex flex-col justify-center items-center gap-10">
+  <div className="bg-[#f7b90c] p-8 md:p-12 flex flex-col justify-center items-center gap-10">
   {/* Header */}
   <div className="flex flex-col gap-4 justify-center items-center text-center">
     <p className="text-3xl md:text-4xl font-bold text-[#44233B] tracking-wide relative inline-block">
-      <span className="relative z-10 px-2">EVENTS</span>
-      <span className="absolute bottom-1 left-0 w-full h-2 bg-[#FFD700] opacity-60 z-0"></span>
+      <span className="relative z-10 px-2 text-red-700">EVENTS</span>
+      <span className="absolute bottom-1 left-0 w-full h-2 bg-white opacity-60 z-0"></span>
     </p>
-    <p className="text-xl md:text-2xl text-[#6EC1E4] font-semibold">
+    <p className="text-xl md:text-2xl text-blue-500 font-semibold">
       Upcoming Events and Workshops
     </p>
   </div>
@@ -68,7 +68,7 @@ const navigate = useNavigate();
   ) : (
     <>
       {/* Event Cards */}
-      <div className="w-full lg:w-5/6 flex flex-col gap-6">
+      <div className=" lg:w-5/6 grid grid-cols-1 md:grid-cols-2 gap-6 border-2 border-red-500">
         {eventsState.map((item, idx) => (
           <motion.div
             key={idx}
@@ -86,12 +86,12 @@ const navigate = useNavigate();
             </div>
 
             {/* Content */}
-            <div className="flex flex-col justify-between gap-4 w-full">
+            <div className="flex flex-col justify-center gap-4 ">
               <div>
                 <h3 className="text-2xl text-[#44233B] font-bold mb-1">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+                <p className=" text-gray-600  md:text-lg text-wrap">
                   {item.description}
                 </p>
               </div>
@@ -107,13 +107,13 @@ const navigate = useNavigate();
                 </p>
               </div>
 
-              <div className="w-full flex justify-end">
+              <div className=" flex ">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-[#61CE70] text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-[#4bb75d] transition"
                 >
-                  Join Us
+                  Contact Us
                 </motion.button>
               </div>
             </div>
@@ -135,6 +135,7 @@ const navigate = useNavigate();
     </>
   )}
 </div>
+
 
   );
 }

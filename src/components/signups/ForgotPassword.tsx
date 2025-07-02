@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import backbtn from "../../assets/svg/backbtn.svg";
 import { useNavigate } from "react-router-dom";
-
+import { UserModuleAPI } from "../../services/AppEndPoints";
 const schema = z.object({
   email: z
     .string()
@@ -18,6 +18,7 @@ type FormFields = z.infer<typeof schema>;
 
 function ForgotPassword() {
   const navigate = useNavigate();
+  const UserForgotPasswordService = UserModuleAPI.ForgetPasswordPost; // API endpoint for forgot password
   const {
     register,
     handleSubmit,
@@ -28,7 +29,7 @@ function ForgotPassword() {
   const onSubmit = async (data: FormFields) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/forgot-password",
+        UserForgotPasswordService,
         data
       );
       console.log("Response:", response);

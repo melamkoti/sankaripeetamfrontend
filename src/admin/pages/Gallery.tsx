@@ -1,30 +1,30 @@
 import { useState } from "react";
-import PostActivity from "../components/activityManager/PostActivity";
-import AllActivities from "../components/activityManager/AllActivities";
+import PostGallery from "../components/galleryManager/PostManager";
+import AllGallerys from "../components/galleryManager/AllGallery";
 
-const ActivityManager = () => {
+const GalleryManager = () => {
   const [view, setView] = useState<"post" | "all">("post");
 
   return (
-    <div className="h-screen">
+    <div className="">
       <div className="flex gap-4 p-4 rounded-md">
         <button
           onClick={() => setView("post")}
           className="border p-4 rounded-lg shadow-md font-bold"
         >
-          Post Activity
+          Post Gallery
         </button>
         <button
           onClick={() => setView("all")}
           className="border p-4 rounded-lg shadow-md font-bold"
         >
-          All Activities
+          All Gallerys
         </button>
       </div>
 
-      {view === "post" ? <PostActivity /> : <AllActivities />}
+      {view === "post" ? <PostGallery /> : <AllGallerys />}
     </div>
   );
 };
 
-export default ActivityManager;
+export default GalleryManager;

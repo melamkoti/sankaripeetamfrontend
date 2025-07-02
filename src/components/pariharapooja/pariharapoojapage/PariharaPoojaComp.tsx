@@ -1,11 +1,11 @@
-import PariharaPoojaBanner from "../../../assets/images/pariharapooja-banner.png";
+import PariharaPoojaBanner from "../../../assets/images/pariharapooja.jpg";
 import lampImg from "../../../assets/images/lamp.png";
 import { PariharaPoojaData } from "./PariharaPoojaData";
 export default function PariharaPoojaComp() {
   return (
     <div>
       <div
-        className="h-[100vh] flex justify-center items-center"
+        className="h-[80vh] flex justify-center items-center"
         style={{
           backgroundImage: `url(${PariharaPoojaBanner})`,
           backgroundSize: "cover",
@@ -13,9 +13,10 @@ export default function PariharaPoojaComp() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <h1 className="text-4xl tracking-wider font-semibold  z-10 text-white">
-          PARIHARA POOJA
-        </h1>
+       <h1 className="text-2xl md:text-4xl font-semibold md:font-bold tracking-wider z-10 text-red-600">
+  PARIHARA POOJA
+</h1>
+
       </div>
       <div className="text-center flex flex-col gap-5 pt-16 px-4 font-bold">
         <div className="flex flex-col gap-4">

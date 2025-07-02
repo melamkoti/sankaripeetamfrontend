@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { UserModuleAPI } from "../../services/AppEndPoints";
 const schema = z.object({
   email: z
     .string()
@@ -18,6 +18,7 @@ type FormFields = z.infer<typeof schema>;
 
 function SignUpMain() {
   const navigate = useNavigate();
+  const UserSignUpService = UserModuleAPI.RegisterEmailPost; // API endpoint for email signup
   const {
     register,
     handleSubmit,
@@ -28,7 +29,7 @@ function SignUpMain() {
   const onSubmit = async (data: FormFields) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/signupemail",
+        UserSignUpService,
         data
       );
       if (response.status === 201) {

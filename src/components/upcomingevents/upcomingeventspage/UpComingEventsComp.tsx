@@ -14,15 +14,12 @@ type ApiResponse = EventType[];
 
 export default function EventsComp() {
   const [upEvents, setUpEvents] = useState<EventType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   const EventApiService = UserModuleAPI.UpcomingEventsGet;
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        setIsLoading(true);
         const response = await fetch(EventApiService);
 
         if (!response.ok) {
@@ -38,31 +35,15 @@ export default function EventsComp() {
 
         setUpEvents(parsedData);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to fetch events");
         console.error("Error fetching events data: ", err);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchEvents();
   }, [EventApiService]);
 
-  if (isLoading) {
-    return (
-      <div className="w-full flex justify-center items-center py-8">
-        <p className="text-[#44233B] text-lg">Loading events...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="w-full flex justify-center items-center py-8">
-        <p className="text-red-500 text-lg">{error}</p>
-      </div>
-    );
-  }
+ 
+  
 
   return (
     <>

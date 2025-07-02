@@ -48,17 +48,21 @@ export default function FooterComp() {
     >
       <div className="flex flex-col  justify-around lg:flex-row gap-8">
         <div className="flex flex-col gap-4 lg:w-1/3">
-          <h1 className="text-xl font-semibold">About Us</h1>
+          {/* <h1 className="text-xl font-semibold">About Us</h1>
           <p>
             Don't stay stuck in the past. Move forward and embrace new
             opportunities. Strive for progress, and remember to keep things
             balanced and under control.
-          </p>
+          </p> */}
+          <div className="md:pl-12">
+            <img src={footerLogo} alt="" />
+          </div>
           <div className="flex items-center gap-3 text-[#FFB600]">
             <div>
               <img src={footerCallImg} className="w-5" alt="" />
             </div>
             <div>
+              <p>+91 9989492655</p>
               <p>+91 9989492655</p>
             </div>
           </div>
@@ -67,19 +71,35 @@ export default function FooterComp() {
               <img src={footerMailImg} className="w-5" alt="" />
             </div>
             <div>
-              <p>guruji@sankaripeetam.in</p>
+              <p>sankaripeetam@gmail.com</p>
               <p>turst.sspc@gmail.com</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 text-[#FFB600]">
-            <div>
-              <img src={footerLocationImg} className="lg:w-14 w-8" alt="" />
-            </div>
-            <div>
+          <div className="flex flex-col gap-6 text-[#FFB600]">
+            {/* Location 1 */}
+            <div className="flex items-start gap-3">
+              <img
+                src={footerLocationImg}
+                className=" w-5 mt-1"
+                alt="Location Icon"
+              />
               <p>
-                Brahmasri Nemmikanti, Narsaiahcharya No: 8-411A, Back side,
-                Anjaneya Swamy Temple, Sundar nagar, Mangamur road, Ongole,
-                Prakasam District, Andhra Pradesh - 523002.
+                Advytha Ashram, Kamakshi Lakeview,
+                <br /> opp to Nayara petrol bunk, Kurnool Road, <br /> Santha
+                Nuthala Padu, Prakasam dist, Andhra Pradesh.
+              </p>
+            </div>
+
+            {/* Location 2 */}
+            <div className="flex items-start gap-3">
+              <img
+                src={footerLocationImg}
+                className=" w-5 mt-1"
+                alt="Location Icon"
+              />
+              <p>
+                Sundar Nagar, Mangamur Road, Ongole, <br /> Prakasam District, Andhra
+                Pradesh - 523002.
               </p>
             </div>
           </div>
@@ -87,7 +107,7 @@ export default function FooterComp() {
         <div className="flex lg:w-1/3 justify-around">
           <ul className="flex flex-col gap-4 text-[#FFB600] ">
             <li className="text-xl font-semibold text-white">
-              <p>Information</p>
+              <p>Quick Links</p>
             </li>
             <div className="flex flex-col gap-3">
               {FooterInfoData.map((item, index) => {
@@ -160,9 +180,9 @@ export default function FooterComp() {
           </a>{" "}
           | <em className="text-white"> Melam Koti</em>
         </p>
-        <div>
+        {/* <div>
           <img src={footerLogo} alt="" />
-        </div>
+        </div> */}
         <div className="flex gap-5 ">
           <NavLink
             to={"https://www.instagram.com/sankaripeetam/#"}

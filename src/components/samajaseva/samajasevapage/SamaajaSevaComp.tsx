@@ -5,7 +5,7 @@ export default function SamaajaSevaComp() {
   return (
     <div>
       <div
-        className="h-[100vh] flex justify-center items-center"
+        className="h-[80vh] flex justify-center items-center"
         style={{
           backgroundImage: `url(${samajasevaBanner})`,
           backgroundSize: "cover",
@@ -13,7 +13,8 @@ export default function SamaajaSevaComp() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <h1 className="text-4xl tracking-wider font-semibold text-[#FF6600] py-3">
+        
+         <h1 className="text-2xl md:text-4xl font-semibold md:font-bold tracking-wider z-10 text-red-600">
           SAMAAJA SEVA
         </h1>
       </div>

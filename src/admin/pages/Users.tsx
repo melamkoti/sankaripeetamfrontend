@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { UserModuleAPI } from "../../services/AppEndPoints";
 type User = {
   id: number;
   name: string;
@@ -11,11 +11,11 @@ type User = {
 
 const AdminPage = () => {
   const [users, setUsers] = useState<User[]>([]);
-
+const FetchAllusers = UserModuleAPI.AllUsersGet
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:3000/user");
+        const response = await fetch(FetchAllusers);
         const data = await response.json();
         setUsers(data);
       } catch (error) {
@@ -34,7 +34,7 @@ const AdminPage = () => {
   return (
     <div className="main_head">
       <h1 className="text-2xl font-bold text-center p-2">Admin - User List</h1>
-      <table className="table-auto w-full">
+      <table className="table-auto w-full bg-white">
         <thead>
           <tr>
             <th className=" border px-4 py-2">No</th>

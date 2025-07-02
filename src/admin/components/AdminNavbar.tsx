@@ -52,6 +52,17 @@ const AdminNavbar = () => {
                 >
                   Activities
                 </NavLink>
+                 <NavLink
+                to="/admin/gallery"
+                onClick={toggleMenu}
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-red-700 block px-3 py-2 rounded-md text-sm font-medium"
+                    : "text-white hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                }
+              >
+                Gallerys
+              </NavLink>
                 <NavLink
                   to="/admin/users"
                   className={({ isActive }) =>
@@ -114,6 +125,17 @@ const AdminNavbar = () => {
                 }
               >
                 Activities
+              </NavLink>
+              <NavLink
+                to="/admin/gallery"
+                onClick={toggleMenu}
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-red-700 block px-3 py-2 rounded-md text-base font-medium"
+                    : "text-white hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                }
+              >
+                Gallerys
               </NavLink>
               <NavLink
                 to="/admin/users"
