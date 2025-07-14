@@ -590,7 +590,7 @@ const Jathakam = () => {
     },
   ];
   return (
-    <div className=" my-24 max-w-2xl mx-auto border-2 rounded-md ">
+    <div className=" my-12 max-w-2xl mx-auto border-2 rounded-md ">
       <div className=" flex justify-end  p-4 ">
         <div className="flex justify-end border border-[#10356A]  rounded-md">
           <NavLink

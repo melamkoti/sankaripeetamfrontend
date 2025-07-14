@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 interface UpComingEventsCardProps {
   item: {
     title: string;
@@ -12,6 +14,7 @@ export default function UpComingEventsCard({
   item,
   index,
 }: UpComingEventsCardProps) {
+  const navigate = useNavigate()
   return (
     <div
   className="relative w-full flex flex-col md:flex-row gap-6 p-6 bg-white shadow-lg rounded-2xl border border-gray-200 hover:shadow-xl transition duration-300"
@@ -44,7 +47,8 @@ export default function UpComingEventsCard({
   </p>
 
   {/* Donate Button */}
-  <button className="mt-auto w-fit bg-[#F26F29] text-white font-semibold text-sm px-5 py-2 rounded-full shadow hover:bg-orange-600 transition">
+  <button className="mt-auto w-fit bg-[#F26F29] text-white font-semibold text-sm px-5 py-2 rounded-full shadow hover:bg-orange-600 transition"
+  onClick={() => navigate("/donationpayment")}>
     DONATE NOW
   </button>
 </div>

@@ -48,7 +48,7 @@ export default function EventsComp() {
   return (
     <>
       <div className="flex flex-col md:gap-2 justify-center items-center">
-        <p className="text-3xl md:text-4xl font-bold text-[#44233B] tracking-wider mb-6 relative inline-block">
+        <p className="text-3xl md:text-4xl font-bold text-[#44233B] tracking-wider my-6 relative inline-block">
           <span className="relative z-10 px-2"> CURRENT EVENTS</span>
           <span className="absolute bottom-1 left-0 w-full h-2 bg-[#FFD700] opacity-60 z-0"></span>
         </p>

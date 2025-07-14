@@ -27,21 +27,22 @@ function FounderComp() {
         style={{ scale, opacity }}
         src={founder}
         alt="Founder"
-        className="w-full h-auto rounded-xl shadow-xl"
+        className="w-full h-auto "
       />
     </div>
   
 
     {/* Founder Name & Titles */}
     <div className="flex flex-col gap-3 justify-center items-center text-[#771700]">
-      <div className="text-center">
+      <div className="text-center font-ponnala">
         <p className="font-medium text-xs md:text-sm">{FounderData[0].nameheadlinetel}</p>
         <p className="font-bold text-lg md:text-2xl">{FounderData[0].nametel}</p>
       </div>
-      <div className="text-center">
+      <div className="text-center font-ponnala mt-2">
         <p className="text-sm font-medium">{FounderData[0].nameheadlineeng}</p>
         <p className="font-bold text-lg md:text-2xl">{FounderData[0].nameeng}</p>
       </div>
+     
     </div>
   </div>
 

@@ -8,7 +8,7 @@ function VastuPage() {
       <JathakamCard />
       <div className="flex flex-col  lg:flex-row item-center justify-center gap-8">
         <div>
-      <Jathakam />
+          <Jathakam />
         </div>
         <div>
           <Boomi />

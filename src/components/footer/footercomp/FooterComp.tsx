@@ -2,7 +2,6 @@ import footerBgImg from "../../../assets/images/footerbg.png";
 import footerCallImg from "../../../assets/images/footer-phone.svg";
 import footerMailImg from "../../../assets/images/footer-mail.svg";
 import footerLocationImg from "../../../assets/images/footer-location.svg";
-import footerClaenderImg from "../../../assets/images/footer-calender.svg";
 import footerOmImg from "../../../assets/images/footer-om.svg";
 import footerLogo from "../../../assets/images/footer-logo.svg";
 import footerInsta from "../../../assets/svg/footer-insta.svg";
@@ -10,33 +9,11 @@ import footerWhatsApp from "../../../assets/svg/footer-whatsapp.svg";
 import footerYouTube from "../../../assets/svg/footer-youtube.svg";
 import footerTelegram from "../../../assets/svg/footer-telegram.svg";
 
-import { format } from "date-fns";
-import { useState, useEffect } from "react";
 import { FooterInfoData, FooterOthersData } from "./FooterPostsData";
 import { Link, NavLink } from "react-router-dom";
-import { UserModuleAPI } from "../../../services/AppEndPoints";
-type FooterEventsType = {
-  image: string;
-  date: Date;
-  title: string;
-};
+
 export default function FooterComp() {
-  const [footerEventsState, setFooterPostsState] = useState<FooterEventsType[]>(
-    []
-  );
-  const AllPostService = UserModuleAPI.AllPostsGet;
-  useEffect(() => {
-    fetch(AllPostService)
-      .then((response) => response.json())
-      .then((data) => {
-        const parsedData = data.map((event: any) => ({
-          ...event,
-          date: new Date(event.date),
-        }));
-        setFooterPostsState(parsedData);
-      })
-      .catch((error) => console.error("Error fetching events data: ", error));
-  }, []);
+  
   return (
     <div
       className="flex flex-col gap-4 text-white  md:pt-24 md:px-12 pt-12 px-6"
@@ -136,7 +113,7 @@ export default function FooterComp() {
             </div>
           </ul>
         </div>
-        <div className="flex flex-col items-start gap-4 ">
+        {/* <div className="flex flex-col items-start gap-4 ">
           <h1 className="text-xl font-semibold">Recent Posts</h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4 md:gap-12 lg:gap-4 text-[#FFB600]">
@@ -165,7 +142,7 @@ export default function FooterComp() {
               );
             })}
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="py-8 flex flex-col flex-col-reverse gap-4 md:flex-row justify-around items-center">
         <p className="text-center text-sm text-gray-600 py-4">

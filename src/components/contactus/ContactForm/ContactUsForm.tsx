@@ -14,13 +14,6 @@ import { UserModuleAPI } from "../../../services/AppEndPoints";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 
-// const EnquiryCategory = [
-//   "GENERAL_ENQUIRY_1",
-//   "GENERAL_ENQUIRY_2",
-//   "GENERAL_ENQUIRY_3",
-//   "GENERAL_ENQUIRY_4",
-// ] as const;
-
 const schema = z.object({
   email: z
     .string()
@@ -33,9 +26,6 @@ const schema = z.object({
     .string()
     .length(10, "Phone number must contain 10 digits")
     .regex(/^\d{10}$/, "Phone number must be digits only"),
-  // category: z.enum(EnquiryCategory, {
-  //   required_error: "Please select an option",
-  // }),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -193,7 +183,7 @@ function ContactUsForm() {
               <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="firstName"
-                  className="text-sm font-medium text-[#333]"
+                  className="text-lg font-medium text-[#333]"
                 >
                   First Name
                 </label>
@@ -213,7 +203,7 @@ function ContactUsForm() {
               <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="lastName"
-                  className="text-sm font-medium text-[#333]"
+                  className="text-lg font-medium text-[#333]"
                 >
                   Last Name
                 </label>
@@ -235,7 +225,7 @@ function ContactUsForm() {
               <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="email"
-                  className="text-sm font-medium text-[#333]"
+                  className="text-lg font-medium text-[#333]"
                 >
                   Email
                 </label>
@@ -253,7 +243,7 @@ function ContactUsForm() {
               <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="phoneNumber"
-                  className="text-sm font-medium text-[#333]"
+                  className="text-lg font-medium text-[#333]"
                 >
                   Phone
                 </label>
@@ -274,7 +264,7 @@ function ContactUsForm() {
             <div className="flex flex-col gap-2 relative">
               <label
                 htmlFor="message"
-                className="text-sm font-medium text-[#333]"
+                className="text-lg font-medium text-[#333]"
               >
                 Message
               </label>
@@ -283,7 +273,7 @@ function ContactUsForm() {
                 placeholder="Type your message here..."
                 id="message"
                 rows={4}
-                className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7E4555]"
+                className=" border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7E4555]"
               />
               {errors.message && (
                 <p className="text-xs text-red-600">{errors.message.message}</p>

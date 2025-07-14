@@ -49,10 +49,14 @@ function SignUpCreate() {
       }
       console.log(data);
       const response = await axios.post(UserApiService, payload);
+       if (response.status === 400) {
+        toast.success("User Allready exit");
+      }
       if (response.status === 201) {
         navigate("/login");
         toast.success("Signup successful!");
       }
+      
       reset();
     } catch (error) {
       console.error("Error submitting form:", error);

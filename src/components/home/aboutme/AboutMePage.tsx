@@ -16,31 +16,27 @@ function AboutMePage() {
   <div className="w-full flex flex-col md:flex-row gap-16 lg:gap-0 justify-center items-center">
     {/* Founder Image */}
     <div className="w-full md:w-1/2 flex justify-center">
-      <div className="border-4 border-[#FFD700] rounded-xl shadow-lg p-2 bg-white ">
         <img
           src={footerLogo}
           alt="founder"
-          className="lg:w-4/6 w-[250px] object-cover object-center rounded-lg"
+          className="lg:w-3/6 w-[250px] object-cover object-center rounded-lg"
         />
-      </div>
     </div>
 
     {/* Content Section */}
     <div className="w-full md:w-1/2 flex flex-col justify-around items-center md:items-start gap-10">
       {/* Section Card */}
       {[
-        { title: "His Thoughts", content: AboutMeData[0].aboutcontent },
-        { title: "His Ashramam", content: AboutMeData[0].aashramcontent },
-        { title: "About the Peetam", content: AboutMeData[0].peetamcontent },
+        // { title: "His Thoughts", content: AboutMeData[0].aboutcontent },
+        // { title: "His Ashramam", content: AboutMeData[0].aashramcontent },
+        {  content: AboutMeData[0].peetamcontent },
       ].map((item, index) => (
         <div
           key={index}
-          className="bg-white/80 backdrop-blur-md border-l-4 border-[#FFD700] shadow-md p-4 rounded-md w-full"
+          className="  w-full"
         >
-          <p className="text-xl font-semibold text-[#b91c1c] font-mukta mb-2">
-            {item.title}
-          </p>
-          <p className="text-sm lg:text-base text-gray-700 text-justify leading-relaxed font-light font-sans">
+          
+          <p className=" text-1xl lg:text-2xl text-gray-700 text-justify  font-light font-sans">
             {item.content}
           </p>
         </div>

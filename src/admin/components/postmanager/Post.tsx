@@ -69,7 +69,7 @@ const Post = () => {
   };
   return (
     <div className="max-w-md mx-auto bg-white p-6 shadow-md rounded-md border-2">
-      <h2 className="text-lg font-bold mb-4 text-center">Create a New Post</h2>
+      <h2 className="text-lg font-bold mb-4 text-center">Create a New Card</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title Field */}
         <div>

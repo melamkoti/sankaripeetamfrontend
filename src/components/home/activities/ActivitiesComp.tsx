@@ -32,8 +32,8 @@ function ActivitiesComp() {
       // }}
     >
       <div className="flex flex-col md:w-1/6 justify-center md:justify-start items-center md:items-start ">
-        <p className="text-[#DB4242] text-lg font-semibold ">Activities</p>
-        <p className=" text-3xl font-semibold text-white">Description</p>
+        <p className="text-red-700 text-4xl font-semibold ">Activities</p>
+        <p className=" text-xl font-semibold text-white">Description</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 text-white w-full gap-8 lg:gap-6 h-full ">
@@ -49,27 +49,28 @@ function ActivitiesComp() {
               }}
               className={`flex flex-col items-center md:items-start justify-around gap-4 rounded-xl  lg:w-5/6 h-full p-4 lg:px-6 
  ${
-  item.isEnable
-    ? "opacity-100 pointer-events-auto cursor-pointer hover:shadow-lg transition-shadow duration-300"
-    : "opacity-30 pointer-events-none cursor-not-allowed"
-}
+   item.isEnable
+     ? "opacity-100 pointer-events-auto cursor-pointer hover:shadow-lg transition-shadow duration-300"
+     : "opacity-30 pointer-events-none cursor-not-allowed"
+ }
 
                 	 ${item.color === "#ffffff" ? "text-[#44233B]" : ""}  `}
               style={{ backgroundColor: item.color }}
             >
-             
-            <img 
-              src={item.image} 
-              alt={item.title} 
-              style={{ maxWidth: '100%', height: 'auto' }}
-            />
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
 
               <div className="text-center md:text-left">
                 <p>{item.title}</p>
                 <p>{item.description}</p>
               </div>
 
-              <a href="/activities/parihara">For More Details go to Activities &#8594;</a>
+              <a href="/activities/parihara">
+                For More Details go to Activities &#8594;
+              </a>
             </motion.div>
           );
         })}

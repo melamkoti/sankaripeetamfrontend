@@ -34,6 +34,8 @@ const PostsAPI = {
 };
 const ContactAPI = {
   AllContactDetailsPost: BaseAPIURL + "contact",
+    ContactDetailsGet: BaseAPIURL + "contact",
+
 };
 const DonationAPI = {
   DonationAmoutPost: BaseAPIURL + "donation/create-order",
