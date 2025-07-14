@@ -1,13 +1,21 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const AdminNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+const handleLogout = () => {
+    // Remove the token and user info from localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
+    // Redirect to login page
+    navigate("/", { replace: true });
+  };
   return (
     <div>
       <nav className="bg-red-600 text-white shadow-sm fixed w-full ">
@@ -40,7 +48,7 @@ const AdminNavbar = () => {
                       : "text-white hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   }
                 >
-                  Posts
+                  Gallery Cards
                 </NavLink>
                 <NavLink
                   to="/admin/activities"
@@ -52,17 +60,17 @@ const AdminNavbar = () => {
                 >
                   Activities
                 </NavLink>
-                 <NavLink
-                to="/admin/gallery"
-                onClick={toggleMenu}
-                className={({ isActive }) =>
-                  isActive
-                    ? "bg-red-700 block px-3 py-2 rounded-md text-sm font-medium"
-                    : "text-white hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
-                }
-              >
-                Gallerys
-              </NavLink>
+                <NavLink
+                  to="/admin/gallery"
+                  onClick={toggleMenu}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "bg-red-700 block px-3 py-2 rounded-md text-sm font-medium"
+                      : "text-white hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                  }
+                >
+                  Gallerys
+                </NavLink>
                 <NavLink
                   to="/admin/users"
                   className={({ isActive }) =>
@@ -72,6 +80,16 @@ const AdminNavbar = () => {
                   }
                 >
                   Users List
+                </NavLink>
+                <NavLink
+                  to="/admin/contactdetails"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "bg-red-700 px-3 py-2 rounded-md text-sm font-medium"
+                      : "text-white hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  }
+                >
+                  User Inquiry List
                 </NavLink>
               </div>
             </div>
@@ -90,7 +108,7 @@ const AdminNavbar = () => {
 
         {/* Mobile Navigation Links */}
         {isOpen && (
-          <div className="md:hidden bg-red-600 pb-3">
+          <div className="md:hidden bg-red-600 pb-3 inset-0  [z-90]">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
               <NavLink
                 to="/admin"
@@ -148,6 +166,18 @@ const AdminNavbar = () => {
               >
                 Users List
               </NavLink>
+              <NavLink
+                to="/admin/contactdetails"
+                onClick={toggleMenu}
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-red-700 block px-3 py-2 rounded-md text-base font-medium"
+                    : "text-white hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                }
+              >
+                User Inquiry List
+              </NavLink>
+              <button onClick={handleLogout} className="p-2 bg-white text-red-500 rounded-md font-bold text-1xl"> Logout</button>
             </div>
           </div>
         )}

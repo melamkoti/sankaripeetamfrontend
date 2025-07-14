@@ -65,18 +65,12 @@ function App() {
             <Route path="poojalu" element={<Poojalu />} />
           </Route>
           <Route path="/vastu" element={<Vastu />} />
-          <Route path="/devalaya" element={<DevalayaPage/>} />
+          <Route path="/devalaya" element={<DevalayaPage />} />
           <Route path="/gallery" element={<GalleryComponent />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/donate" element={<DonateNow />} />
-          <Route
-            path="/donationpayment"
-            element={
-              <ProtectedRoute allowedRoles={["User", "Admin"]}>
-                <DonationPaymentPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/donationpayment" element={<DonationPaymentPage />} />
+          
           <Route path="/privacy&policy" element={<PrivacyPolicy />} />
           <Route path="/cancellation&refund" element={<CancellationRefund />} />
           <Route path="/contact" element={<RazarpayContact />} />

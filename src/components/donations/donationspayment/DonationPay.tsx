@@ -25,6 +25,9 @@ const schema = z.object({
     )
     .min(1, "At least one family member must be added"),
   pancard: z.string().min(10, "Must Contain at least 10 characters").optional(), // PAN card field (optional validation here)
+  terms: z.literal(true, {
+    errorMap: () => ({ message: "You must accept the terms and conditions" }),
+  }),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -44,14 +47,11 @@ function DonationPay() {
     formState: { errors },
     reset,
   } = useForm<FormFields>({ resolver: zodResolver(schema) });
-const DonationApiService = UserModuleAPI.DonationAmoutPost;
+  const DonationApiService = UserModuleAPI.DonationAmoutPost;
   const onSubmit = async (data: FormFields) => {
-    console.log(data, "Response")
+    console.log(data, "Response");
     try {
-      const response = await axios.post(
-        DonationApiService,
-        data
-      );
+      const response = await axios.post(DonationApiService, data);
       if (response.status === 200) {
         console.log("donation successfull", response.data);
       }
@@ -87,7 +87,7 @@ const DonationApiService = UserModuleAPI.DonationAmoutPost;
     setAmount(newAmount);
     setValue("amount", newAmount);
     const numericAmount = parseFloat(newAmount); // Convert to a number
-    if (numericAmount >= 10000) {
+    if (numericAmount >= 2000) {
       setPanEnabled(true);
     } else {
       setPanEnabled(false);
@@ -174,7 +174,7 @@ const DonationApiService = UserModuleAPI.DonationAmoutPost;
               htmlFor="pancard"
               className="text-lg font-normal text-[#666]"
             >
-              PAN Card (required for donations of ₹10,000 or more)
+              PAN Card (required for donations of ₹2,000 or more)
             </label>
             <input
               {...register("pancard")}
@@ -325,13 +325,39 @@ const DonationApiService = UserModuleAPI.DonationAmoutPost;
               </div>
             </div>
 
-            <div className="md:w-5/6 lg:w-3/6 flex">
-              <div className="rounded-l-lg text-center p-2 w-3/6 bg-[#E26900]">
-                Donation Total:
+         
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  {...register("terms")}
+                  className="mt-1"
+                />
+                <label htmlFor="terms" className="text-sm">
+                  I agree to the{" "}
+                  <a
+                    href="/terms&conditions"
+                    className="text-[#E26900] underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Terms and Conditions
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="/privacy&policy"
+                    className="text-[#E26900] underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Privacy Policy
+                  </a>
+                </label>
               </div>
-              <div className="rounded-r-lg w-3/6 border-2 border-[#e26900] flex items-center px-2 text-black">
-                <p>{amount}</p>
-              </div>
+              {errors.terms && (
+                <p className="text-red-600 text-xs">{errors.terms.message}</p>
+              )}
             </div>
 
             <motion.button

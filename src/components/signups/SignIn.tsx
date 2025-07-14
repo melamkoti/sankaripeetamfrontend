@@ -7,7 +7,7 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import eyehide from "../../assets/svg/eyehide.svg";
 import eyeshow from "../../assets/svg/eyeshow.svg";
-import googleicon from "../../assets/svg/googleicon.svg";
+// import googleicon from "../../assets/svg/googleicon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../auth/AuthContext";
@@ -25,7 +25,7 @@ function SignUpCreate() {
   const authContext = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-const UserLoginApiService = UserModuleAPI.SingInPost; // API endpoint for user login
+  const UserLoginApiService = UserModuleAPI.SingInPost; // API endpoint for user login
   const {
     register,
     handleSubmit,
@@ -35,10 +35,7 @@ const UserLoginApiService = UserModuleAPI.SingInPost; // API endpoint for user l
 
   const onSubmit = async (data: FormFields) => {
     try {
-      const response = await axios.post(
-        UserLoginApiService,
-        data
-      );
+      const response = await axios.post(UserLoginApiService, data);
       if (response.status === 200) {
         const { token, email, name, role } = response.data;
         localStorage.setItem("token", token);
@@ -50,23 +47,22 @@ const UserLoginApiService = UserModuleAPI.SingInPost; // API endpoint for user l
         if (authContext) {
           authContext.login(token, email, name, role);
         }
-        toast.success("  successfully Signed In");
+        toast.success("successfully Signed In");
         // Navigate based on user role
-      if (role === "Admin") {
-        navigate("/admin/");
-      } else {
-        navigate("/donationpayment");
-      }
+        if (role === "Admin") {
+          navigate("/admin/");
+        } else {
+          navigate("/donationpayment");
+        }
       } else if (response.status === 404) {
         toast.error("User not found");
       } else if (response.status === 401) {
         toast.error("Invalid credentials");
       }
-      console.log("Response:", response);
       reset();
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error("Signup failed. Please try again.");
+      toast.error("SignIn  failed. Please try again.");
     }
   };
   // useEffect(() => {
@@ -152,12 +148,14 @@ const UserLoginApiService = UserModuleAPI.SingInPost; // API endpoint for user l
                       {errors.password.message}
                     </p>
                   )}
-                  <NavLink
-                    to={"/forgot"}
-                    className="text-[#FFA12B] text-sm underline underline-offset-2 text-right"
-                  >
-                    Forgot your Password?
-                  </NavLink>
+                  <div className="flex justify-end">
+                    <NavLink
+                      to="/forgot"
+                      className="text-[#FFA12B] text-sm underline underline-offset-2  w-fit"
+                    >
+                      Forgot your Password?
+                    </NavLink>
+                  </div>
                 </div>
               </div>
 
@@ -184,7 +182,7 @@ const UserLoginApiService = UserModuleAPI.SingInPost; // API endpoint for user l
             </form>
           </div>
 
-          <div className="flex items-center w-full">
+          {/* <div className="flex items-center w-full">
             <hr className="flex-1 border-t-2 border-gray-300" />
             <span className="mx-4 font-semibold text-xl text-[#666]">OR</span>
             <hr className="flex-1 border-t-2 border-gray-300" />
@@ -200,7 +198,7 @@ const UserLoginApiService = UserModuleAPI.SingInPost; // API endpoint for user l
             <p className=" text-[#363636] md:font-semibold">
               Continue with Google
             </p>
-          </motion.button>
+          </motion.button> */}
         </div>
       </div>
     </div>

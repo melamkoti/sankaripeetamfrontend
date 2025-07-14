@@ -1,20 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../../auth/AuthContext";
+// import { useContext } from "react";
+// import { AuthContext } from "../../../auth/AuthContext";
 import DonationsBannerImg from "../../../assets/images/donations-banner.png";
 import { DonationsCardData } from "./DonationsData";
 export default function DonationsComp() {
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleDonateNowClick = () => {
-    if (authContext?.isAuthenticated) {
+   
       navigate("/donationpayment");
-      console.log("Navigating to /donationpayment");
-    } else {
-      navigate("/login ");
-      console.log("Navigating to /login");
-    }
+     
   };
   return (
     <div className="flex flex-col gap-6 ">

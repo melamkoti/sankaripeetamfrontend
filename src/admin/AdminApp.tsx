@@ -6,6 +6,7 @@ import Activities from "./pages/Activities";
 import Users from "./pages/Users";
 import Gallery from "./pages/Gallery"
 import { NotFound } from "./components/NotFound";
+import { UserInquiryList } from "./pages/UserInquiry";
 const AdminApp = () => {
   return (
     <>
@@ -17,6 +18,7 @@ const AdminApp = () => {
           <Route path="post" element={<Post />} />
           <Route path="users" element={<Users />} />
           <Route path="gallery" element={<Gallery />} />
+          <Route path="contactdetails" element={<UserInquiryList />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

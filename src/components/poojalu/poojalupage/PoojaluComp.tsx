@@ -270,11 +270,11 @@ const PoojaluComp = () => {
       >
         
          <h1 className="text-2xl md:text-4xl font-semibold md:font-bold tracking-wider z-10 text-red-600">
- ASHRAMA PUJALU        </h1>
+ ASHRAM PUJA      </h1>
       </div>
       <div className="max-w-4xl mx-auto py-8 px-4">
         <h1 className="text-3xl font-bold text-center text-orange-800 mb-8">
-          Temple Poojalu
+          Ashram Pooja
         </h1>
 
         <div className="flex justify-center mb-8 gap-4">

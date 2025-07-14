@@ -16,14 +16,14 @@ function OurGoalsPage() {
           <img
             src={founder}
             alt="Founder"
-            className="w-3/4 mx-auto object-cover rounded-xl shadow-lg"
+            className="w-3/4 mx-auto object-cover rounded-xl "
           />
         </div>
         <div className="w-full lg:w-1/2 text-center lg:text-left">
-          <h2 className="text-2xl lg:text-3xl font-bold text-red-700 mb-4">
+          <h2 className="text-2xl lg:text-5xl font-bold text-red-700 mb-4">
             About the Peethadhipathi
           </h2>
-          <p className="text-sm lg:text-base text-gray-700 leading-relaxed">
+          <p className="lg:text-2xl  text-1xl text-gray-700 ">
             Peethadhipathi of Sanathana Saankari Peetam,<br />
             <strong>Brahmasri Nemmikanti Narsaiah Acharya</strong>, is a highly
             revered Vedic scholar, spiritual teacher, and guide to thousands of

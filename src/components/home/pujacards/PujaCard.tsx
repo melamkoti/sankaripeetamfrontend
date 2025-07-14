@@ -1,9 +1,34 @@
-import { CardData } from "./CardData";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import LeftYarrow from "../../../assets/svg/ChevronLeft.svg";
 import RightYarrow from "../../../assets/svg/ChevronRightSmall.svg";
+import { UserModuleAPI } from "../../../services/AppEndPoints";
+import footerClaenderImg from "../../../assets/images/footer-calender.svg";
+import { format } from "date-fns";
 
+type FooterEventsType = {
+  image: string;
+  date: Date;
+  title: string;
+  description: string;
+};
 const PujaCard = () => {
+  const [footerEventsState, setFooterPostsState] = useState<FooterEventsType[]>(
+    []
+  );
+  const AllPostService = UserModuleAPI.AllPostsGet;
+  useEffect(() => {
+    fetch(AllPostService)
+      .then((response) => response.json())
+      .then((data) => {
+        const parsedData = data.map((event: FooterEventsType) => ({
+          ...event,
+          date: new Date(event.date),
+        }));
+        setFooterPostsState(parsedData);
+      })
+      .catch((error) => console.error("Error fetching events data: ", error));
+  }, []);
+
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const handleScrollRight = () => {
@@ -18,7 +43,7 @@ const PujaCard = () => {
     <div className="md:p-12 p-6 bg-gradient-to-b from-[#f7b90c] to-[#fff9db] relative overflow-x-hidden">
       {/* Title */}
       <h1 className="pb-6 md:text-4xl text-2xl font-semibold font-mukta text-white drop-shadow-md text-center tracking-wide">
-        SWAMIJI PREVIOUS PUJA & PRATISTA
+        GALLERY
       </h1>
 
       {/* Arrows */}
@@ -41,28 +66,37 @@ const PujaCard = () => {
         className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar py-4 px-2"
         ref={scrollContainerRef}
       >
-        {CardData.map((item, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0 w-[250px] bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out"
-          >
-            <div className="p-4">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="rounded-lg w-full object-cover h-[180px]"
-              />
-              <div className="mt-4 text-center">
-                <h2 className="text-xl font-semibold font-mukta text-[#b91c1c]">
-                  {item.title}
-                </h2>
-                <p className="text-sm text-gray-700 mt-1 capitalize font-light">
-                  {item.description}
-                </p>
+        {footerEventsState
+          .sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          ) // Sort newest first
+          .map((item, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[250px] bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out"
+            >
+              <div className="p-4">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="rounded-lg w-full object-cover h-[180px]"
+                />
+                <div className="mt-4 text-center">
+                  <p className="flex gap-1">
+                    <img src={footerClaenderImg} alt="" />
+                    <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
+                  </p>
+                  <h2 className="text-xl font-semibold font-mukta text-[#b91c1c]">
+                    {item.title}
+                  </h2>
+
+                  <p className="text-sm text-gray-700 mt-1 capitalize font-light">
+                    {item.description}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

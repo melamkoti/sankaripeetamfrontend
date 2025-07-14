@@ -48,7 +48,7 @@ const DeletePostService = UserModuleAPI.IndividualPostDelete
   return (
     <div className="max-w-4xl mx-auto bg-white md:p-6 p-2 shadow-md rounded-md">
       <h2 className="text-lg md:text-2xl font-bold mb-4 text-center">
-        All Posts
+        All Cards
       </h2>
       <div className="grid grid-cols-1  md:grid-cols-2   gap-4">
         {events.map((event) => (

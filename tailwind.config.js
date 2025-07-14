@@ -4,9 +4,17 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mukta: ["Mukta Malar", "sans-serif"],
+        inter: ['Inter', 'sans-serif'],
+        mulish: ['Mulish', 'sans-serif'],
+        ponnala: ['Ponnala', 'sans-serif'], // Note: Ponnala might need verification
+        tiro: ['Tiro Telugu', 'serif'],
       },
     },
   },
   plugins: [],
 };
+
+
+{/* <p class="font-inter">This text uses Inter font</p>
+<p class="font-mulish">This text uses Mulish font</p>
+<p class="font-tiro">This text uses Tiro Telugu font</p> */}

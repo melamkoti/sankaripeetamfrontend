@@ -12,13 +12,13 @@ const PostManager = () => {
           onClick={() => setView("post")}
           className="border p-4 rounded-lg shadow-md font-bold"
         >
-          Post Planing
+          Post Card
         </button>
         <button
           onClick={() => setView("all")}
           className="border p-4 rounded-lg shadow-md font-bold"
         >
-          All Plannings
+          All Cards
         </button>
       </div>
 
