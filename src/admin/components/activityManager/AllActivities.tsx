@@ -54,7 +54,9 @@ const EventGetService = UserModuleAPI.AllActivityGet;
       </h2>
       <div className="grid grid-cols-1  md:grid-cols-2   gap-4">
         {events.map((event) => (
-          <div key={event.id} className="bg-gray-300 p-4 rounded-md shadow-md">
+          <div key={event.id} className={`bg-gray-300 p-4 rounded-md shadow-md `}
+                        style={{ backgroundColor: event.color }}
+>
             <img
               src={event.image}
               alt={event.title}

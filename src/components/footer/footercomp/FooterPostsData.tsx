@@ -4,7 +4,7 @@ export const FooterInfoData = [
   { name: "Parihara Puja", path: "/activities/parihara" },
   { name: "Adhyatmikam", path: "/activities/adyatmikam" },
   { name: "Samajaseva", path: "/activities/samajaseva" },
-  { name: "Poojaalu", path: "/activities/poojalu" },
+  { name: "Pujalu", path: "/activities/poojalu" },
 ];
 export const FooterOthersData = [
   { name: "About", path: "/aboutus" },

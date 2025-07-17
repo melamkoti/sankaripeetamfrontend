@@ -1,12 +1,12 @@
-import { DonationPayData } from "./DonationPayData";
-import tickred from "../../../assets/svg/tickred.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { UserModuleAPI } from "../../../services/AppEndPoints";
+
 const schema = z.object({
   email: z
     .string()
@@ -14,17 +14,14 @@ const schema = z.object({
     .email("Invalid email address"),
   firstname: z.string().min(3, "Name must be at least 3 letters"),
   lastname: z.string().min(3, "Name must be at least 3 letters"),
+  tel: z
+    .string()
+    .min(10, "Phone number must be at least 10 digits")
+    .regex(/^[0-9]+$/, "Must contain only numbers"),
+  category: z.string().nonempty("Please select a category"),
   message: z.string().min(10, "Must contain at least 10 characters"),
   amount: z.string().nonempty("Amount is required"),
-  family: z
-    .array(
-      z.object({
-        value1: z.string().min(1, "Relation is required"),
-        value2: z.string().min(3, "Name must be at least 3 letters"),
-      })
-    )
-    .min(1, "At least one family member must be added"),
-  pancard: z.string().min(10, "Must Contain at least 10 characters").optional(), // PAN card field (optional validation here)
+  pancard: z.string().min(10, "Must Contain at least 10 characters").optional(),
   terms: z.literal(true, {
     errorMap: () => ({ message: "You must accept the terms and conditions" }),
   }),
@@ -32,347 +29,290 @@ const schema = z.object({
 
 type FormFields = z.infer<typeof schema>;
 
-type InputField = {
-  value1: string;
-  value2: string;
-};
-
 function DonationPay() {
-  const [amount, setAmount] = useState("");
-  const [panEnabled, setPanEnabled] = useState(false); // State to control PAN card input
+  const location = useLocation();
+  const { donationTitle } = location.state || {};
+  const [panEnabled, setPanEnabled] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+const PersonDetailsPostService = UserModuleAPI.PersonDetailsPost;
+const RazarpayDonationPostService = UserModuleAPI.RazarpayDonationPost;
+
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
-    reset,
-  } = useForm<FormFields>({ resolver: zodResolver(schema) });
-  const DonationApiService = UserModuleAPI.DonationAmoutPost;
-  const onSubmit = async (data: FormFields) => {
-    console.log(data, "Response");
-    try {
-      const response = await axios.post(DonationApiService, data);
-      if (response.status === 200) {
-        console.log("donation successfull", response.data);
-      }
-      reset();
+  } = useForm<FormFields>({
+    resolver: zodResolver(schema),
+  });
 
-      console.log("Response:", response, "text");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
+  const amount = watch("amount");
 
-  const [inputFields, setInputFields] = useState([{ value1: "", value2: "" }]);
-
-  const handleAddFields = () => {
-    setInputFields([...inputFields, { value1: "", value2: "" }]);
-  };
-
-  const handleChange = (
-    index: number,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    const newInputFields = [...inputFields];
-    newInputFields[index][name as keyof InputField] = value;
-    setInputFields(newInputFields);
-  };
-  const handleRemoveFields = (index: number) => {
-    const newInputFields = inputFields.filter((_, i) => i !== index);
-    setInputFields(newInputFields);
-  };
-
-  function amountUpdate(newAmount: string) {
-    setAmount(newAmount);
-    setValue("amount", newAmount);
-    const numericAmount = parseFloat(newAmount); // Convert to a number
-    if (numericAmount >= 2000) {
+  // Enable PAN field when amount is >= 2000
+  useEffect(() => {
+    if (amount && Number(amount) >= 2000) {
       setPanEnabled(true);
     } else {
       setPanEnabled(false);
-      setValue("pancard", ""); // Reset PAN card value if disabled
+      setValue("pancard", undefined); // Clear PAN when disabled
     }
-  }
+  }, [amount, setValue]);
 
-  function clearAmount() {
-    setAmount("");
-    setValue("amount", "");
-    setPanEnabled(false); // Disable PAN card input when clearing amount
-  }
+  const onSubmit = async (data: FormFields) => {
+    setIsSubmitting(true);
+
+    try {
+
+      
+      console.groupEnd();
+      // Prepare API payload
+      const payload = {
+        userId: parseInt(localStorage.getItem("userId") || "guest"), // Fallback to 'guest' if not logged in
+        amount: data.amount,
+        pancard: panEnabled ? data.pancard : null,
+        message: data.message,
+        contact: data.tel,
+        category: data.category,
+        email: data.email,
+        name: `${data.firstname} ${data.lastname}`,
+      };
+
+      // Uncomment to enable actual API call
+      const response = await axios.post(
+        PersonDetailsPostService,
+        payload
+      );
+      console.log("🚀 API Response:", response.data);
+
+      // For demo purposes - simulate API success
+      console.log("📤 Simulated API Payload:", payload);
+    } catch (error) {
+      console.error("❌ Donation submission failed:", error);
+      alert("Donation failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <div className="flex flex-col gap-8 p-4 lg:p-12 lg:w-[60vw] mx-auto">
-      <p>{DonationPayData[0].maindescp}</p>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-8 p-4 lg:p-12 lg:w-[60vw] mx-2 lg:mx-auto my-4 bg-white rounded-lg shadow-lg"
+    >
+      {/* Donation Amount Section */}
+      <div className="flex flex-col gap-6">
+        <p className="text-2xl font-bold text-gray-800 text-center">
+          Making Donation:{" "}
+          <span className="text-orange-500 text-2xl md:text-3xl">
+            {donationTitle}
+          </span>
+        </p>
 
-      {/* content */}
-      <div className="flex flex-col gap-4 ">
-        <p className="text-2xl font-medium ">Content </p>
+        <div className="flex flex-col gap-1">
+          <label className="text-black">Select Category</label>
+          <select
+            {...register("category")}
+            defaultValue={
+              [
+                "Annadanam",
+                "TempleSeva",
+                "GoSeva",
+                "Orphans",
+                "VivekaVidyalaya",
+                "SoilRejuvenation",
+              ].find(
+                (opt) =>
+                  opt.toLowerCase() ===
+                  donationTitle?.toLowerCase().replace(/\s+/g, "")
+              ) || ""
+            }
+            className="border-2 p-3 rounded-lg outline-none focus:border-orange-500"
+          >
+            <option value="">Select a category</option>
+            <option value="Annadanam">Annadanam</option>
+            <option value="TempleSeva">Temple Seva</option>
+            <option value="GoSeva">Go Seva</option>
+            <option value="Orphans">Orphans</option>
+            <option value="VivekaVidyalaya">Viveka Vidyalaya</option>
+            <option value="SoilRejuvenation">Soil Rejuvenation</option>
+          </select>
+          {errors.category && (
+            <p className="text-red-500 text-sm">{errors.category.message}</p>
+          )}
+        </div>
 
-        <ul className="flex flex-col gap-2">
-          {DonationPayData[0].list.map((item, idx) => {
-            return (
-              <div key={idx} className="flex gap-2">
-                <img src={tickred} alt="tickred" className="w-4" />
-                <p>{item.li}</p>
-              </div>
-            );
-          })}
-        </ul>
+        <p className="text-2xl font-bold text-gray-800">Donation Amount</p>
+
+        <div className="flex flex-col">
+          <div className="flex items-center">
+            <div className="bg-orange-600 text-white font-semibold text-xl rounded-l-lg p-3 px-4">
+              ₹
+            </div>
+            <input
+              {...register("amount")}
+              className="outline-none border-orange-600 border-2 p-3 rounded-r-lg w-full md:w-1/2"
+              placeholder="Enter amount"
+              type="number"
+              min="1"
+            />
+          </div>
+          {panEnabled && (
+            <p className="text-sm text-gray-500 mt-1">
+              PAN card required for donations ≥ ₹2000
+            </p>
+          )}
+          {errors.amount && (
+            <p className="text-red-500 text-sm mt-1">{errors.amount.message}</p>
+          )}
+        </div>
       </div>
 
-      {/* donation input */}
-      <div className="w-full md:w-5/6 p-2">
-        <form
-          className="w-full flex flex-col gap-8"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {/* amount */}
-          <div className="flex flex-col gap-6">
-            <p className="text-2xl font-medium">Donation Amount</p>
+      {/* PAN Card Section */}
+      {panEnabled && (
+        <div className="flex flex-col gap-2">
+          <label className="text-lg text-gray-600">
+            PAN Card <span className="text-red-500">*</span>
+            <span className="text-sm text-gray-500">
+              {" "}
+              (required for donations ≥ ₹2000)
+            </span>
+          </label>
+          <input
+            {...register("pancard")}
+            className="border-2 p-3 rounded-lg outline-none focus:border-orange-500 uppercase"
+            placeholder="ABCDE1234F"
+            maxLength={10}
+            style={{ textTransform: "uppercase" }}
+          />
+          {errors.pancard && (
+            <p className="text-red-500 text-sm">{errors.pancard.message}</p>
+          )}
+        </div>
+      )}
 
-            <div className="flex w-full flex-col">
-              <div className="flex">
-                <div className="bg-[#E26900] text-white font-semibold text-xl rounded-l-lg p-2 px-4">
-                  &#8377;{" "}
-                </div>
-                <input
-                  value={amount}
-                  {...register("amount")} // Registering the donation amount for validation
-                  onChange={(e) => amountUpdate(e.target.value)}
-                  onFocus={clearAmount}
-                  className="outline-none border-[#E26900] border-e-2 p-2 border-y-2 rounded-r-lg w-full md:w-3/6"
-                />
-              </div>
-              {errors.amount && (
-                <p className="text-red-600 text-xs mt-1">
-                  {errors.amount.message}
-                </p>
-              )}
-            </div>
+      {/* Personal Details Section */}
+      <div className="flex flex-col gap-6">
+        <p className="text-2xl font-bold text-gray-800">Personal Details</p>
 
-            <div className="flex flex-wrap gap-2 ">
-              {DonationPayData[0].donationPrices.map((item, idx) => {
-                return (
-                  <motion.button
-                    type="button"
-                    onClick={() => amountUpdate(item.price)}
-                    key={idx}
-                    className="rounded-xl py-2 px-4 border-2 border-[#797979]"
-                    whileHover={{ scale: 1.08 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    &#8377;{item.price}
-                  </motion.button>
-                );
-              })}
-            </div>
-          </div>
-          {/* PAN Card Input */}
-          <div className="w-full flex flex-col gap-2">
-            <label
-              htmlFor="pancard"
-              className="text-lg font-normal text-[#666]"
-            >
-              PAN Card (required for donations of ₹2,000 or more)
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-1">
+            <label className="text-gray-600">
+              First Name <span className="text-red-500">*</span>
             </label>
             <input
-              {...register("pancard")}
-              id="pancard"
-              type="text"
-              maxLength={10}
-              placeholder="Enter your PAN Card number"
-              className={`border-2 p-2 rounded-lg outline-none border-slate-400 ${
-                panEnabled ? "focus:border-[#FFA12B]" : "bg-gray-100"
-              }`}
-              disabled={!panEnabled}
+              {...register("firstname")}
+              className="border-2 p-3 rounded-lg outline-none focus:border-orange-500"
+              placeholder="John"
             />
-            {errors.pancard && (
-              <p className="text-red-600 text-xs mt-1">
-                {errors.pancard.message}
-              </p>
+            {errors.firstname && (
+              <p className="text-red-500 text-sm">{errors.firstname.message}</p>
             )}
           </div>
 
-          {/* PersonalDetails */}
-          <div className="w-full flex flex-col gap-8">
-            <p className="text-2xl font-medium">Personal Details</p>
-
-            <div className="flex flex-col gap-8 justify-start">
-              <div className="flex md:w-3/6 flex-col gap-1 relative">
-                <label
-                  htmlFor="firstname"
-                  className="text-lg font-normal text-[#666]"
-                >
-                  First Name
-                </label>
-                <input
-                  {...register("firstname")}
-                  placeholder="Enter your First Name"
-                  id="firstname"
-                  className="border-2 outline-none border-slate-400 focus:border-[#FFA12B]  rounded-lg p-2"
-                />
-                {errors.firstname && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.firstname.message}
-                  </p>
-                )}
-              </div>
-
-              <p className="text-xl font-medium">
-                Enter Details of your family
-              </p>
-
-              <div>
-                {inputFields.map((_, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col md:flex-row w-full items-start gap-2 mb-4"
-                  >
-                    <div className="w-full md:w-2/6 flex flex-col ">
-                      <input
-                        {...register(`family.${index}.value1`)}
-                        type="text"
-                        onChange={(event) => handleChange(index, event)}
-                        placeholder="Relation"
-                        className="border-2 w-full p-2 rounded outline-none border-slate-400 focus:border-[#FFA12B]"
-                      />
-                      {errors.family?.[index]?.value1 && (
-                        <p className="text-red-600 text-xs mt-1 ">
-                          {errors.family[index].value1.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="w-full flex flex-col md:w-2/6 ">
-                      <input
-                        {...register(`family.${index}.value2`)} // Register Name
-                        type="text"
-                        onChange={(event) => handleChange(index, event)}
-                        placeholder="Name"
-                        className="border-2 w-full p-2 rounded outline-none border-slate-400 focus:border-[#FFA12B]"
-                      />
-                      {errors.family?.[index]?.value2 && (
-                        <p className="text-red-600 text-xs mt-1">
-                          {errors.family[index].value2.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="flex gap-2 mt-1 ">
-                      <button
-                        type="button"
-                        onClick={handleAddFields}
-                        className="border-2 px-1  border-slate-500 text-black p-1 md:text-xl font-semibold text-center rounded-lg"
-                      >
-                        +
-                      </button>
-                      {inputFields.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveFields(index)}
-                          className="p-1 px-2 border-2 border-red-500 text-black text-xl font-bold rounded-lg"
-                        >
-                          -
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="w-full md:w-3/6">
-              <div className="flex flex-col gap-1 relative">
-                <label
-                  htmlFor="email"
-                  className="text-lg font-normal text-[#666]"
-                >
-                  Email
-                </label>
-                <input
-                  {...register("email")}
-                  placeholder="Enter your Email"
-                  id="email"
-                  className="border-2 outline-none border-slate-400 focus:border-[#FFA12B]  rounded-lg p-2"
-                />
-                {errors.email && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="w-full md:w-3/6 mt-4">
-              <div className="flex flex-col gap-1 relative">
-                <label
-                  htmlFor="message"
-                  className="text-lg font-normal text-[#666]"
-                >
-                  Message
-                </label>
-                <textarea
-                  {...register("message")}
-                  placeholder="Enter your Purpose of donation"
-                  id="message"
-                  className="border-2 outline-none border-slate-400 focus:border-[#FFA12B] rounded-lg p-2 h-24 w-full resize-none"
-                />
-                {errors.message && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.message.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-         
-            <div className="flex flex-col gap-4">
-              <div className="flex items-start gap-2">
-                <input
-                  type="checkbox"
-                  id="terms"
-                  {...register("terms")}
-                  className="mt-1"
-                />
-                <label htmlFor="terms" className="text-sm">
-                  I agree to the{" "}
-                  <a
-                    href="/terms&conditions"
-                    className="text-[#E26900] underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Terms and Conditions
-                  </a>{" "}
-                  and{" "}
-                  <a
-                    href="/privacy&policy"
-                    className="text-[#E26900] underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Privacy Policy
-                  </a>
-                </label>
-              </div>
-              {errors.terms && (
-                <p className="text-red-600 text-xs">{errors.terms.message}</p>
-              )}
-            </div>
-
-            <motion.button
-              type="submit"
-              onClick={handleSubmit(onSubmit)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-3/6 md:w-2/6 p-2 text-white rounded-full bg-[#7E4555] mx-auto "
-            >
-              Donate Now
-            </motion.button>
+          <div className="flex flex-col gap-1">
+            <label className="text-gray-600">
+              Last Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              {...register("lastname")}
+              className="border-2 p-3 rounded-lg outline-none focus:border-orange-500"
+              placeholder="Doe"
+            />
+            {errors.lastname && (
+              <p className="text-red-500 text-sm">{errors.lastname.message}</p>
+            )}
           </div>
-        </form>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label className="text-gray-600">
+            Email <span className="text-red-500">*</span>
+          </label>
+          <input
+            {...register("email")}
+            type="email"
+            className="border-2 p-3 rounded-lg outline-none focus:border-orange-500"
+            placeholder="john@example.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label className="text-gray-600">
+            Contact <span className="text-red-500">*</span>
+          </label>
+          <input
+            {...register("tel")}
+            type="tel"
+            className="border-2 p-3 rounded-lg outline-none focus:border-orange-500"
+            placeholder="9876543210"
+          />
+          {errors.tel && (
+            <p className="text-red-500 text-sm">{errors.tel.message}</p>
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* Message Section */}
+      <div className="flex flex-col gap-1">
+        <label className="text-gray-600">
+          Purpose of Donation <span className="text-red-500">*</span>
+        </label>
+        <textarea
+          {...register("message")}
+          className="border-2 p-3 rounded-lg outline-none focus:border-orange-500 h-32"
+          placeholder="Tell us why you're donating..."
+        />
+        {errors.message && (
+          <p className="text-red-500 text-sm">{errors.message.message}</p>
+        )}
+      </div>
+
+      {/* Terms and Conditions */}
+      <div className="flex items-start gap-3 cursor-pointer">
+        <input
+          type="checkbox"
+          id="terms"
+          {...register("terms")}
+          className="mt-1"
+        />
+        <label htmlFor="terms" className="text-gray-600">
+          I agree to the{" "}
+          <a
+            href="/terms&conditions"
+            className="text-orange-600 hover:underline"
+          >
+            Terms and Conditions
+          </a>{" "}
+          and{" "}
+          <a href="/privacy&policy" className="text-orange-600 hover:underline">
+            Privacy Policy
+          </a>{" "}
+          <span className="text-red-500">*</span>
+        </label>
+      </div>
+      {errors.terms && (
+        <p className="text-red-500 text-sm">{errors.terms.message}</p>
+      )}
+
+      {/* Submit Button */}
+      <motion.button
+        type="submit"
+        disabled={isSubmitting}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className={`py-3 px-6 rounded-full text-lg font-bold transition-colors ${
+          isSubmitting
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-orange-600 text-white hover:bg-orange-700"
+        }`}
+      >
+        {isSubmitting ? "Processing..." : "Donate Now"}
+      </motion.button>
+    </form>
   );
 }
 

@@ -1,6 +1,6 @@
 //-------------BASEURL's----------------
-// const BaseAPIURL = "http://localhost:3000/";
-const BaseAPIURL = "https://api.sankaripeetam.org/";
+const BaseAPIURL = "http://localhost:3000/";
+// const BaseAPIURL = "https://api.sankaripeetam.org/";
 
 const UserRegisterAPI = {
   RegisterPost: BaseAPIURL + "user/signup",
@@ -38,7 +38,9 @@ const ContactAPI = {
 
 };
 const DonationAPI = {
-  DonationAmoutPost: BaseAPIURL + "donation/create-order",
+  PersonDetailsPost: BaseAPIURL + "donation/create-order",
+  RazarpayDonationPost: BaseAPIURL + "api/create-order",
+
   AllDonationGet: BaseAPIURL + "donation",
 };
 const GalleryAPI = {

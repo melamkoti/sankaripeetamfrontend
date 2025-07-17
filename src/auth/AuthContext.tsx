@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, ReactNode, useContext } from
 import { useNavigate } from "react-router-dom";
 
 interface User {
+  id:string;
   email: string;
   name: string;
   role: string;
@@ -10,7 +11,7 @@ interface User {
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
-  login: (token: string, email: string, name: string, role: string) => void;
+  login: (token: string, email: string, name: string, role: string, userId: string) => void;
   logout: () => void;
 }
 
@@ -30,20 +31,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const email = localStorage.getItem("email");
     const name = localStorage.getItem("name");
     const role = localStorage.getItem("role");
+      const id = localStorage.getItem("userId");
 
-    if (token && email && name && role) {
+    if (token && email && name && role && id) {
       setIsAuthenticated(true);
-      setUser({ email, name, role });
+      setUser({ email, name, role, id });
     }
   }, []);
 
-  const login = (token: string, email: string, name: string, role: string) => {
+  const login = (token: string, email: string, name: string, role: string,userId:string) => {
     localStorage.setItem("token", token);
     localStorage.setItem("email", email);
     localStorage.setItem("name", name);
     localStorage.setItem("role", role);
+    localStorage.setItem("userId", userId);
 
-    setUser({ email, name, role });
+    setUser({ email, name, role ,id:userId});
     setIsAuthenticated(true);
     navigate("/donationpayment");
   };
@@ -53,6 +56,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem("email");
     localStorage.removeItem("name");
     localStorage.removeItem("role");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("id");
+
     setIsAuthenticated(false);
     setUser(null);
     navigate("/login");

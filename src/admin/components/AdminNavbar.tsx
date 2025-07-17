@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const AdminNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-const handleLogout = () => {
+  const handleLogout = () => {
     // Remove the token and user info from localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("name");
@@ -27,7 +27,7 @@ const handleLogout = () => {
             </div>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <div className="ml-10 flex space-x-4">
                 <NavLink
                   to="/admin"
@@ -91,11 +91,18 @@ const handleLogout = () => {
                 >
                   User Inquiry List
                 </NavLink>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 bg-white text-red-500 rounded-md font-bold text-1xl "
+                >
+                  {" "}
+                  Logout
+                </button>
               </div>
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
+            <div className="lg:hidden flex items-center">
               <button
                 className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-red-700 focus:outline-none"
                 onClick={toggleMenu}
@@ -108,7 +115,7 @@ const handleLogout = () => {
 
         {/* Mobile Navigation Links */}
         {isOpen && (
-          <div className="md:hidden bg-red-600 pb-3 inset-0  [z-90]">
+          <div className="lg:hidden bg-red-600 pb-3 inset-0  [z-90]">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
               <NavLink
                 to="/admin"
@@ -177,7 +184,13 @@ const handleLogout = () => {
               >
                 User Inquiry List
               </NavLink>
-              <button onClick={handleLogout} className="p-2 bg-white text-red-500 rounded-md font-bold text-1xl"> Logout</button>
+              <button
+                onClick={handleLogout}
+                className="p-2 bg-white text-red-500 rounded-md font-bold text-1xl"
+              >
+                {" "}
+                Logout
+              </button>
             </div>
           </div>
         )}
