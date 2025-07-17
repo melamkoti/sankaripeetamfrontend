@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 
 const UploadGallery = () => {
   const [title, setTitle] = useState("");
+    const [date, setDate] = useState("");
+
   const [images, setImages] = useState<FileList | null>(null);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [status, setStatus] = useState<"success" | "error" | "loading" | "">(
@@ -34,6 +36,7 @@ const UploadGallery = () => {
 
     const formData = new FormData();
     formData.append("title", title);
+    formData.append("date",date)
     Array.from(images).forEach((img) => formData.append("images", img));
 
     try {
@@ -69,6 +72,14 @@ const UploadGallery = () => {
           placeholder="Enter title"
           className="border border-gray-300 p-2 rounded"
           required
+        />
+         <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          placeholder="Enter date"
+          className="border border-gray-300 p-2 rounded"
+          
         />
         <input
           type="file"

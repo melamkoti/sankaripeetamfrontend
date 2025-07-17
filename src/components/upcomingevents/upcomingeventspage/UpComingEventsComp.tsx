@@ -42,7 +42,7 @@ export default function EventsComp() {
     fetchEvents();
   }, [EventApiService]);
 
- 
+
   
 
   return (

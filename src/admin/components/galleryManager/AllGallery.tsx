@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserModuleAPI } from "../../../services/AppEndPoints";
 import { toast } from "react-toastify";
+import { format } from "date-fns";
 interface GalleryItem {
   title: string;
+  date: string;
   images: string[];
 }
 
@@ -15,7 +17,7 @@ function AllGallerys() {
       try {
         const response = await axios.get<GalleryItem[]>(GalleryGet);
         setGalleryItems(response.data);
-        toast.success("Gallery Fetched Successfully")
+        toast.success("Gallery Fetched Successfully");
       } catch (error) {
         console.error("Error fetching gallery:", error);
       }
@@ -30,32 +32,39 @@ function AllGallerys() {
         Our Events Gallery
       </h1>
 
-      {galleryItems.map((item, index) => (
-        <section key={index} className="space-y-6">
-          {/* Section Title */}
-          <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-800 border-b-2 border-yellow-400 inline-block pb-2">
-            {item.title}
-          </h2>
+      {galleryItems
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .map((item, index) => (
+          <section key={index} className="space-y-6">
+            {/* Section Title */}
+            <div className="flex  items-center">
+              <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-800 border-b-2 border-yellow-400 inline-block pb-2">
+                {item.title}
+              </h2>
+              <p className="text-2xl text-blue-500 px-4">
+                {format(new Date(item.date), "MMM dd, yyyy")}
+              </p>
+            </div>
 
-          {/* Image Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-            {item.images.map((img, imgIndex) => (
-              <div
-                key={imgIndex}
-                className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
-              >
-                <img
-                  src={img}
-                  alt={`gallery-${imgIndex}`}
-                  className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                />
-                {/* Optional hover overlay */}
-                <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            ))}
-          </div>
-        </section>
-      ))}
+            {/* Image Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {item.images.map((img, imgIndex) => (
+                <div
+                  key={imgIndex}
+                  className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <img
+                    src={img}
+                    alt={`gallery-${imgIndex}`}
+                    className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                  />
+                  {/* Optional hover overlay */}
+                  <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
     </div>
   );
 }

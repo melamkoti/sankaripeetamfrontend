@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import calender from "../../../assets/svg/calendar.png";
 import axios from "axios";
 import EditEventModal from "./EditEventModel";
 import { UserModuleAPI } from "../../../services/AppEndPoints";
 import { toast } from "react-toastify";
+import { format } from "date-fns";
+
 type Event = {
   id: number;
   title: string;
@@ -15,8 +18,8 @@ type Event = {
 const AllEvents = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [editEvent, setEditEvent] = useState<Event | null>(null);
-const EeventsGetService = UserModuleAPI.AllEventsGet;
-const EeventsDeleteService = UserModuleAPI.IndividualEventDelete;
+  const EeventsGetService = UserModuleAPI.AllEventsGet;
+  const EeventsDeleteService = UserModuleAPI.IndividualEventDelete;
 
   const fetchEvents = async () => {
     try {
@@ -57,11 +60,20 @@ const EeventsDeleteService = UserModuleAPI.IndividualEventDelete;
           <div key={event.id} className="bg-gray-100 p-4 rounded-md shadow-md">
             <h3 className="font-bold">{event.title}</h3>
             <p>{event.description}</p>
-            <p>{new Date(event.eventDate).toLocaleDateString()}</p>
+            <div className="flex items-center gap-3 py-2">
+              <img
+                src={calender}
+                alt="calendar"
+                className="w-5 h-5 md:w-6 md:h-6"
+              />
+              <p className="text-red-500 text-sm md:text-base font-medium">
+                {format(new Date(event.eventDate), "dd/MM/yyyy")}
+              </p>
+            </div>
             <img
               src={event.image}
               alt={event.title}
-              className="w-full h-32 object-cover rounded-md"
+              className="w-full h-40 object-cover rounded-md"
             />
             <div className="flex  justify-between items-center	mt-4 gap-2">
               <button className="bg-blue-500 text-white px-4 py-1 rounded-md text-sm ">
@@ -71,7 +83,7 @@ const EeventsDeleteService = UserModuleAPI.IndividualEventDelete;
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                 YouTube
+                  YouTube
                 </a>
               </button>
 

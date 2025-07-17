@@ -4,6 +4,7 @@ import RightYarrow from "../../../assets/svg/ChevronRightSmall.svg";
 import { UserModuleAPI } from "../../../services/AppEndPoints";
 import footerClaenderImg from "../../../assets/images/footer-calender.svg";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 type FooterEventsType = {
   image: string;
@@ -15,6 +16,8 @@ const PujaCard = () => {
   const [footerEventsState, setFooterPostsState] = useState<FooterEventsType[]>(
     []
   );
+    const navigate = useNavigate();
+
   const AllPostService = UserModuleAPI.AllPostsGet;
   useEffect(() => {
     fetch(AllPostService)
@@ -38,12 +41,16 @@ const PujaCard = () => {
   const handleScrollLeft = () => {
     scrollContainerRef.current?.scrollBy({ left: -300, behavior: "smooth" });
   };
+  const handleCardClick = (date: Date) =>{
+        navigate(`/gallery?date=${date.toISOString()}`);
+
+  }
 
   return (
     <div className="md:p-12 p-6 bg-gradient-to-b from-[#f7b90c] to-[#fff9db] relative overflow-x-hidden">
       {/* Title */}
-      <h1 className="pb-6 md:text-4xl text-2xl font-semibold font-mukta text-white drop-shadow-md text-center tracking-wide">
-        GALLERY
+      <h1 className="pb-6 md:text-4xl text-2xl font-semibold font-mukta text-red-700 drop-shadow-md text-center tracking-wide">
+        Swamiji's  Puja and Pratishta{" "}
       </h1>
 
       {/* Arrows */}
@@ -73,7 +80,8 @@ const PujaCard = () => {
           .map((item, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-[250px] bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out"
+              className="flex-shrink-0 w-[250px] bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer"
+              onClick={() => handleCardClick(item.date)}
             >
               <div className="p-4">
                 <img

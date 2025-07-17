@@ -11,7 +11,7 @@ import DonateNow from "./components/donations/Donations";
 import PariharaPooja from "./components/pariharapooja/PariharaPooja";
 import Adyatmikam from "./components/adyatmikam/Adyatmikam";
 import SamaajaSeva from "./components/samajaseva/SamaajaSeva";
-import PreviousEvents from "./components/events/Events";
+import PreviousEvents from "./components/oldevents/Events";
 import UpComingEvents from "./components/upcomingevents/UpComingEvents";
 import ContactUs from "./components/contactus/ContactUsPage";
 import DonationPaymentPage from "./components/donations/donationspayment/DonationPaymentPage";
@@ -25,7 +25,6 @@ import SetPassword from "./components/signups/SetPassword";
 import PasswordComplete from "./components/signups/PasswordComplete";
 import { AuthProvider } from "./auth/AuthContext";
 import ProtectedRoute from "./middleware/PrivateRoute";
-// import UserProfile from "./components/user/UserProfile";
 import AdminApp from "./admin/AdminApp";
 import PrivacyPolicy from "./components/razarpay/PrivacyPolicy";
 import CancellationRefund from "./components/razarpay/Cancelation&Refund";
@@ -33,7 +32,7 @@ import RazarpayContact from "./components/razarpay/RazarpayContact";
 import Shipping from "./components/razarpay/Shipping";
 import TermsAndConditions from "./components/razarpay/Terms&condition";
 import GalleryComponent from "./components/gallery/Gallery";
-
+import RazorpayPayment from "./components/donations/donationspayment/RayzorpayPayment";
 function App() {
   const location = useLocation();
 
@@ -62,7 +61,7 @@ function App() {
             <Route path="parihara" element={<PariharaPooja />} />
             <Route path="adyatmikam" element={<Adyatmikam />} />
             <Route path="samajaseva" element={<SamaajaSeva />} />
-            <Route path="poojalu" element={<Poojalu />} />
+            <Route path="pujalu" element={<Poojalu />} />
           </Route>
           <Route path="/vastu" element={<Vastu />} />
           <Route path="/devalaya" element={<DevalayaPage />} />
@@ -70,20 +69,13 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/donate" element={<DonateNow />} />
           <Route path="/donationpayment" element={<DonationPaymentPage />} />
-          
           <Route path="/privacy&policy" element={<PrivacyPolicy />} />
+
           <Route path="/cancellation&refund" element={<CancellationRefund />} />
           <Route path="/contact" element={<RazarpayContact />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/terms&conditions" element={<TermsAndConditions />} />
-          {/* <Route
-          path="/user"
-          element={
-            <ProtectedRoute allowedRoles={["User", "Admin"]}>
-              <UserProfile user="sfda" />
-            </ProtectedRoute>
-          }
-        /> */}
+          <Route path="/razarpay" element={<RazorpayPayment />}/>
           {/* Admin panel route */}
           <Route
             path="/admin/*"

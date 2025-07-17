@@ -49,9 +49,9 @@ export const UserInquiryList = () => {
         </tr>
       </thead>
       <tbody>
-        {contact.map((user) => (
-          <tr key={user.id} className="hover:bg-gray-50">
-            <td className="border px-4 py-2">{user.id}</td>
+        {contact.map((user, index) => (
+          <tr key={index} className="hover:bg-gray-50">
+            <td className="border px-4 py-2">{index + 1}</td>
             <td className="border px-4 py-2">
               {user.firstName} {user.lastName}
             </td>

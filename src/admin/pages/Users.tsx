@@ -44,13 +44,13 @@ const AdminPage = () => {
               <th className="border px-4 py-2">Name</th>
               <th className="border px-4 py-2">Email</th>
               <th className="border px-4 py-2">Role</th>
-              <th className="border px-4 py-2">CreatedAt</th>
+              <th className="border px-4 py-2">Register</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.id} className="hover:bg-gray-50">
-                <td className="border px-4 py-2">{user.id}</td>
+            {users.map((user,index) => (
+              <tr key={index} className="hover:bg-gray-50">
+                <td className="border px-4 py-2">{index + 1}</td>
                 <td className="border px-4 py-2">{user.name}</td>
                 <td className="border px-4 py-2">{user.email}</td>
                 <td className="border px-4 py-2">{user.role}</td>

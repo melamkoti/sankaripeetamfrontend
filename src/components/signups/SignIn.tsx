@@ -37,15 +37,10 @@ function SignUpCreate() {
     try {
       const response = await axios.post(UserLoginApiService, data);
       if (response.status === 200) {
-        const { token, email, name, role } = response.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("email", email);
-        localStorage.setItem("name", name);
-        localStorage.setItem("role", role);
-        console.log(name);
+        const { token, email, name, role,userId } = response.data;
 
         if (authContext) {
-          authContext.login(token, email, name, role);
+          authContext.login(token, email, name, role, userId);
         }
         toast.success("successfully Signed In");
         // Navigate based on user role
@@ -65,11 +60,7 @@ function SignUpCreate() {
       toast.error("SignIn  failed. Please try again.");
     }
   };
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/donationpayment", { replace: true });
-  //   }
-  // }, []);
+  
 
   function togglepassword() {
     setShowPassword(!showPassword);
@@ -182,23 +173,7 @@ function SignUpCreate() {
             </form>
           </div>
 
-          {/* <div className="flex items-center w-full">
-            <hr className="flex-1 border-t-2 border-gray-300" />
-            <span className="mx-4 font-semibold text-xl text-[#666]">OR</span>
-            <hr className="flex-1 border-t-2 border-gray-300" />
-          </div>
-
-          <motion.button
-            type="submit"
-            whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
-            whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
-            className=" border border-[#FFA12B] w-full flex justify-center items-center md:gap-4 gap-2 rounded-3xl md:p-2 p-1 shadow-xl"
-          >
-            <img src={googleicon} alt="googleicon" className="md:w-6 w-4 " />
-            <p className=" text-[#363636] md:font-semibold">
-              Continue with Google
-            </p>
-          </motion.button> */}
+          
         </div>
       </div>
     </div>
