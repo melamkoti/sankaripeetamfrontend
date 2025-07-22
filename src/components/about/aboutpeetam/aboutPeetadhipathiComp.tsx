@@ -1,17 +1,17 @@
-import aboutfounderimg from "../../../assets/images/footer-logo.svg";
+import aboutfounderimg from "../../../assets/images/image.png";
 
-function AboutPeetamComp() {
+function AboutPeetadhipathiComp() {
   return (
     <div className="w-full lg:h-full flex flex-col lg:flex-row justify-start items-center p-6 md:p-12 lg:p-0 gap-4 md:gap-12 lg:gap-0 ">
-      <div className="w-2/6 md:max-w-1/6 lg:h-full">
+      <div className="w-3/6 md:max-w-1/6 lg:h-full">
         <img
           src={aboutfounderimg}
           alt="aboutfounderimg"
-          className="w-5/6 lg:max-w-3/6  mx-auto"
+          className="w-full lg:max-w-3/6  "
         />
       </div>
 
-      <div className=" mx-4 lg:w-4/6 h-full flex flex-col justify-around items-center p-2 text-base gap-6 md:text-center text-justify md:text-justify   text-[#000]">
+      <div className="lg:w-3/6 h-full flex flex-col justify-around items-center p-2 text-base gap-6 md:text-center text-justify md:text-justify   text-[#000]">
       <h2 className="text-2xl lg:text-4xl font-bold text-center text-orange-700 mb-8">
         Biography of Sri Brahmasri Nemmikanti Narasaiah Acharyulu
       </h2>
@@ -60,4 +60,4 @@ function AboutPeetamComp() {
   );
 }
 
-export default AboutPeetamComp;
+export default AboutPeetadhipathiComp;

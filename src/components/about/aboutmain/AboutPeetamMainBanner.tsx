@@ -1,6 +1,6 @@
-import aboutusmain from "../../../assets/images/aboutusmain.png";
+import aboutusmain from "../../../assets/images/cartmain.png";
 
-function AboutMain() {
+function AboutPeetamMain() {
   return (
     <div
       className="flex justify-center items-end p-12 h-[90vh] min-w-screen radix-lg"
@@ -11,11 +11,11 @@ function AboutMain() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* <p className="text-2xl md:text-4xl font-semibold text-white tracking-wider text-center">
-        ABOUT SANATANA SANKARI PEETAM
-      </p> */}
+      <p className="text-2xl md:text-4xl font-semibold text-white tracking-wider text-center">
+        ABOUT  PEETAM
+      </p>
     </div>
   );
 }
 
-export default AboutMain;
+export default AboutPeetamMain;

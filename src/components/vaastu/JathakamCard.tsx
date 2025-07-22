@@ -1,5 +1,4 @@
 import jathakamBanner from "../../assets/images/jathakamm.jpeg";
-import nature from "../../assets/images/fog-nature-forest-woods-india.jpg"
 import React from "react";
 
 
@@ -13,7 +12,7 @@ const JathakamCard: React.FC<JathakamCardProps> = ({bhumi}) => {
       <div
         className="md:h-[90vh] h-[60vh] flex justify-center items-center "
         style={{
-          backgroundImage: `url(${ bhumi ? nature : jathakamBanner})`,
+          backgroundImage: `url(${ bhumi ? "" : jathakamBanner})`,
           backgroundSize: "cover",
           backgroundPosition: "bottom",
           backgroundRepeat: "no-repeat",

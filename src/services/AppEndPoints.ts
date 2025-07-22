@@ -38,9 +38,9 @@ const ContactAPI = {
 
 };
 const DonationAPI = {
-  PersonDetailsPost: BaseAPIURL + "donation/create-order",
+  PersonDetailsPost: BaseAPIURL + "donation/saveddetails",
   RazarpayDonationPost: BaseAPIURL + "api/create-order",
-
+  RazarpayVerifyOrderPost:BaseAPIURL + "api/verify-order",
   AllDonationGet: BaseAPIURL + "donation",
 };
 const GalleryAPI = {

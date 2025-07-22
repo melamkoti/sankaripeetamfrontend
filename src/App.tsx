@@ -3,7 +3,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
-import AboutUs from "./components/about/AboutPage";
+import AboutUs from "./components/about/AboutPeetam";
+import Aboutpeetadhipathi from "./components/about/Aboutpeetadhipathi";
+
 import Header from "./components/header/Header";
 import Vastu from "./components/vaastu/VastuPage";
 import DevalayaPage from "./components/vaastu/DevalayaPage";
@@ -32,7 +34,7 @@ import RazarpayContact from "./components/razarpay/RazarpayContact";
 import Shipping from "./components/razarpay/Shipping";
 import TermsAndConditions from "./components/razarpay/Terms&condition";
 import GalleryComponent from "./components/gallery/Gallery";
-import RazorpayPayment from "./components/donations/donationspayment/RayzorpayPayment";
+ import RazorpayPayment from "./components/donations/donationspayment/DonationReceipt";
 function App() {
   const location = useLocation();
 
@@ -52,7 +54,10 @@ function App() {
           <Route path="/setpassword" element={<SetPassword />} />
           <Route path="/complete" element={<PasswordComplete />} />
           <Route path="/" element={<Home />} />
-          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/about" element={""}>
+            <Route path="peetam" element={<AboutUs />} />
+            <Route path="peetadhipathi" element={<Aboutpeetadhipathi />} />
+          </Route>
           <Route path="/events" element={""}>
             <Route path="previousevents" element={<PreviousEvents />} />
             <Route path="upcomingevents" element={<UpComingEvents />} />
@@ -70,7 +75,6 @@ function App() {
           <Route path="/donate" element={<DonateNow />} />
           <Route path="/donationpayment" element={<DonationPaymentPage />} />
           <Route path="/privacy&policy" element={<PrivacyPolicy />} />
-
           <Route path="/cancellation&refund" element={<CancellationRefund />} />
           <Route path="/contact" element={<RazarpayContact />} />
           <Route path="/shipping" element={<Shipping />} />

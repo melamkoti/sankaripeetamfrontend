@@ -40,7 +40,7 @@ export default function FooterComp() {
             </div>
             <div>
               <p>+91 9989492655</p>
-              <p>+91 9989492655</p>
+              <p>+91 9985164455</p>
             </div>
           </div>
           <div className="flex items-center gap-3 text-[#FFB600]">
@@ -162,7 +162,7 @@ export default function FooterComp() {
         </div> */}
         <div className="flex gap-5 ">
           <NavLink
-            to={"https://www.instagram.com/sankaripeetam/#"}
+            to={"https://www.instagram.com/narasaiah_acharya?igsh=aThtbzIxeTIxYjZu&utm_source=qr"}
             target="blank"
             className="p-2 bg-white rounded-full m-auto cursor-pointer
 "
@@ -171,7 +171,7 @@ export default function FooterComp() {
           </NavLink>
           <NavLink
             to={
-              "https://www.facebook.com/people/Sanathana-Sankari-Peetam/61556567276927/?mibextid=LQQJ4d"
+              "https://www.facebook.com/share/1AzuTz8VTm/?mibextid=wwXIfr"
             }
             target="blank"
             className="p-2 bg-white rounded-full m-auto cursor-pointer

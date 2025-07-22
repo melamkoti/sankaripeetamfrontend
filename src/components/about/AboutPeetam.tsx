@@ -1,4 +1,4 @@
-import AboutMain from "./aboutmain/AboutMain";
+import AboutMain from "./aboutmain/AboutPeetamMainBanner";
 import AboutPeetamComp from "./aboutpeetam/AboutPeetamComp";
 
 function AboutPage() {
