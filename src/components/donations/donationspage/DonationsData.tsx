@@ -15,14 +15,14 @@ export const DonationsCardData = [
   {
     id: 2,
     img: DonationImg2,
-    title: "Temple Seva",
+    title: "TempleSeva",
     content:
       "Temple seva is a profound act of service where devotees contribute their time and efforts to maintain the sanctity and operations of the temple. Through seva, individuals connect with the divine, expressing their devotion and humility while supporting the spiritual well-being of the community.",
   },
   {
     id: 3,
     img: DonationImg3,
-    title: "Go Seva",
+    title: "GoSeva",
     content:
       "Cow seva, or the service of caring for cows, is a revered practice that honors the sacredness of the cow in many traditions. By providing for these gentle creatures, devotees express their gratitude and respect, fostering a deep connection with nature and upholding the values of compassion and selfless service.",
   },
@@ -36,7 +36,7 @@ export const DonationsCardData = [
   {
     id: 5,
     img: DonationImg5,
-    title: "Viveka Vidyalaya",
+    title: "VivekaVidyalaya",
     content:
       "Viveka Vidyalaya is dedicated to providing holistic education, fostering academic excellence, and nurturing moral values in students. Through a balanced curriculum, the school aims to develop well-rounded individuals equipped with the knowledge, skills, and character needed to succeed in life and contribute positively to society.",
   },
@@ -44,7 +44,7 @@ export const DonationsCardData = [
     id: 6,
 
     img: DonationImg6,
-    title: "Bhu Seva",
+    title: "BhuSeva",
     content:
       "Soil rejuvenation involves restoring the health and fertility of soil through sustainable practices such as organic farming, crop rotation, composting, and reducing chemical inputs. By focusing on enriching the soil's natural nutrients and promoting biodiversity, soil rejuvenation ensures long-term agricultural productivity, combats land degradation, and supports a balanced ecosystem.",
   },

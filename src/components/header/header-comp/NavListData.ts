@@ -1,6 +1,11 @@
 export const NavListData = [
   { navLink: "HOME", route: "/" },
-  { navLink: "ABOUT", route: "/aboutus" },
+  // { navLink: "ABOUT", route: "/aboutus" },
+  {
+    navLink: "ABOUT",
+    route: "/about",
+    childNav: ["peetam", "peetadhipathi"],
+  },
   {
     navLink: "EVENTS",
     route: "/events",
