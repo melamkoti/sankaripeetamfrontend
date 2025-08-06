@@ -20,6 +20,13 @@ const ActivitiesForm = () => {
       return;
     }
 
+    const clearForm = () => {
+      setTitle("");
+      setDescription("");
+      setImage(null);
+      setColor("#ffffff");
+      setIsEnable(true);
+    };
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -32,12 +39,8 @@ const ActivitiesForm = () => {
       await axios.post(EventPostService, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      toast.success("Post submitted successfully!");
-      setTitle("");
-      setDescription("");
-      setImage(null);
-      setColor("#ffffff");
-      setIsEnable(true);
+      toast.success("Activity submitted successfully!");
+      clearForm();
     } catch (error) {
       console.error("Upload failed:", error);
       toast.error("Error submitting post");

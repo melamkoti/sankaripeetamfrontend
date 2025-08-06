@@ -4,7 +4,7 @@
 
 @layer components {
   .main_head {
-    @apply pt-[70px];
+    @apply pt-[60px];
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
@@ -113,6 +113,25 @@
   .no-print {
     display: none !important;
   }
+}
+
+
+/* Custom thin scrollbar */
+.thin-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Thin width for WebKit browsers */
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.5); /* Tailwind gray-500-ish */
+  border-radius: 4px;
 }
 
 

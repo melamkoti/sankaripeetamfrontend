@@ -18,6 +18,13 @@ const Post = () => {
       alert("All fields are required!");
       return;
     }
+    const clearForm = () => {
+      setTitle("");
+      setDescription("");
+      setDate("");
+      setImage(null);
+      setImageError(null);
+    };
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -30,6 +37,7 @@ const Post = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Post submitted successfully!");
+      clearForm();
     } catch (error) {
       console.error("Error submitting post:", error);
       toast.error("Error submitting post ");
@@ -68,8 +76,8 @@ const Post = () => {
     img.src = objectUrl;
   };
   return (
-    <div className="max-w-md mx-auto bg-white p-6 shadow-md rounded-md border-2">
-      <h2 className="text-lg font-bold mb-4 text-center">Create a New Card</h2>
+    <div className="max-w-md mx-auto bg-white p-6 shadow-md rounded-xl border-2">
+      <h2 className="text-lg font-bold mb-4 text-center">Create Puja Card</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title Field */}
         <div>

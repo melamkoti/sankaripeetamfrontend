@@ -34,14 +34,15 @@ import RazarpayContact from "./components/razarpay/RazarpayContact";
 import Shipping from "./components/razarpay/Shipping";
 import TermsAndConditions from "./components/razarpay/Terms&condition";
 import GalleryComponent from "./components/gallery/Gallery";
- import RazorpayPayment from "./components/donations/donationspayment/DonationReceipt";
+import JoinUsPage from "./components/home/joinus/JoinUsPage";
+//  import RazorpayPayment from "./components/donations/donationspayment/DonationReceipt";
 function App() {
   const location = useLocation();
 
   const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <div
-      style={{ backgroundColor: "#FFF8DC", fontFamily: "Mulish, sans-serif" }}
+      style={{ backgroundColor: "#FFF8DC", fontFamily: "Anek Telugu, sans-serif, Work Sans" }}
     >
       <AuthProvider>
         <ScrollToTop />
@@ -79,7 +80,7 @@ function App() {
           <Route path="/contact" element={<RazarpayContact />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/terms&conditions" element={<TermsAndConditions />} />
-          <Route path="/razarpay" element={<RazorpayPayment />}/>
+          {/* <Route path="/razarpay" element={<RazorpayPayment />}/> */}
           {/* Admin panel route */}
           <Route
             path="/admin/*"
@@ -91,6 +92,8 @@ function App() {
           />{" "}
         </Routes>
         {!isAdminRoute && <WhatsUpComp />}
+        {!isAdminRoute && <JoinUsPage />}
+
         {!isAdminRoute && <Footer />}
       </AuthProvider>
     </div>

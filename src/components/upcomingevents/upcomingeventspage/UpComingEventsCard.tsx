@@ -41,7 +41,10 @@ export default function UpComingEventsCard({
         </div>
 
         {/* Description */}
-        <p className="text-gray-700 text-base leading-relaxed mt-6">
+        {/* <p className="text-gray-700 text-base leading-relaxed mt-6">
+          {item.description}
+        </p> */}
+        <p className="text-gray-700 text-base leading-relaxed md:text-lg overflow-y-auto max-h-[10.5rem] leading-snug mt-6 thin-scrollbar">
           {item.description}
         </p>
 

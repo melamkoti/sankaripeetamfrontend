@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Post from "../components/postmanager/Post";
-import AllPosts from "../components/postmanager/AllPosts";
+import Post from "../components/pujapostmanager/Post";
+import AllPosts from "../components/pujapostmanager/AllPosts";
 
 const ActivityManager = () => {
   const [view, setView] = useState<"post" | "all">("post");
@@ -24,7 +24,7 @@ const ActivityManager = () => {
             view === "post" ? activeButtonClasses : inactiveButtonClasses
           }`}
         >
-          Post Card
+          Puja Card
         </button>
         <button
           onClick={() => setView("all")}
@@ -32,7 +32,7 @@ const ActivityManager = () => {
             view === "all" ? activeButtonClasses : inactiveButtonClasses
           }`}
         >
-          All Cards
+          All Puja Cards
         </button>
       </div>
 
