@@ -16,7 +16,7 @@ const PujaCard = () => {
   const [footerEventsState, setFooterPostsState] = useState<FooterEventsType[]>(
     []
   );
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const AllPostService = UserModuleAPI.AllPostsGet;
   useEffect(() => {
@@ -41,16 +41,15 @@ const PujaCard = () => {
   const handleScrollLeft = () => {
     scrollContainerRef.current?.scrollBy({ left: -300, behavior: "smooth" });
   };
-  const handleCardClick = (date: Date) =>{
-        navigate(`/gallery?date=${date.toISOString()}`);
-
-  }
+  const handleCardClick = (date: Date) => {
+    navigate(`/gallery?date=${date.toISOString()}`);
+  };
 
   return (
-    <div className="md:p-12 p-6 bg-gradient-to-b from-[#f7b90c] to-[#fff9db] relative overflow-x-hidden">
+    <div className="md:p-12 p-6 bg-[#E9E5DF] relative overflow-x-hidden">
       {/* Title */}
       <h1 className="pb-6 md:text-4xl text-2xl font-semibold font-mukta text-red-700 drop-shadow-md text-center tracking-wide">
-        Swamiji's  Puja and Pratishta{" "}
+        Swamiji's Puja and Pratishta{" "}
       </h1>
 
       {/* Arrows */}
@@ -80,7 +79,7 @@ const PujaCard = () => {
           .map((item, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-[250px] bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer"
+              className="flex-shrink-0 max-w-[280px] bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer"
               onClick={() => handleCardClick(item.date)}
             >
               <div className="p-4">
@@ -89,17 +88,20 @@ const PujaCard = () => {
                   alt={item.title}
                   className="rounded-lg w-full object-cover h-[180px]"
                 />
-                <div className="mt-4 text-center">
+                <div className="mt-4 ">
                   <p className="flex gap-1">
                     <img src={footerClaenderImg} alt="" />
                     <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
                   </p>
-                  <h2 className="text-xl font-semibold font-mukta text-[#b91c1c]">
+                  <h2 className="text-xl font-semibold font-mukta text-[#D9540F]">
                     {item.title}
                   </h2>
 
-                  <p className="text-sm text-gray-700 mt-1 capitalize font-light">
+                  <p className="text-sm  mt-1 capitalize font-light leading-relaxed  overflow-y-auto max-h-[8.5rem] leading-snug mt-2 thin-scrollbar text-left">
                     {item.description}
+                  </p>
+                  <p className="text-[#066FAE] font-normal text-sm mt-2 hover:underline md:text-[16px] tracking-tight">
+                     More Details →
                   </p>
                 </div>
               </div>

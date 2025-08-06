@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { useSearchParams } from "react-router-dom";
 
 interface GalleryItem {
+  id:string;
   title: string;
   date: string;
   images: string[];
@@ -17,6 +18,7 @@ function GalleryComponent() {
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const GalleryGet = UserModuleAPI.AllGalleryGet;
+const GalleryDelete = UserModuleAPI.AllGalleryDelete;
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -30,6 +32,22 @@ function GalleryComponent() {
 
     fetchGallery();
   }, []);
+
+  const handleDelete = async (galleryId: string) => {
+  const confirmed = window.confirm("Are you sure you want to delete this gallery?");
+  if (!confirmed) return;
+
+  try {
+    await axios.delete(`${GalleryDelete}/${galleryId}`); // adjust URL if needed
+
+    // Update state
+    setGalleryItems((prevItems) => prevItems.filter((item) => item.id !== galleryId));
+  } catch (error) {
+    console.error("Failed to delete gallery:", error);
+    alert("Something went wrong while deleting.");
+  }
+};
+
 
   const openImage = (imgUrl: string) => {
     setSelectedImage(imgUrl);
@@ -79,6 +97,12 @@ function GalleryComponent() {
                 {format(new Date(item.date), "MMM dd, yyyy")}
               </p>
             </div>
+             <button
+          onClick={() => handleDelete(item.id)}
+          className="text-red-600 hover:text-red-800 text-sm"
+        >
+          🗑 Delete
+        </button>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
               {item.images.map((img, imgIndex) => (

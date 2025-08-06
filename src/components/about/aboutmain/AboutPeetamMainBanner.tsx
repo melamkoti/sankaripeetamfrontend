@@ -1,19 +1,15 @@
-import aboutusmain from "../../../assets/images/cartmain.png";
+import aboutusmain from "../../../assets/images/aboutpeetam.png";
 
 function AboutPeetamMain() {
   return (
-    <div
-      className="flex justify-center items-end p-12 h-[90vh] min-w-screen radix-lg"
-      style={{
-        backgroundImage: `url(${aboutusmain})`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <p className="text-2xl md:text-4xl font-semibold text-white tracking-wider text-center">
-        ABOUT  PEETAM
-      </p>
+    <div className="flex justify-center items-center py-4 bg-[#E9E5DF]">
+      <div
+        className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
+             h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px]"
+        style={{
+          backgroundImage: `url(${aboutusmain})`,
+        }}
+      ></div>
     </div>
   );
 }

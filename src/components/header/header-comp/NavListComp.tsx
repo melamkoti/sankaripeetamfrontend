@@ -28,7 +28,9 @@ export default function NavListComp() {
   };
 
   return (
-    <div className="flex flex-wrap w-full text-[#f87005] text-md font-semibold justify-center items-center lg:gap-10 gap-4 h-full">
+    <div
+      className="flex flex-wrap w-full    justify-center items-center lg:gap-6 gap-2 h-full "
+    >
       {NavListData.map((item: NavListItem, index) => {
         const isActive = item.navLink === activeDropdown;
 
@@ -42,11 +44,11 @@ export default function NavListComp() {
               }
             >
               {/* Main link */}
-              <div className="flex items-end">
+              <div className="flex items-end items-center">
                 <span
-                  className={`duration-300 hover:text-black cursor-pointer hover:underline font-bold  ${
-                    item.navLink === "DONATE NOW"
-                      ? "bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full"
+                  className={`duration-300 hover:text-black text-[#201711] cursor-pointer text-[18px] hover:underline font-medium font-work  ${
+                    item.navLink === "Donate Now"
+                      ? "bg-[#BB4F27] hover:bg-orange-700 text-[#FAE7D0] px-4 py-2 rounded-full"
                       : ""
                   }`}
                   onClick={() => handleNavLinkClick(item)}

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useReactToPrint } from "react-to-print";
 import Logo from "../../../assets/images/footer-logo.svg";
-import { useRef, useEffect,  } from "react";
+import { useRef,   } from "react";
 
 interface ReceiptData {
   donationData: {
@@ -54,26 +54,20 @@ const DonationReceipt =({
   onPrintComplete?: () => void;
   onClose?: () => void;
 }) => {
-  const contentRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    console.log("Mounted contentRef:", contentRef.current);
-  }, []);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
-    content: () => contentRef.current,
+    content: () => contentRef.current ,
+    documentTitle: `Donation_Receipt`,
     pageStyle: `
-    @page { size: A4; margin: 10mm; }
-    @media print {
-      body { -webkit-print-color-adjust: exact; }
-      .no-print { display: none !important; }
-      .receipt-content { padding: 0; }
-    }
-  `,
-    documentTitle: `Donation_Receipt_${
-      paymentData?.razorpay_payment_id || "receipt"
-    }`,
-  });
+      @page { size: A4; margin: 10mm; }
+      @media print {
+        body { -webkit-print-color-adjust: exact; }
+        .no-print { display: none !important; }
+        .receipt-content { padding: 0; }
+      }
+    `,
+  }as unknown as Parameters<typeof useReactToPrint>[0]);
 
   // 👇 safest print handler
  

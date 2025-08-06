@@ -12,6 +12,9 @@ interface GalleryItem {
 function AllGallerys() {
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const GalleryGet = UserModuleAPI.AllGalleryGet;
+
+  
+
   useEffect(() => {
     const fetchGallery = async () => {
       try {

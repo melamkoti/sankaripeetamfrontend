@@ -23,59 +23,61 @@ function ActivitiesComp() {
   }, []);
 
   return (
-    <div
-      className=" flex flex-col justify-start w-full p-8 md:p-12 lg:p-20 gap-12 bg-[#f7b90c]"
-      // style={{
-      //   backgroundImage: ` url(${activitiesbg})`,
-      //   backgroundPosition: "center",
-      //   backgroundSize: "cover",
-      // }}
-    >
-      <div className="flex flex-col md:w-1/6 justify-center md:justify-start items-center md:items-start ">
-        <p className="text-red-700 text-4xl font-semibold ">Activities</p>
-        <p className=" text-xl font-semibold text-white">Description</p>
-      </div>
+    
+   <div className="flex flex-col w-full p-4 md:p-12 lg:p-20 gap-12 bg-[#E9E5DF]">
+  {/* Heading */}
+  <div className="text-center">
+    <h2 className="text-2xl md:text-[32px] font-semibold ">
+      Sanathana Sankari Peetam - Activities
+    </h2>
+    <p className=" text-sm md:text-[20px] font-normal mt-2">Abhayam – Vijayam</p>
+  </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 text-white w-full gap-8 lg:gap-6 h-full ">
-        {activitiesState.map((item, idx) => {
-          return (
-            <motion.div
-              key={idx}
-              whileHover={{
-                scale: 1.05,
-                transition: {
-                  duration: 0.25,
-                },
-              }}
-              className={`flex flex-col items-center md:items-start justify-around gap-4 rounded-xl  lg:w-5/6 h-full p-4 lg:px-6 
- ${
-   item.isEnable
-     ? "opacity-100 pointer-events-auto cursor-pointer hover:shadow-lg transition-shadow duration-300"
-     : "opacity-30 pointer-events-none cursor-not-allowed"
- }
+  {/* Cards */}
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 place-items-center">
+    {activitiesState.map((item, idx) => (
+      <motion.div
+        key={idx}
+        whileHover={{ scale: 1.03, transition: { duration: 0.25 } }}
+        className={`flex flex-col md:flex-row items-center md:items-start justify-around gap-4 rounded-xl w-full md:w-5/6 h-full p-6 bg-white shadow-md transition-all duration-300
+          ${
+            item.isEnable
+              ? "opacity-100 pointer-events-auto cursor-pointer hover:shadow-lg"
+              : "opacity-30 pointer-events-none cursor-not-allowed"
+          }
+          ${item.color === "#ffffff" ? "text-[#44233B]" : ""}
+        `}
+        style={{ backgroundColor: item.color }}
+      >
+        {/* Image */}
+        <div className="flex-shrink-0 w-20 h-20 md:w-40 md:h-40 overflow-hidden rounded-full border-4 border-white shadow">
+          <img
+            src={item.image}
+            alt={item.title}
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-                	 ${item.color === "#ffffff" ? "text-[#44233B]" : ""}  `}
-              style={{ backgroundColor: item.color }}
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
+        {/* Text Content */}
+        <div className="flex flex-col text-center md:text-left gap-4">
+          <h3 className="text-lg font-semibold text-[#D9540F] md:text-[24px]">
+            {item.title}
+          </h3>
+          <p className="font-medium text-sm leading-[30px] md:text-[18px] tracking-wider">
+            {item.description}
+          </p>
+          <a
+            href="/activities/parihara"
+            className="text-[#066FAE] font-normal text-sm mt-2 hover:underline md:text-[18px] tracking-tight"
+          >
+            For More Details →
+          </a>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</div>
 
-              <div className="text-center md:text-left">
-                <p>{item.title}</p>
-                <p>{item.description}</p>
-              </div>
-
-              <a href="/activities/parihara">
-                For More Details go to Activities &#8594;
-              </a>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
   );
 }
 

@@ -37,7 +37,7 @@ function SignUpCreate() {
     try {
       const response = await axios.post(UserLoginApiService, data);
       if (response.status === 200) {
-        const { token, email, name, role,userId } = response.data;
+        const { token, email, name, role, userId } = response.data;
 
         if (authContext) {
           authContext.login(token, email, name, role, userId);
@@ -49,18 +49,22 @@ function SignUpCreate() {
         } else {
           navigate("/donationpayment");
         }
-      } else if (response.status === 404) {
-        toast.error("User not found");
-      } else if (response.status === 401) {
-        toast.error("Invalid credentials");
       }
       reset();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("SignIn  failed. Please try again.");
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response) {
+        if (error.response.status === 404) {
+          toast.error("User not found");
+        } else if (error.response.status === 401) {
+          toast.error("Invalid credentials");
+        } else {
+          toast.error("Sign-in failed. Please try again.");
+        }
+      } else {
+        toast.error("Something went wrong.");
+      }
     }
   };
-  
 
   function togglepassword() {
     setShowPassword(!showPassword);
@@ -172,8 +176,6 @@ function SignUpCreate() {
               </div>
             </form>
           </div>
-
-          
         </div>
       </div>
     </div>

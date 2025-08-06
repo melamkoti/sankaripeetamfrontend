@@ -2,25 +2,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import EditPostModal from "./EditPostModel";
 import { UserModuleAPI } from "../../../services/AppEndPoints";
-import {toast} from "react-toastify";
-type Activity = {
+import { toast } from "react-toastify";
+import footerClaenderImg from "../../../assets/images/footer-calender.svg";
+import { format } from "date-fns";
+
+type PujaCard = {
   id: number;
   title: string;
+  date: string;
   description: string;
   image: string;
 };
 
-const AllActivity = () => {
-  const [events, setEvents] = useState<Activity[]>([]);
-  const [editEvent, setEditEvent] = useState<Activity | null>(null);
-const AllPostsService = UserModuleAPI.AllPostsGet;
-const DeletePostService = UserModuleAPI.IndividualPostDelete
+const AllPujaCards = () => {
+  const [events, setEvents] = useState<PujaCard[]>([]);
+  const [editEvent, setEditEvent] = useState<PujaCard | null>(null);
+  const AllPostsService = UserModuleAPI.AllPostsGet;
+  const DeletePostService = UserModuleAPI.IndividualPostDelete;
   const fetchEvents = async () => {
     try {
       const response = await axios.get(AllPostsService);
       setEvents(response.data);
       toast.success("Posts fetched successfully!");
-      
     } catch (error) {
       toast.error("Failed to fetch posts." + error);
     }
@@ -58,9 +61,15 @@ const DeletePostService = UserModuleAPI.IndividualPostDelete
               alt={event.title}
               className="w-full h-[300px] z-20"
             />
-            <h3 className="font-bold my-2">{event.title}</h3>
-            <p className="h-24">{event.description}</p>
-
+            <h3 className="font-semibold my-2 text-xl">{event.title}</h3>
+            {/* <p className="h-24">{event.description}</p> */}
+            <p className="flex gap-1">
+              <img src={footerClaenderImg} alt="" />
+              <p>{format(new Date(event.date), "dd/MM/yyyy")}</p>
+            </p>{" "}
+            <p className="text-gray-800 text-base  md:text-lg overflow-y-auto max-h-[6.5rem] leading-snug mt-6 thin-scrollbar">
+              {event.description}
+            </p>
             <div className="flex  justify-between items-center	mt-4 ">
               <button
                 onClick={() => setEditEvent(event)}
@@ -85,4 +94,4 @@ const DeletePostService = UserModuleAPI.IndividualPostDelete
   );
 };
 
-export default AllActivity;
+export default AllPujaCards;

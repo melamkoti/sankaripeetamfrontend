@@ -16,7 +16,7 @@ interface EventsCardProps {
 const EventsCard: React.FC<EventsCardProps> = ({ item, index }) => {
   return (
     <div
-      className=" bg-gray-400 relative w-full flex flex-col md:flex-row gap-6 p-6  shadow-lg rounded-2xl border border-gray-400 hover:shadow-xl transition duration-300"
+      className=" bg-gray-100 relative w-full flex flex-col md:flex-row gap-6 p-6  shadow-lg rounded-2xl  hover:shadow-xl transition duration-300"
       key={index}
     >
       {/* Left: Title + Image */}
@@ -40,7 +40,8 @@ const EventsCard: React.FC<EventsCardProps> = ({ item, index }) => {
         </div>
 
         {/* Description */}
-        <p className="text-gray-700 text-base leading-relaxed mt-6">
+
+        <p className=" text-gray-700 text-base leading-relaxed mt-6  md:text-lg overflow-y-auto max-h-[10.5rem] leading-snug thin-scrollbar">
           {item.description}
         </p>
       </div>

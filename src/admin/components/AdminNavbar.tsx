@@ -48,7 +48,7 @@ const AdminNavbar = () => {
                       : "text-white hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   }
                 >
-                  Gallery Cards
+                  Puja Cards
                 </NavLink>
                 <NavLink
                   to="/admin/activities"
@@ -138,7 +138,7 @@ const AdminNavbar = () => {
                     : "text-white hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 }
               >
-                Posts
+                  Puja Cards
               </NavLink>
               <NavLink
                 to="/admin/activities"

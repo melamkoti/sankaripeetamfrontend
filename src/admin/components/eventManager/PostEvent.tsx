@@ -15,10 +15,18 @@ const PostEvent = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !description || !eventDate || !image ) {
+    if (!title || !description || !eventDate || !image) {
       alert("All fields are required!");
       return;
     }
+    const clearForm = () => {
+      setTitle("");
+      setDescription("");
+      setEventDate("");
+      setImage(null);
+      setYoutubeLink("");
+      setImageError(null);
+    };
 
     const formData = new FormData();
     formData.append("title", title);
@@ -29,12 +37,12 @@ const PostEvent = () => {
     setLoading(true);
 
     try {
-      const data = await axios.post(EventPostService, formData, {
+      await axios.post(EventPostService, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log("Form Data:", data);
 
       toast.success("Event submitted successfully!");
+      clearForm();
     } catch (error) {
       console.error("Error submitting event:", error);
       toast.error("Error submitting event: ");
@@ -75,7 +83,7 @@ const PostEvent = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-2 shadow-md rounded-md border-2">
+    <div className="max-w-md mx-auto bg-white p-2 shadow-md rounded-xl border-2">
       <h2 className="text-lg font-bold mb-4 text-center">Create a New Event</h2>
       <form onSubmit={handleSubmit} className="space-y-2">
         {/* Title */}
@@ -131,15 +139,14 @@ const PostEvent = () => {
             id="image"
             accept="image/*"
             // onChange={(e) => setImage(e.target.files?.[0] || null)}
-                onChange={handleImageChange}
-
+            onChange={handleImageChange}
             className="w-full border border-gray-300 p-2 rounded-md"
           />
-           {imageError && (
-          <p className="text-red-500 text-sm mt-1">{imageError}</p>
-        )}
+          {imageError && (
+            <p className="text-red-500 text-sm mt-1">{imageError}</p>
+          )}
         </div>
-       
+
         {/* YouTube Link */}
         <div>
           <label htmlFor="youtubeLink" className="block font-medium mb-1">

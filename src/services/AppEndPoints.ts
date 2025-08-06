@@ -34,18 +34,18 @@ const PostsAPI = {
 };
 const ContactAPI = {
   AllContactDetailsPost: BaseAPIURL + "contact",
-    ContactDetailsGet: BaseAPIURL + "contact",
-
+  ContactDetailsGet: BaseAPIURL + "contact",
 };
 const DonationAPI = {
   PersonDetailsPost: BaseAPIURL + "donation/saveddetails",
   RazarpayDonationPost: BaseAPIURL + "api/create-order",
-  RazarpayVerifyOrderPost:BaseAPIURL + "api/verify-order",
+  RazarpayVerifyOrderPost: BaseAPIURL + "api/verify-order",
   AllDonationGet: BaseAPIURL + "donation",
 };
 const GalleryAPI = {
   AllGalleryPost: BaseAPIURL + "api/gallery",
   AllGalleryGet: BaseAPIURL + "api/gallery",
+  AllGalleryDelete: BaseAPIURL + "api/gallery",
 };
 export const UserModuleAPI = {
   ...UserRegisterAPI,
@@ -54,5 +54,5 @@ export const UserModuleAPI = {
   ...PostsAPI,
   ...ContactAPI,
   ...DonationAPI,
-  ...GalleryAPI
+  ...GalleryAPI,
 };

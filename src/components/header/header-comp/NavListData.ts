@@ -1,26 +1,26 @@
 export const NavListData = [
-  { navLink: "HOME", route: "/" },
+  { navLink: "Home", route: "/" },
   // { navLink: "ABOUT", route: "/aboutus" },
   {
-    navLink: "ABOUT",
+    navLink: "About",
     route: "/about",
     childNav: ["peetam", "peetadhipathi"],
   },
   {
-    navLink: "EVENTS",
+    navLink: "Events",
     route: "/events",
     childNav: ["previousevents", "upcomingevents"],
   },
   {
-    navLink: "ACTIVITIES",
+    navLink: "Activities",
     route: "/activities",
     childNav: ["parihara", "adyatmikam", "samajaseva", "pujalu"],
   },
 
-  { navLink: "VAASTU", route: "/vastu" },
-  { navLink: "GALLERY", route: "/gallery" },
+  { navLink: "Vaastu", route: "/vastu" },
+  { navLink: "Gallery", route: "/gallery" },
 
-  { navLink: "CONTACT US", route: "/contactus" },
+  { navLink: "Contact Us", route: "/contactus" },
 
-  { navLink: "DONATE NOW", route: "/donate" },
+  { navLink: "Donate Now", route: "/donate" },
 ];

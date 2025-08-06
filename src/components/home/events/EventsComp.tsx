@@ -1,4 +1,3 @@
-import calender from "../../../assets/svg/calendar.png";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
@@ -42,19 +41,17 @@ function EventsComp() {
   }, []);
 
   return (
-    <div className="bg-[#f7b90c] p-8 md:p-12 flex flex-col justify-center items-center gap-10">
+    <div className="bg-[#FAF5F0] py-12 px-4 md:px-8 flex flex-col items-center gap-10">
       {/* Header */}
-      <div className="flex flex-col gap-4 justify-center items-center text-center">
-        <p className="text-3xl md:text-4xl font-bold text-[#44233B] tracking-wide relative inline-block">
-          <span className="relative z-10 px-2 text-red-700">EVENTS</span>
-          <span className="absolute bottom-1 left-0 w-full h-2 bg-white opacity-60 z-0"></span>
-        </p>
-        <p className="text-xl md:text-2xl text-blue-500 font-semibold">
+
+      <div className="text-center">
+        <h2 className="text-2xl md:text-[32px] font-semibold ">Events</h2>
+        <p className=" text-sm md:text-[20px] font-normal mt-2">
+          {" "}
           Upcoming Events and Workshops
         </p>
       </div>
 
-      {/* Content */}
       {isLoading ? (
         <div className="w-full flex justify-center items-center py-10">
           <p className="text-lg font-medium text-[#44233B]">
@@ -69,74 +66,113 @@ function EventsComp() {
         </div>
       ) : (
         <>
-          {/* Event Cards */}
-          <div className=" lg:w-5/6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {eventsState.map((item, idx) => (
-              <motion.div
+          {/* Events List */}
+          <div className="w-full max-w-6xl flex flex-col gap-6">
+            {eventsState.slice(0, 4).map((item, idx) => (
+              <div
                 key={idx}
-                whileHover={{ scale: 1.015 }}
-                className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl p-6 flex flex-col md:flex-row gap-6"
+                className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row"
               >
                 {/* Image */}
-                <div className="w-full md:w-[220px] h-[220px] flex-shrink-0 overflow-hidden rounded-xl mx-auto md:mx-0">
-                  <motion.img
-                    whileHover={{ scale: 1.05 }}
+                <div className="md:w-1/3 h-40 md:h-60 flex-shrink-0">
+                  <img
                     src={item.image}
-                    alt="Event"
-                    className="w-full h-full object-cover object-center rounded-xl"
+                    alt={item.title}
+                    className="w-full h-full object-cover object-center rounded-lg"
                   />
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col justify-center gap-4 ">
+                <div className="p-6 flex flex-col justify-between md:w-2/3">
                   <div>
-                    <h3 className="text-2xl text-[#44233B] font-bold mb-1">
+                    <h3 className="text-xl md:text-[24px] font-semibold text-[#D9540F]">
                       {item.title}
                     </h3>
-                    <p className=" text-gray-600  md:text-lg text-wrap">
+                    <p className=" text-sm md:text-base mt-2 leading-snug text-[18px] font-normal">
                       {item.description}
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={calender}
-                      alt="calendar"
-                      className="w-5 h-5 md:w-6 md:h-6"
-                    />
-                    <p className="text-[#FD8F8F] text-sm md:text-base font-medium">
-                      {format(new Date(item.eventDate), "dd/MM/yyyy")}
-                    </p>
+                  {/* Date & Location */}
+                  <div className="flex items-center gap-4 text-sm md:text-base mt-4">
+                    <div className="flex items-center gap-2 ">
+                      {/* <img
+                        src={calender}
+                        alt="calendar"
+                        className="w-5 h-5 font-medium"
+                      /> */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="21"
+                        height="24"
+                        viewBox="0 0 21 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M0 21.75C0 22.9922 1.00781 24 2.25 24H18.75C19.9922 24 21 22.9922 21 21.75V9H0V21.75ZM15 12.5625C15 12.2531 15.2531 12 15.5625 12H17.4375C17.7469 12 18 12.2531 18 12.5625V14.4375C18 14.7469 17.7469 15 17.4375 15H15.5625C15.2531 15 15 14.7469 15 14.4375V12.5625ZM15 18.5625C15 18.2531 15.2531 18 15.5625 18H17.4375C17.7469 18 18 18.2531 18 18.5625V20.4375C18 20.7469 17.7469 21 17.4375 21H15.5625C15.2531 21 15 20.7469 15 20.4375V18.5625ZM9 12.5625C9 12.2531 9.25313 12 9.5625 12H11.4375C11.7469 12 12 12.2531 12 12.5625V14.4375C12 14.7469 11.7469 15 11.4375 15H9.5625C9.25313 15 9 14.7469 9 14.4375V12.5625ZM9 18.5625C9 18.2531 9.25313 18 9.5625 18H11.4375C11.7469 18 12 18.2531 12 18.5625V20.4375C12 20.7469 11.7469 21 11.4375 21H9.5625C9.25313 21 9 20.7469 9 20.4375V18.5625ZM3 12.5625C3 12.2531 3.25312 12 3.5625 12H5.4375C5.74687 12 6 12.2531 6 12.5625V14.4375C6 14.7469 5.74687 15 5.4375 15H3.5625C3.25312 15 3 14.7469 3 14.4375V12.5625ZM3 18.5625C3 18.2531 3.25312 18 3.5625 18H5.4375C5.74687 18 6 18.2531 6 18.5625V20.4375C6 20.7469 5.74687 21 5.4375 21H3.5625C3.25312 21 3 20.7469 3 20.4375V18.5625ZM18.75 3H16.5V0.75C16.5 0.3375 16.1625 0 15.75 0H14.25C13.8375 0 13.5 0.3375 13.5 0.75V3H7.5V0.75C7.5 0.3375 7.1625 0 6.75 0H5.25C4.8375 0 4.5 0.3375 4.5 0.75V3H2.25C1.00781 3 0 4.00781 0 5.25V7.5H21V5.25C21 4.00781 19.9922 3 18.75 3Z"
+                          fill="#D14747"
+                        />
+                      </svg>
+                      <span className="text-[18px] font-medium">
+                        {format(new Date(item.eventDate), "dd/MM/yyyy")}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 md:text-[18px]">
+                      {/* <img src={calender} alt="calendar" className="w-5 h-5 font-medium" /> */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="21"
+                        height="24"
+                        viewBox="0 0 21 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M0 21.75C0 22.9922 1.00781 24 2.25 24H18.75C19.9922 24 21 22.9922 21 21.75V9H0V21.75ZM15 12.5625C15 12.2531 15.2531 12 15.5625 12H17.4375C17.7469 12 18 12.2531 18 12.5625V14.4375C18 14.7469 17.7469 15 17.4375 15H15.5625C15.2531 15 15 14.7469 15 14.4375V12.5625ZM15 18.5625C15 18.2531 15.2531 18 15.5625 18H17.4375C17.7469 18 18 18.2531 18 18.5625V20.4375C18 20.7469 17.7469 21 17.4375 21H15.5625C15.2531 21 15 20.7469 15 20.4375V18.5625ZM9 12.5625C9 12.2531 9.25313 12 9.5625 12H11.4375C11.7469 12 12 12.2531 12 12.5625V14.4375C12 14.7469 11.7469 15 11.4375 15H9.5625C9.25313 15 9 14.7469 9 14.4375V12.5625ZM9 18.5625C9 18.2531 9.25313 18 9.5625 18H11.4375C11.7469 18 12 18.2531 12 18.5625V20.4375C12 20.7469 11.7469 21 11.4375 21H9.5625C9.25313 21 9 20.7469 9 20.4375V18.5625ZM3 12.5625C3 12.2531 3.25312 12 3.5625 12H5.4375C5.74687 12 6 12.2531 6 12.5625V14.4375C6 14.7469 5.74687 15 5.4375 15H3.5625C3.25312 15 3 14.7469 3 14.4375V12.5625ZM3 18.5625C3 18.2531 3.25312 18 3.5625 18H5.4375C5.74687 18 6 18.2531 6 18.5625V20.4375C6 20.7469 5.74687 21 5.4375 21H3.5625C3.25312 21 3 20.7469 3 20.4375V18.5625ZM18.75 3H16.5V0.75C16.5 0.3375 16.1625 0 15.75 0H14.25C13.8375 0 13.5 0.3375 13.5 0.75V3H7.5V0.75C7.5 0.3375 7.1625 0 6.75 0H5.25C4.8375 0 4.5 0.3375 4.5 0.75V3H2.25C1.00781 3 0 4.00781 0 5.25V7.5H21V5.25C21 4.00781 19.9922 3 18.75 3Z"
+                          fill="#D14747"
+                        />
+                      </svg>
+                      <span className="font-medium text-[18px]">
+                        {" "}
+                        Sankari Peetam, Hyderabad
+                      </span>
+                    </div>
                   </div>
 
-                  <div className=" flex ">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                  {/* Buttons */}
+                  <div className="flex gap-3 justify-center lg:justify-start   mt-4">
+                    <button
                       onClick={() => navigate("/contactus")}
-                      className="bg-[#61CE70] text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-[#4bb75d] transition"
+                      className="bg-[#8E512C] hover:bg-[#6f3510] text-white px-4 py-2 rounded-md"
                     >
                       Contact Us
-                    </motion.button>
+                    </button>
+                    <button
+                      onClick={() => navigate("/donate")}
+                      className="bg-[#8E512C] hover:bg-[#6f3510] text-white px-4 py-2 rounded-md"
+                    >
+                      Donate
+                    </button>
+                    {/* <button
+                      onClick={() => navigate("/join")}
+                      className="bg-[#8E512C] hover:bg-[#6f3510] text-white px-4 py-2 rounded-md"
+                    >
+                      Join Us
+                    </button> */}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
-
-          {/* More Events Button */}
-          <div className="mt-8">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/events/upcomingevents")}
-              className="bg-[#44233B] text-white text-base md:text-lg font-medium rounded-full px-6 py-3 shadow-md hover:bg-[#2f1727] transition"
-            >
-              More Events
-            </motion.button>
           </div>
         </>
       )}
+
+      {/* View All Events Button */}
+      <motion.button
+        onClick={() => navigate("/events/upcomingevents")}
+        className="bg-[#8E512C] hover:bg-[#6f3510] text-white px-6 py-3 rounded-md shadow-md"
+      >
+        View All Events →
+      </motion.button>
     </div>
   );
 }
