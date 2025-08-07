@@ -590,15 +590,15 @@ const Jathakam = () => {
     },
   ];
   return (
-    <div className=" my-12 max-w-2xl mx-auto border-2 rounded-md ">
+    <div className=" my-12 max-w-2xl mx-auto  rounded-md ">
       <div className=" flex justify-end  p-4 ">
-        <div className="flex justify-end border border-[#10356A]  rounded-md">
+       <div className="flex justify-end  rounded-md gap-4 text-lg  md:text-[20px]">
           <NavLink
             to="/vastu"
             className={({ isActive }) =>
               isActive
-                ? "bg-[#10356A] p-3 text-white rounded-l-md"
-                : "bg-white text-black p-3 rounded-md "
+                 ? " p-3 text-[#D9540F] border-b-4 border-[#D9540F] font-semibold"
+                : "  p-3 text-[#7D7D7D] border-b-2 border-[#7D7D7D] font-semibold"
             }
           >
             <p>గృహ గణితం</p>
@@ -607,8 +607,8 @@ const Jathakam = () => {
             to="/devalaya"
             className={({ isActive }) =>
               isActive
-                ? "bg-[#10356A] p-3 text-white rounded-r-md"
-                : "bg-white text-black p-3 rounded-md "
+                ? " p-3 text-[#D9540F] border-b-4 border-[#D9540F] font-semibold"
+                : "  p-3 text-[#7D7D7D] border-b-2 border-[#7D7D7D] font-semibold"
             }
           >
             <p>దేవాలయ గణితం</p>
@@ -617,7 +617,9 @@ const Jathakam = () => {
       </div>
       <div className="max-w-2xl mx-auto md:p-6 p-2 bg-white shadow-md rounded-lg ">
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">ఆయాది పదం :</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            ఆయాది పదం :
+          </label>
           <input
             type="number"
             value={padam}
@@ -637,7 +639,7 @@ const Jathakam = () => {
           <input
             type="text"
             value={ayamText}
-            placeholder="Placeholder"
+            disabled
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />
         </div>
@@ -652,7 +654,7 @@ const Jathakam = () => {
           <input
             type="text"
             value={nakshatramText}
-            placeholder="Placeholder"
+            disabled
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />
         </div>
@@ -666,7 +668,7 @@ const Jathakam = () => {
           />
           <input
             type="text"
-            placeholder="Placeholder"
+            disabled
             value={varamText}
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />
@@ -681,7 +683,7 @@ const Jathakam = () => {
           />
           <input
             type="text"
-            placeholder="Placeholder"
+            disabled
             value={thedhiText}
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />
@@ -696,7 +698,7 @@ const Jathakam = () => {
           />
           <input
             type="text"
-            placeholder="Placeholder"
+            disabled
             value={yogamText}
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />
@@ -711,7 +713,7 @@ const Jathakam = () => {
           />
           <input
             type="text"
-            placeholder="Placeholder"
+            disabled
             value={danamText}
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />
@@ -726,7 +728,7 @@ const Jathakam = () => {
           />
           <input
             type="text"
-            placeholder="Placeholder"
+            disabled
             value={runamText}
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />
@@ -741,7 +743,7 @@ const Jathakam = () => {
           />
           <input
             type="text"
-            placeholder="Placeholder"
+            disabled
             value={amsaText}
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />
@@ -756,7 +758,7 @@ const Jathakam = () => {
           />
           <input
             type="text"
-            placeholder="Placeholder"
+            disabled
             value={age}
             className="w-1/2 p-2 ml-2 border border-gray-300 rounded"
           />

@@ -41,7 +41,7 @@ function EventsComp() {
   }, []);
 
   return (
-    <div className="bg-[#FAF5F0] py-12 px-4 md:px-8 flex flex-col items-center gap-10">
+    <div className="bg-[#E9E5DF] py-12 px-4 md:px-8 flex flex-col items-center gap-10">
       {/* Header */}
 
       <div className="text-center">
@@ -168,7 +168,7 @@ function EventsComp() {
 
       {/* View All Events Button */}
       <motion.button
-        onClick={() => navigate("/events/upcomingevents")}
+        onClick={() => navigate("/events")}
         className="bg-[#8E512C] hover:bg-[#6f3510] text-white px-6 py-3 rounded-md shadow-md"
       >
         View All Events →

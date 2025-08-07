@@ -30,31 +30,8 @@ const Boomi = () => {
   }, []);
 
   return (
-    <div className=" my-24  mx-auto border-2 rounded-md ">
-      {/* <div className=" flex justify-end  p-4  ">
-        <div className="flex justify-end border border-[#10356A] rounded-md">
-          <NavLink
-            to="/vastu"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-[#10356A] p-3 text-white rounded-l-md"
-                : "bg-white text-black p-3 rounded-md"
-            }
-          >
-            <p>గృహ గణితం</p>
-          </NavLink>
-          <NavLink
-            to="/boomi"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-[#10356A] p-3 text-white  rounded-r-md"
-                : "bg-white text-black p-3 rounded-md"
-            }
-          >
-            <p>దేవాలయ గణితం</p>
-          </NavLink>
-        </div>
-      </div> */}
+    <div className=" my-12 md:mt-36 md:p-6 p-2  mx-auto  bg-white shadow-md rounded-lg ">
+     
       <div className="flex items-center mb-6 text-center mt-8">
         <label className="w-1/4 text-gray-700 font-medium">పాదం :</label>
         <input

@@ -13,7 +13,6 @@ import DonateNow from "./components/donations/Donations";
 import PariharaPooja from "./components/pariharapooja/PariharaPooja";
 import Adyatmikam from "./components/adyatmikam/Adyatmikam";
 import SamaajaSeva from "./components/samajaseva/SamaajaSeva";
-import PreviousEvents from "./components/oldevents/Events";
 import UpComingEvents from "./components/upcomingevents/UpComingEvents";
 import ContactUs from "./components/contactus/ContactUsPage";
 import DonationPaymentPage from "./components/donations/donationspayment/DonationPaymentPage";
@@ -36,13 +35,17 @@ import TermsAndConditions from "./components/razarpay/Terms&condition";
 import GalleryComponent from "./components/gallery/Gallery";
 import JoinUsPage from "./components/home/joinus/JoinUsPage";
 //  import RazorpayPayment from "./components/donations/donationspayment/DonationReceipt";
+import AdythaAshram from "./components/adythaAsharam/AdythaAshram";
 function App() {
   const location = useLocation();
 
   const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <div
-      style={{ backgroundColor: "#FFF8DC", fontFamily: "Anek Telugu, sans-serif, Work Sans" }}
+      style={{
+        backgroundColor: "#E9E5DF",
+        fontFamily: "Anek Telugu, sans-serif, Work Sans",
+      }}
     >
       <AuthProvider>
         <ScrollToTop />
@@ -59,10 +62,7 @@ function App() {
             <Route path="peetam" element={<AboutUs />} />
             <Route path="peetadhipathi" element={<Aboutpeetadhipathi />} />
           </Route>
-          <Route path="/events" element={""}>
-            <Route path="previousevents" element={<PreviousEvents />} />
-            <Route path="upcomingevents" element={<UpComingEvents />} />
-          </Route>
+          <Route path="/events" element={<UpComingEvents />} />
           <Route path="/activities" element={""}>
             <Route path="parihara" element={<PariharaPooja />} />
             <Route path="adyatmikam" element={<Adyatmikam />} />
@@ -75,6 +75,7 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/donate" element={<DonateNow />} />
           <Route path="/donationpayment" element={<DonationPaymentPage />} />
+          <Route path="/advythaashram" element={<AdythaAshram />} />
           <Route path="/privacy&policy" element={<PrivacyPolicy />} />
           <Route path="/cancellation&refund" element={<CancellationRefund />} />
           <Route path="/contact" element={<RazarpayContact />} />

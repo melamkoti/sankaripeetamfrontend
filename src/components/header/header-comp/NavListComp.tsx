@@ -29,7 +29,7 @@ export default function NavListComp() {
 
   return (
     <div
-      className="flex flex-wrap w-full    justify-center items-center lg:gap-6 gap-2 h-full "
+      className="flex flex-wrap w-full justify-center items-center lg:gap-6 gap-2 h-full "
     >
       {NavListData.map((item: NavListItem, index) => {
         const isActive = item.navLink === activeDropdown;

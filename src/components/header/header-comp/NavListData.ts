@@ -9,7 +9,6 @@ export const NavListData = [
   {
     navLink: "Events",
     route: "/events",
-    childNav: ["previousevents", "upcomingevents"],
   },
   {
     navLink: "Activities",

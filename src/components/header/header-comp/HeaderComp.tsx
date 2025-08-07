@@ -46,7 +46,7 @@ export default function Navbar() {
           </h2>
           <p className="text-[11px] font-normal">Dharmam Saranam Gachchami</p>
         </div>
-        <div className="flex justify-center items-center lg:hidden">
+        <div className="flex justify-center items-center lg:hidden ">
           <Example />
         </div>
       </div>
@@ -83,10 +83,10 @@ export default function Navbar() {
       </div>
 
       {/* Bottom Navigation Menu */}
-      <div className="hidden bg-[#FDAE51] lg:flex justify-between items-center px-4 md:px-16 py-2 shadow border-t-2 border-b-2 border-[#BB4F27]">
+      <div className="hidden  bg-[#F9DFC1] lg:flex justify-between items-center px-4 md:px-16 py-2 shadow border-t-2 border-b-2 border-[#BB4F27]">
         {/* Navigation Links */}
 
-        <div className="hidden md:flex 2xl:pl-[600px] xl:pl-[300px]   ">
+        <div className="hidden md:flex w-full justify-end   ">
           <NavListComp />
         </div>
 

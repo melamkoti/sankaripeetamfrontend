@@ -48,8 +48,8 @@ const PujaCard = () => {
   return (
     <div className="md:p-12 p-6 bg-[#E9E5DF] relative overflow-x-hidden">
       {/* Title */}
-      <h1 className="pb-6 md:text-4xl text-2xl font-semibold font-mukta text-red-700 drop-shadow-md text-center tracking-wide">
-        Swamiji's Puja and Pratishta{" "}
+      <h1 className="pb-6 md:text-4xl text-2xl font-semibold font-mukta  drop-shadow-md text-center tracking-wide">
+       Our Events Gallery
       </h1>
 
       {/* Arrows */}
@@ -101,7 +101,7 @@ const PujaCard = () => {
                     {item.description}
                   </p>
                   <p className="text-[#066FAE] font-normal text-sm mt-2 hover:underline md:text-[16px] tracking-tight">
-                     More Details →
+                     View Gallery →
                   </p>
                 </div>
               </div>
