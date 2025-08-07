@@ -4,9 +4,9 @@ import JathakamCard from "./JathakamCard";
 
 function DevalayaPage() {
   return (
-    <>
-      <JathakamCard bhumi={false} />
-      <div className="flex flex-col  lg:flex-row item-center justify-center gap-8">
+    <div className="main_head lg:mt-[110px]">
+      <JathakamCard  />
+      <div className="flex flex-col  lg:flex-row item-center justify-center gap-8 mx-4">
         <div>
           <Devalaya />
         </div>
@@ -14,7 +14,7 @@ function DevalayaPage() {
           <Boomi />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

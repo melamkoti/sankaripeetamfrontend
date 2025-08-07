@@ -12,22 +12,17 @@ const CardSlider: React.FC = () => {
           On going Projects{" "}
         </p>
       </div>
-      <div className="flex justify-center items-center p-6 bg-[#E9E5DF]">
-        <div
-          className=" rounded-xl"
-          style={{
-            backgroundImage: `url(${aboutusmain})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            width: "1316px",
-            height: "740px",
-            flexShrink: 0,
-            aspectRatio: "313 / 176",
-          }}
-        ></div>
-      </div>
-      <div className="px-32 py-6 flex flex-col justify-between ">
+      
+      <div className="flex justify-center items-center p-4 bg-[#E9E5DF]">
+      <div
+        className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
+             h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px]"
+        style={{
+          backgroundImage: `url(${aboutusmain})`,
+        }}
+      ></div>
+    </div>
+      <div className=" md:px-16 lg:px-28 px-4 py-6 flex flex-col justify-between ">
         <h3 className="text-xl md:text-[24px] font-semibold text-[#D9540F]">
           Advytha Ashram
         </h3>
@@ -40,7 +35,7 @@ const CardSlider: React.FC = () => {
           people along with his students and became a Sathguru.{" "}
         </p>
         <a
-            href="/activities/parihara"
+            href="/advythaashram"
             className="text-[#066FAE] font-normal text-sm mt-2 hover:underline md:text-[18px] tracking-tight"
           >
             For More Details →

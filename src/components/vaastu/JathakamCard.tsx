@@ -1,25 +1,18 @@
 import jathakamBanner from "../../assets/images/jathakamm.jpeg";
-import React from "react";
 
-
-interface JathakamCardProps {
-  bhumi?: boolean; // Optional boolean prop
-}
-
-const JathakamCard: React.FC<JathakamCardProps> = ({bhumi}) => {
+const JathakamCard = () => {
   return (
-    <div>
+    <div className="flex justify-center items-center py-4 bg-[#E9E5DF] ">
       <div
-        className="md:h-[90vh] h-[60vh] flex justify-center items-center "
+        className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
+             h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px] relative"
         style={{
-          backgroundImage: `url(${ bhumi ? "" : jathakamBanner})`,
-          backgroundSize: "cover",
-          backgroundPosition: "bottom",
-          backgroundRepeat: "no-repeat",
+          backgroundImage: `url(${jathakamBanner})`,
         }}
       >
-        <h1 className="md:text-6xl text-4xl tracking-wider font-semibold text-white z-10">
-          {bhumi ? "గృహవాస్తు గణితం":"వాస్తు సంగ్రహం"}
+        {" "}
+        <h1 className="md:text-6xl text-xl tracking-wider font-semibold text-white z-10 absolute bottom-4 left-1/2 transform -translate-x-1/2">
+          వాస్తు సంగ్రహం
         </h1>
       </div>
     </div>
