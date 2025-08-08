@@ -1,4 +1,4 @@
-import signinimg from "../../assets/images/signinimg.png";
+// import signinimg from "../../assets/images/signinimg.png";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,14 +47,14 @@ function SignUpMain() {
   };
 
   return (
-    <div className=" h-screen main_head ">
       <div
-        className="h-screen flex justify-end items-center "
-        style={{
-          backgroundImage: `url(${signinimg})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
+           className=" lg:mt-[110px] h-screen flex justify-center items-center bg-gradient-to-br from-[#f3d1c1] via-[#e9a17c] to-[#d6785d]"
+
+        // style={{
+        //   backgroundImage: `url(${signinimg})`,
+        //   backgroundPosition: "center",
+        //   backgroundSize: "cover",
+        // }}
       >
         <div className="flex flex-col  lg:w-2/6 w-4/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-6 p-8 z-10 md:mr-32 m-6 rounded-xl ">
           <p className="text-3xl  font-semibold">Sign Up</p>
@@ -100,7 +100,7 @@ function SignUpMain() {
                 </a>
               </p>
               <motion.button
-                className="bg-[#FFA12B] w-full rounded-3xl p-2 font-semibold text-white mt-2 "
+                className="bg-[#8E512C] w-full rounded-3xl p-2 font-semibold text-white mt-2 "
                 type="submit"
                 whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
                 whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
@@ -121,7 +121,6 @@ function SignUpMain() {
           </p>
         </div>
       </div>
-    </div>
   );
 }
 

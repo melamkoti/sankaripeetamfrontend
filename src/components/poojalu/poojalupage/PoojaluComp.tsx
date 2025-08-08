@@ -258,8 +258,8 @@ const PoojaluComp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-amber-100 ">
-      <div className="flex justify-center items-center py-4 bg-[#E9E5DF] ">
+    <div className="min-h-screen bg-[#E9E5DF]">
+      <div className="flex justify-center items-center py-4  ">
         <div
           className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
              h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px] relative"
@@ -267,53 +267,50 @@ const PoojaluComp = () => {
             backgroundImage: `url(${poojaluBannerImg})`,
           }}
         >
-          {" "}
-          <h1 className="md:text-6xl text-xl tracking-wider font-semibold text-white z-10 absolute bottom-4 lg:bottom-12 left-1/2 transform -translate-x-1/2">
-            Ashram Puja
-          </h1>
+         
         </div>
       </div>
       <div className="max-w-4xl mx-auto py-8 px-4">
-        <h1 className="text-3xl font-bold text-center text-orange-800 mb-8">
+        <h1 className="text-3xl font-bold text-center mb-8">
           Ashram Pooja
         </h1>
 
         <div className="flex justify-center mb-8 gap-4">
           <button
             onClick={() => setActiveTab("daily")}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+            className={`px-6 lg:px-12 py-2 lg:text-[20px]  font-medium transition-all ${
               activeTab === "daily"
-                ? "bg-orange-600 text-white shadow-md"
-                : "bg-white text-orange-700 hover:bg-orange-100"
+                ? "border-b-4 border-[#D9540F] text-[#D9540F] "
+                : "border-b-2 border-[#7D7D7D] text-[#7D7D7D] "
             }`}
           >
             Daily
           </button>
           <button
             onClick={() => setActiveTab("monthly")}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+            className={`px-6 lg:px-12 py-2 lg:text-[20px] font-medium transition-all ${
               activeTab === "monthly"
-                ? "bg-orange-600 text-white shadow-md"
-                : "bg-white text-orange-700 hover:bg-orange-100"
+              ? "border-b-4 border-[#D9540F] text-[#D9540F] "
+                : "border-b-2 border-[#7D7D7D] text-[#7D7D7D] "
             }`}
           >
             Monthly
           </button>
           <button
             onClick={() => setActiveTab("yearly")}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+            className={`px-6 lg:px-12 py-2 lg:text-[20px]  font-medium transition-all ${
               activeTab === "yearly"
-                ? "bg-orange-600 text-white shadow-md"
-                : "bg-white text-orange-700 hover:bg-orange-100"
+              ? "border-b-4 border-[#D9540F] text-[#D9540F] "
+                : "border-b-2 border-[#7D7D7D] text-[#7D7D7D] "
             }`}
           >
             Yearly
           </button>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="p-6">
-            <h2 className="text-2xl font-semibold text-orange-700 mb-6 border-b pb-2">
+        <div className="overflow-hidden">
+          <div className="p-2">
+            <h2 className="text-2xl font-semibold  mb-6 border-b ">
               {poojaluData[activeTab].title}
             </h2>
 
@@ -321,7 +318,7 @@ const PoojaluComp = () => {
               {poojaluData[activeTab].poojas.map((pooja, index) => (
                 <div
                   key={index}
-                  className="bg-amber-50 p-5 rounded-lg border-l-4 border-orange-500"
+                  className="bg-white p-5 rounded-lg border-l-4 border-orange-500"
                 >
                   <h3 className="text-xl font-medium text-orange-800 mb-2">
                     {pooja.title}

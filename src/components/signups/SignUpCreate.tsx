@@ -1,4 +1,4 @@
-import signinimg from "../../assets/images/signinimg.png";
+// import signinimg from "../../assets/images/signinimg.png";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,14 +49,14 @@ function SignUpCreate() {
       }
       console.log(data);
       const response = await axios.post(UserApiService, payload);
-       if (response.status === 400) {
+      if (response.status === 400) {
         toast.success("User Allready exit");
       }
       if (response.status === 201) {
         navigate("/login");
         toast.success("Signup successful!");
       }
-      
+
       reset();
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -69,185 +69,162 @@ function SignUpCreate() {
   }
 
   return (
-    <div className="main_head">
-      <div
-        className="h-screen flex justify-end items-center"
-        style={{
-          backgroundImage: `url(${signinimg})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-      >
-        <div className="flex flex-col lg:w-2/6 w-4/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10 md:mr-32 mx-4 rounded-xl">
-          <p className="text-2xl font-semibold text-center mb-1">
-            Create an account
-          </p>
+   
+    <div
+     className=" lg:mt-[110px] h-screen flex justify-center items-center bg-gradient-to-br from-[#f3d1c1] via-[#e9a17c] to-[#d6785d]">
+      <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-8">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Create an Account
+        </h2>
 
-          <form
-            className="w-full flex flex-col md:gap-1"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div className="mb-4">
-              <span className="text-lg font-semibold">Register As:</span>
-              <label className="ml-2">
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          {/* Register As */}
+          <div className="flex gap-4">
+            <span className="block text-[18px] font-medium  mb-1">
+              Register As:
+            </span>
+            <div className="flex items-center space-x-4">
+              <label className="flex items-center space-x-1 font-medium cursor-pointer">
                 <input
                   type="radio"
                   value="User"
                   {...register("role")}
                   checked={selectedRole === "User"}
                   onChange={() => setSelectedRole("User")}
-                  className="mr-1"
+                  className=" cursor-pointer"
                 />
-                User
+                <span>User</span>
               </label>
-              <label className="ml-4">
+              <label className="flex items-center space-x-1 font-medium cursor-pointer">
                 <input
                   type="radio"
                   value="Admin"
                   {...register("role")}
                   checked={selectedRole === "Admin"}
                   onChange={() => setSelectedRole("Admin")}
-                  className="mr-1"
+                  className=" cursor-pointer"
                 />
-                Admin
+                <span>Admin</span>
               </label>
-              {errors.role && (
-                <p className="text-red-600 text-xs mt-1">
-                  {errors.role.message}
-                </p>
-              )}
             </div>
-
-            {selectedRole === "Admin" && (
-              <div className="flex flex-col gap-1 relative">
-                <label
-                  htmlFor="secretKey"
-                  className="text-sm font-normal text-[#666]"
-                >
-                  Secret Key
-                </label>
-                <input
-                  {...register("secretKey")}
-                  placeholder="Enter your Secret Key"
-                  id="secretKey"
-                  className="border outline-none border-slate-400 focus:border-[#FFA12B] rounded-md p-2 bg-transparent"
-                />
-                {errors.secretKey && (
-                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                    {errors.secretKey.message}
-                  </p>
-                )}
-              </div>
+            {errors.role && (
+              <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>
             )}
+          </div>
 
-            <div className="flex flex-col gap-1 relative">
-              <label htmlFor="name" className="text-sm font-normal text-[#666]">
-                Full Name
+          {/* Secret Key (Admin only) */}
+          {selectedRole === "Admin" && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Secret Key
               </label>
               <input
-                {...register("name")}
-                placeholder="Enter your Name"
-                id="name"
-                className="border outline-none border-slate-400 focus:border-[#FFA12B] rounded-md p-2 bg-transparent"
+                {...register("secretKey")}
+                placeholder="Enter your Secret Key"
+                className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-[#FFA12B] focus:border-[#FFA12B] outline-none"
               />
-              {errors.name && (
-                <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                  {errors.name.message}
+              {errors.secretKey && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.secretKey.message}
                 </p>
               )}
             </div>
+          )}
 
-            <div className="flex flex-col gap-1 relative">
-              <label
-                htmlFor="email"
-                className="text-sm font-normal text-[#666]"
-              >
-                Email Address
-              </label>
+          {/* Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Full Name
+            </label>
+            <input
+              {...register("name")}
+              placeholder="Enter your Name"
+              className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-[#FFA12B] focus:border-[#FFA12B] outline-none"
+            />
+            {errors.name && (
+              <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
+            )}
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Email Address
+            </label>
+            <input
+              {...register("email")}
+              placeholder="Enter your Email"
+              className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-[#FFA12B] focus:border-[#FFA12B] outline-none"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <div className="relative">
               <input
-                {...register("email")}
-                placeholder="Enter your Email"
-                id="email"
-                className="border outline-none border-slate-400 focus:border-[#FFA12B] rounded-md p-2 bg-transparent"
+                {...register("password")}
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Your Password"
+                className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-[#FFA12B] focus:border-[#FFA12B] outline-none"
               />
-              {errors.email && (
-                <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-
-            <div className="flex flex-col gap-1 relative">
-              <label
-                htmlFor="password"
-                className="text-sm font-normal text-[#666]"
+              <button
+                type="button"
+                onClick={togglePassword}
+                className="absolute right-3 top-2.5"
               >
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  {...register("password")}
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter Your Password"
-                  id="password"
-                  className="border outline-none border-slate-400 focus:border-[#FFA12B] w-full p-2 rounded-md bg-transparent"
+                <img
+                  src={showPassword ? eyeshow : eyehide}
+                  alt=""
+                  className="w-4"
                 />
-                <button
-                  type="button"
-                  onClick={togglePassword}
-                  className="absolute right-4 bottom-3.5"
-                >
-                  <img
-                    src={showPassword ? eyeshow : eyehide}
-                    alt=""
-                    className="w-4"
-                  />
-                </button>
-              </div>
-              {errors.password && (
-                <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                  {errors.password.message}
-                </p>
-              )}
+              </button>
             </div>
+            {errors.password && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
 
-            <p className="text-sm">
-              By Signing Up, you agree to the{" "}
-              <a
-                href="#"
-                className="text-[#FFA12B] underline underline-offset-2"
-              >
-                Terms of Use
-              </a>{" "}
-              and{" "}
-              <a
-                href="#"
-                className="text-[#FFA12B] underline underline-offset-2"
-              >
-                Privacy Policy
-              </a>
-              .
-            </p>
-            <motion.button
-              className="bg-[#FFA12B] w-full rounded-3xl p-2 font-semibold text-white mt-2"
-              type="submit"
-              whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
-              whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
-            >
-              Create Account
-            </motion.button>
-          </form>
-
-          <p className="text-center md:mt-1 mt-2 text-sm">
-            Already have an account?{" "}
-            <NavLink
-              to={"/login"}
-              className="text-[#FFA12B] underline underline-offset-2"
-            >
-              Sign In
-            </NavLink>
+          {/* Terms */}
+          <p className="text-xs text-gray-600">
+            By Signing Up, you agree to the{" "}
+            <a href="#" className="text-[#FFA12B] underline">
+              Terms of Use
+            </a>{" "}
+            and{" "}
+            <a href="#" className="text-[#FFA12B] underline">
+              Privacy Policy
+            </a>
+            .
           </p>
-        </div>
+
+          {/* Submit */}
+          <motion.button
+            className="bg-[#8E512C] w-full rounded-lg py-2 font-semibold text-white hover:bg-[#8E512C] transition"
+            type="submit"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Create Account
+          </motion.button>
+        </form>
+
+        {/* Footer */}
+        <p className="text-center text-sm mt-4">
+          Already have an account?{" "}
+          <NavLink to="/login" className="text-[#FFA12B] underline">
+            Sign In
+          </NavLink>
+        </p>
       </div>
     </div>
   );
