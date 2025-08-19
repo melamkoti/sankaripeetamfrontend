@@ -4,46 +4,53 @@ import { PariharaPoojaData } from "./PariharaPoojaData";
 export default function PariharaPoojaComp() {
   return (
     <>
-      <div className="flex justify-center items-center py-4 bg-[#E9E5DF] ">
+      <div className="flex justify-center items-center p-4 md:py-4 md:px-2 lg:px-0 max-w-[1280px] mx-auto">
         <div
-          className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
+          className="w-full rounded-xl bg-center bg-cover bg-no-repeat 
              h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px] relative"
           style={{
             backgroundImage: `url(${PariharaPoojaBanner})`,
           }}
         ></div>
       </div>
-      <div className="text-center flex flex-col gap-5 pt-16 px-4 font-bold">
-        <div className="flex flex-col gap-4 ">
-          <p>సత్యాను సారిణీ లక్ష్మీ | కీర్తి: త్యాగాను సారిణీ ||</p>
-          <p>అభ్యాసాను సారిణీ విద్యా | బుద్ధి: కర్మాను సారిణీ ||</p>
+      <h1 className="text-xl md:text-[32px] font-semibold  tracking-wider z-10 text-center pt-12">
+        Parihara Puja
+      </h1>
+     
+      <div className="w-full h-full px-6 py-20 md:px-12 md:py-32 flex flex-col md:flex-row justify-center items-center gap-16 bg-[#E9E5DF] relative overflow-hidden">
+        {/* Optional Quote/Poem Section (you had commented out) */}
+
+        <div className="md:w-1/2 flex flex-col items-center gap-8">
+          <div className="text-center">
+            <p className="text-[12px] md:text-[20px] font-semibold md:font-bold lg:w-4/6 mx-auto font-anek tracking-wider">
+              సత్యాను సారిణీ లక్ష్మీ | కీర్తి: త్యాగాను సారిణీ || అభ్యాసాను
+              సారిణీ విద్యా | బుద్ధి: కర్మాను సారిణీ ||
+            </p>
+          </div>
+          <p className="text-base md:text-xl font-medium text-center  mx-auto ">
+           Sathyanusarini Lakshmi | Keerthihi Tyaganusarini || <br />{" "}
+            Abhyasanusarini Vidyaa | Buddhihi Karmanusarini ||{" "}
+          </p>
         </div>
-        <div className="flex flex-col gap-2 px-4 font-light">
-          <p>Sathyanusarini Lakshmi | Keerthihi Tyaganusarini ||</p>
-          <p>Abhyasanusarini Vidyaa | Buddhihi Karmanusarini ||</p>
-        </div>
-        <h1 className="text-xl md:text-[32px] font-semibold  tracking-wider z-10 ">
-          Parihara Puja
-        </h1>
       </div>
-      <div className="flex flex-col items-center gap-4 p-4 md:p-6 rounded-xl">
+      <div className="flex flex-col items-center gap-8 p-4 md:px-2  rounded-xl max-w-[1280px] mx-auto ">
         {PariharaPoojaData.map((item, index) => {
           return (
             <div
-              className="flex flex-col md:flex-row items-start gap-4 p-4 md:p-6 bg-white rounded-md shadow-md hover:shadow-xl transition-shadow duration-300 w-full max-w-[95%] md:max-w-[85%]"
+              className="flex flex-col md:flex-row items-start gap-6 p-6  bg-white rounded-md shadow-md hover:shadow-xl transition-shadow duration-300 w-full  "
               key={index}
             >
               {/* Icon Section */}
-              <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-orange-50 shadow-inner flex-shrink-0 mx-auto md:mx-0">
+              <div className="w-24 h-24 md:w-40 md:h-40 flex items-center justify-center rounded-full bg-orange-50 shadow-inner flex-shrink-0 mx-auto md:mx-0">
                 <img
                   src={lampImg}
                   alt="lamp"
-                  className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full"
+                  className="w-24 h-24 md:w-full md:h-full object-cover rounded-full"
                 />
               </div>
 
               {/* Text Section */}
-              <div className="flex flex-col gap-2 text-center md:text-left">
+              <div className="flex flex-col gap-2 text-center md:text-left pl-4">
                 <h1 className="text-[#D9540F] font-semibold text-base md:text-lg tracking-wide">
                   {index + 1}. {item.title}
                 </h1>

@@ -26,20 +26,52 @@ const EditActivityModel = ({
     color: event.color,
     isEnable: event.isEnable,
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const ActivityUpdateService = UserModuleAPI.IndividualActivityPut;
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setSelectedFile(file);
+
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.put(`${ActivityUpdateService}/${event.id}`, formData)
+      const formDataToSend = new FormData();
+      formDataToSend.append("title", formData.title);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("color", formData.color);
+      formDataToSend.append("isEnable", formData.isEnable.toString());
+
+      if (selectedFile) {
+        formDataToSend.append("image", selectedFile);
+      } else {
+        formDataToSend.append("image", formData.image);
+      }
+
+      await axios.put(`${ActivityUpdateService}/${event.id}`, formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       toast.success("Activity updated successfully!");
       onClose();
     } catch (error) {
       toast.error("Error updating Activity: " + error);
     }
   };
-
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 md:w-2/5">
@@ -90,19 +122,31 @@ const EditActivityModel = ({
               htmlFor="image"
               className="block text-sm font-medium mb-1 text-gray-700"
             >
-              Image URL
+              Image
             </label>
+            {previewImage ? (
+              <img
+                src={previewImage}
+                alt="Preview"
+                className="mb-2 h-32 w-full object-cover rounded-md"
+              />
+            ) : (
+              <img
+                src={formData.image}
+                alt="Current"
+                className="mb-2 h-32 w-full object-cover rounded-md"
+              />
+            )}
             <input
-              type="text"
+              type="file"
               id="image"
-              value={formData.image}
-              onChange={(e) =>
-                setFormData({ ...formData, image: e.target.value })
-              }
+              onChange={handleFileChange}
+              accept="image/*"
               className="w-full border border-gray-300 p-2 rounded-md focus:ring-blue-400 focus:outline-none"
             />
           </div>
 
+          {/* Rest of your form remains the same */}
           {/* Color */}
           <div>
             <label
@@ -124,13 +168,12 @@ const EditActivityModel = ({
           </div>
 
           {/* Status */}
-
           <div>
             <label
               htmlFor="isEnable"
               className="block font-medium mb-1 text-gray-600"
             >
-              Enable Or Desable Activity
+              Enable Or Disable Activity
             </label>
             <select
               id="isEnable"

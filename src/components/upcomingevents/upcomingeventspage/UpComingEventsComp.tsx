@@ -48,11 +48,11 @@ export default function EventsComp() {
   }, [activeTab, EventApiService, PastEventsApiService]);
 
   return (
-    <div className=" min-h-screen lg:mt-[110px]">
+    <div className=" min-h-screen  ">
       {/* Header Image */}
-      <div className="flex justify-center items-center py-4 bg-[#E9E5DF]">
+      <div className="flex justify-center items-center p-4 ">
         <div
-          className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
+          className="w-[1280px] rounded-xl bg-center bg-cover bg-no-repeat 
              h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px]"
           style={{
             backgroundImage: `url(${EventsImage})`,
@@ -61,29 +61,34 @@ export default function EventsComp() {
       </div>
 
       {/* Title & Subtitle */}
-      <div className="text-center mt-6">
-        <h1 className="text-3xl font-bold text-gray-800">Events</h1>
-        <p className="text-gray-500"> {activeTab === "upcoming" ? "Upcoming Events and Workshops": "Past Events and Workshops"} </p>
+      <div className="text-center mt-16 pb-4">
+        <h1 className="text-3xl font-bold ">Events</h1>
+        <p className="text-black">
+          {" "}
+          {activeTab === "upcoming"
+            ? "Upcoming Events and Workshops"
+            : "Past Events and Workshops"}{" "}
+        </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex justify-center mt-6 space-x-4">
+      <div className="flex justify-between mt-6 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-4">
         <button
           onClick={() => setActiveTab("upcoming")}
-          className={` text-md md:text-[20px] px-6 sm:px-20 py-2 font-medium transition ${
+          className={`text-[16px] md:text-[20px] px-2 sm:px-20 py-2 font-medium transition w-[48%] ${
             activeTab === "upcoming"
-              ? "text-[#D9540F] border-b-4 border-[#D9540F]"
-              : "text-[#7D7D7D] hover:text-gray-600 border-b-2 border-[#7D7D7D]"
+              ? "text-[#D9540F] border-b-[2px] border-[#D9540F]"
+              : "text-[#7D7D7D] hover:text-gray-600 border-b-[1px] border-[#7D7D7D]"
           }`}
         >
           Upcoming Events
         </button>
         <button
           onClick={() => setActiveTab("past")}
-          className={ ` text-md md:text-[20px] px-10 sm:px-20 py-2 font-medium transition ${
+          className={`text-[16px] md:text-[20px] px-2 sm:px-20 py-2 font-medium transition w-[48%] ${
             activeTab === "past"
-              ? "text-[#D9540F] border-b-4 border-[#D9540F]"
-              : "text-[#7D7D7D] hover:text-gray-600 border-b-2 border-[#7D7D7D]"
+              ? "text-[#D9540F] border-b-[2px] border-[#D9540F]"
+              : "text-[#7D7D7D] hover:text-gray-600 border-b-[1px] border-[#7D7D7D]"
           }`}
         >
           Past Events
@@ -91,10 +96,16 @@ export default function EventsComp() {
       </div>
 
       {/* Event Cards */}
-      <div className="grid grid-cols-1 gap-6 mt-6 px-4 sm:px-6 md:px-12 py-6">
+
+      <div className="grid grid-cols-1 gap-6 mt-6 px-4 sm:px-6 md:px-0 py-6  w-full max-w-[1280px] mx-auto">
         {events.length > 0 ? (
           events.map((item, index) => (
-            <UpComingEventsCard item={item} key={index} activeTab={activeTab} index={0}/>
+            <UpComingEventsCard
+              item={item}
+              key={index}
+              activeTab={activeTab}
+              index={0}
+            />
           ))
         ) : (
           <p className="text-center text-gray-500 py-10">

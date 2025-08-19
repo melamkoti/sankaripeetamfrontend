@@ -5,7 +5,8 @@ export default {
     extend: {
       fontFamily: {
         anek: ["Anek Telugu", "sans-serif"],
-         work: ["Work Sans", "sans-serif"],
+        work: ["Work Sans", "sans-serif"],
+        oswald: ["Oswald", "sans-serif"],
       },
     },
   },

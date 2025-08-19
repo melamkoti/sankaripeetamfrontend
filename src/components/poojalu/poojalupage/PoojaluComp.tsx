@@ -21,7 +21,7 @@ const PoojaluComp = () => {
 
   const poojaluData: Record<"daily" | "monthly" | "yearly", PoojaluCategory> = {
     daily: {
-      title: "Daily Poojalu",
+      title: "Daily Pujalu",
       poojas: [
         {
           title: "Archana",
@@ -57,7 +57,7 @@ const PoojaluComp = () => {
       showNote: true,
     },
     monthly: {
-      title: "Monthly Poojalu",
+      title: "Monthly Pujalu",
       poojas: [
         {
           title: "Vishesha Abhishekam",
@@ -93,7 +93,7 @@ const PoojaluComp = () => {
       ],
     },
     yearly: {
-      title: "Yearly Poojalu",
+      title: "Yearly Pujalu",
       poojas: [
         {
           title: "Dhakshina Kaali Janmathidhi Vishesha Pooja",
@@ -258,50 +258,64 @@ const PoojaluComp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#E9E5DF]">
-      <div className="flex justify-center items-center py-4  ">
+    <div className="min-h-screen ">
+      <div className="flex justify-center items-center    p-4 md:py-4 md:px-2 lg:px-0 max-w-[1280px] mx-auto">
         <div
-          className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
+          className="w-full rounded-xl bg-center bg-cover bg-no-repeat 
              h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px] relative"
           style={{
             backgroundImage: `url(${poojaluBannerImg})`,
           }}
-        >
-         
+        ></div>
+      </div>
+      <h1 className="text-xl md:text-[32px] font-semibold  tracking-wider z-10 text-center pt-12">
+Ashram Puja      </h1>
+      <div className="w-full h-full px-6 py-20 md:px-12 md:py-32 flex flex-col md:flex-row justify-center items-center gap-16 bg-[#E9E5DF] relative overflow-hidden">
+        {/* Optional Quote/Poem Section (you had commented out) */}
+
+        <div className="md:w-1/2 flex flex-col items-center gap-8">
+          <div className="text-center">
+            <p className="text-[12px] md:text-[20px] font-semibold md:font-bold lg:w-4/6 mx-auto font-anek tracking-wider">
+              కామః క్రోధశ్చ, లోభశ్చ దేహే తిష్ఠతి తస్కరాః || జ్ఞాన రత్నాపహారాయ |
+              తస్మాత్ జాగ్రత జాగ్రత ||
+            </p>
+          </div>
+          <p className="text-base md:text-xl font-medium text-center  mx-auto ">
+            Kamah Krodascha Lobhascha Dehae Thishtathi Thaskaraah | <br /> Gnana
+            Ratnapahaaraaya Tasmath Jagratha Jagratha ||{" "}
+          </p>
         </div>
       </div>
-      <div className="max-w-4xl mx-auto py-8 px-4">
-        <h1 className="text-3xl font-bold text-center mb-8">
-          Ashram Pooja
-        </h1>
 
-        <div className="flex justify-center mb-8 gap-4">
+      <div className="max-w-[1280px] mx-auto py-8 px-4">
+
+        <div className="flex justify-center mb-8 gap-4  ">
           <button
             onClick={() => setActiveTab("daily")}
-            className={`px-6 lg:px-12 py-2 lg:text-[20px]  font-medium transition-all ${
+            className={`px-6 lg:px-12 py-2 lg:text-[20px]  font-medium transition-all w-[35%] ${
               activeTab === "daily"
-                ? "border-b-4 border-[#D9540F] text-[#D9540F] "
-                : "border-b-2 border-[#7D7D7D] text-[#7D7D7D] "
+                ? "border-b-[2px] border-[#D9540F] text-[#D9540F] "
+                : "border-b-[1px] border-[#7D7D7D] text-[#7D7D7D] "
             }`}
           >
             Daily
           </button>
           <button
             onClick={() => setActiveTab("monthly")}
-            className={`px-6 lg:px-12 py-2 lg:text-[20px] font-medium transition-all ${
+            className={`px-6 lg:px-12 py-2 lg:text-[20px] font-medium transition-all w-[30%] ${
               activeTab === "monthly"
-              ? "border-b-4 border-[#D9540F] text-[#D9540F] "
-                : "border-b-2 border-[#7D7D7D] text-[#7D7D7D] "
+                ? "border-b-[2px] border-[#D9540F] text-[#D9540F] "
+                : "border-b-[1px] border-[#7D7D7D] text-[#7D7D7D] "
             }`}
           >
             Monthly
           </button>
           <button
             onClick={() => setActiveTab("yearly")}
-            className={`px-6 lg:px-12 py-2 lg:text-[20px]  font-medium transition-all ${
+            className={`px-6 lg:px-12 py-2 lg:text-[20px]  font-medium transition-all w-[35%] ${
               activeTab === "yearly"
-              ? "border-b-4 border-[#D9540F] text-[#D9540F] "
-                : "border-b-2 border-[#7D7D7D] text-[#7D7D7D] "
+                ? "border-b-[2px] border-[#D9540F] text-[#D9540F] "
+                : "border-b-[1px] border-[#7D7D7D] text-[#7D7D7D] "
             }`}
           >
             Yearly
@@ -318,7 +332,7 @@ const PoojaluComp = () => {
               {poojaluData[activeTab].poojas.map((pooja, index) => (
                 <div
                   key={index}
-                  className="bg-white p-5 rounded-lg border-l-4 border-orange-500"
+                  className="bg-white p-6 rounded-lg border-l-4 border-orange-500"
                 >
                   <h3 className="text-xl font-medium text-orange-800 mb-2">
                     {pooja.title}

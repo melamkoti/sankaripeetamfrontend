@@ -32,6 +32,8 @@ type FormFields = z.infer<typeof schema>;
 function DonationPay() {
   const location = useLocation();
   const { donationTitle } = location.state || {};
+  const [donationId, setDonationId] = useState(null); // Store donation ID
+
   const [panEnabled, setPanEnabled] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
@@ -74,7 +76,6 @@ function DonationPay() {
     resolver: zodResolver(schema),
   });
   const userId = localStorage.getItem("userId");
-  console.log(userId, "userId");
   const amount = watch("amount");
 
   const handleCategoryChange = (e: any) => {
@@ -110,24 +111,78 @@ function DonationPay() {
     });
   };
 
-  const handlePaymentSuccess = async (response: any, formData: FormFields) => {
+  // const handlePaymentSuccess = async (response: any, formData: FormFields) => {
+  //   try {
+  //     const verificationResponse = await axios.post(
+  //       RazarpayverifyOrderPostService,
+  //       {
+  //         razorpay_payment_id: response.razorpay_payment_id,
+  //         razorpay_order_id: response.razorpay_order_id,
+  //         razorpay_signature: response.razorpay_signature,
+  //         donationData: {
+  //           ...formData,
+  //           name: `${formData.firstname} ${formData.lastname}`,
+  //           amount: formData.amount,
+  //         },
+  //       }
+  //     );
+
+  //     if (verificationResponse.data.success) {
+  //       // Prepare receipt data
+  //       setReceiptData({
+  //         donationData: {
+  //           amount: formData.amount,
+  //           currency: "INR",
+  //           donationDetails: {
+  //             category: formData.category,
+  //             name: `${formData.firstname} ${formData.lastname}`,
+  //             email: formData.email,
+  //             phone: formData.tel,
+  //             message: formData.message,
+  //             pancard: panEnabled ? formData.pancard ?? null : null,
+  //           },
+  //         },
+  //         paymentData: {
+  //           razorpay_payment_id: response.razorpay_payment_id,
+  //           razorpay_order_id: response.razorpay_order_id,
+  //           razorpay_signature: response.razorpay_signature,
+  //           date: new Date().toISOString(),
+  //         },
+  //       });
+
+  //       setShowReceipt(true);
+  //     } else {
+  //       setPaymentError(
+  //         verificationResponse.data.error || "Payment verification failed"
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Payment verification error:", error);
+  //     let errorMessage = "Payment verification failed";
+
+  //     if (axios.isAxiosError(error)) {
+  //       errorMessage = error.response?.data?.error || errorMessage;
+  //     }
+
+  //     setPaymentError(errorMessage);
+  //   }
+  // };
+  console.log(donationId)
+  const handlePaymentSuccess = async (response: any, formData: FormFields,donationId:string) => {
     try {
+      // 1. First verify the payment with your backend
       const verificationResponse = await axios.post(
         RazarpayverifyOrderPostService,
         {
           razorpay_payment_id: response.razorpay_payment_id,
           razorpay_order_id: response.razorpay_order_id,
           razorpay_signature: response.razorpay_signature,
-          donationData: {
-            ...formData,
-            name: `${formData.firstname} ${formData.lastname}`,
-            amount: formData.amount,
-          },
+          donationId: donationId, // This should be from your donation creation response
         }
       );
 
       if (verificationResponse.data.success) {
-        // Prepare receipt data
+        // 2. Prepare receipt data
         setReceiptData({
           donationData: {
             amount: formData.amount,
@@ -150,6 +205,7 @@ function DonationPay() {
         });
 
         setShowReceipt(true);
+        setPaymentError(null);
       } else {
         setPaymentError(
           verificationResponse.data.error || "Payment verification failed"
@@ -164,9 +220,20 @@ function DonationPay() {
       }
 
       setPaymentError(errorMessage);
+
+      // Optionally update donation as failed in your backend
+      // try {
+      //   await axios.patch(`${DontaionDetailsPostService}/${donationId}`, {
+      //     paymentStatus: "FAILED",
+      //     error: errorMessage,
+      //   });
+      // } catch (updateError) {
+      //   console.error("Failed to update donation status:", updateError);
+      // }
     }
   };
-  const initiateRazorpayPayment = async (orderId: string, data: FormFields) => {
+
+  const initiateRazorpayPayment = async (orderId: string, data: FormFields,donationId:string) => {
     try {
       await loadRazorpayScript();
 
@@ -177,31 +244,7 @@ function DonationPay() {
         name: "SANKARIPEETAM",
         description: `Donation for ${data.category}`,
         order_id: orderId,
-        // handler: async (response: any) => {
-        //   // Verify payment on your server
-        //   try {
-        //     const verificationResponse = await axios.post(
-        //       RazarpayverifyOrderPostService,
-        //       {
-        //         razorpay_payment_id: response.razorpay_payment_id,
-        //         razorpay_order_id: response.razorpay_order_id,
-        //         razorpay_signature: response.razorpay_signature,
-        //         donationData: data,
-        //       }
-        //     );
-
-        //     if (verificationResponse.data.success) {
-        //       alert("Payment successful! Thank you for your donation.");
-        //       // You can redirect or show success message here
-        //     } else {
-        //       setPaymentError("Payment verification failed");
-        //     }
-        //   } catch (error) {
-        //     console.error("Payment verification error:", error);
-        //     setPaymentError("Payment verification failed");
-        //   }
-        // },
-        handler: (response: any) => handlePaymentSuccess(response, data),
+        handler: (response: any) => handlePaymentSuccess(response, data,donationId),
 
         prefill: {
           name: `${data.firstname} ${data.lastname}`,
@@ -238,6 +281,27 @@ function DonationPay() {
     setPaymentError(null);
 
     try {
+
+       // 1. FIRST create the donation record in your database
+    const donationResponse = await axios.post(DontaionDetailsPostService, {
+      userId, // From auth context
+      amount: data.amount,
+      currency: "INR",
+      donationDetails: {
+        category: data.category,
+        name: `${data.firstname} ${data.lastname}`,
+        email: data.email,
+        phone: data.tel,
+        message: data.message,
+        pancard: panEnabled ? data.pancard : null,
+      },
+    }); 
+  // Get the donation ID from the database response
+    const donationId = donationResponse.data.donationId;
+    setDonationId(donationId); // Store for verification later
+    console.log("Donation created with ID:", donationId);
+
+
       // First create the order on your backend
       const orderResponse = await axios.post(RazarpayDonationPostService, {
         amount: data.amount,
@@ -251,27 +315,19 @@ function DonationPay() {
           pancard: panEnabled ? data.pancard : null,
         },
       });
+      
+    
 
-      await axios.post(DontaionDetailsPostService, {
-        userId, // Get from your auth context
-        amount: data.amount,
-        currency: "INR",
-        donationDetails: {
-          category: data.category,
-          name: `${data.firstname} ${data.lastname}`,
-          email: data.email,
-          phone: data.tel,
-          message: data.message,
-          pancard: panEnabled ? data.pancard : null,
-        },
-      });
+      // store the details to the database
 
+     
       if (!orderResponse.data.order_id) {
         throw new Error("Failed to create payment order");
       }
 
       // Then initiate Razorpay payment
-      await initiateRazorpayPayment(orderResponse.data.order_id, data);
+      await initiateRazorpayPayment(orderResponse.data.order_id, data, donationId,
+      );
     } catch (error) {
       console.error("Donation submission failed:", error);
       let errorMessage = "Donation failed. Please try again.";
@@ -288,7 +344,7 @@ function DonationPay() {
   };
 
   return (
-    <div className="p-4 lg:p-8">
+    <div className="p-2 lg:p-8">
       {showReceipt && receiptData ? (
         <DonationReceipt
           donationData={receiptData.donationData}
@@ -299,6 +355,7 @@ function DonationPay() {
           onClose={() => {
             // Optional: Add logic to return to form
             setShowReceipt(false);
+            console.log("clickid", setShowReceipt(false))
           }}
         />
       ) : (
@@ -327,7 +384,7 @@ function DonationPay() {
                       "GoSeva",
                       "Orphans",
                       "VivekaVidyalaya",
-                      "SoilRejuvenation",
+                      "BhuSeva",
                     ].find(
                       (opt) =>
                         opt.toLowerCase() ===
@@ -344,7 +401,7 @@ function DonationPay() {
                   <option value="GoSeva">Go Seva</option>
                   <option value="Orphans">Orphans</option>
                   <option value="VivekaVidyalaya">Viveka Vidyalaya</option>
-                  <option value="BhuRejuvenation">Bhu Rejuvenation</option>
+                  <option value="BhuSeva">Bhu Seva</option>
                 </select>
                 {errors.category && (
                   <p className="text-red-500 text-sm">
@@ -467,7 +524,7 @@ function DonationPay() {
                 {...register("tel")}
                 type="tel"
                 className="border-2 p-3 rounded-lg outline-none focus:border-orange-500"
-                placeholder="9876543210"
+                placeholder="+91 90123 45678"
               />
               {errors.tel && (
                 <p className="text-red-500 text-sm">{errors.tel.message}</p>

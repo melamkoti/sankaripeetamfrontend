@@ -1,38 +1,39 @@
 import samajasevaBanner from "../../../assets/images/samajaseva-banner.jpeg";
- import { SamajasevaData } from "./SamajasevaData";
+import { SamajasevaData } from "./SamajasevaData";
 
 export default function SamaajaSevaComp() {
   return (
     <>
-      <div className="flex justify-center items-center py-4 bg-[#E9E5DF] ">
+      <div className="flex justify-center items-center p-4 md:py-4 md:px-2 lg:px-0 max-w-[1280px] mx-auto ">
         <div
-          className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
+          className="w-full rounded-xl bg-center bg-cover bg-no-repeat 
              h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px] relative"
           style={{
             backgroundImage: `url(${samajasevaBanner})`,
           }}
-        >
-          
+        ></div>
+      </div>
+      <h1 className="text-xl md:text-[32px] font-semibold  tracking-wider z-10 text-center pt-12">
+        Samaaja Seva (Service towards Society)
+      </h1>
+      <div className="w-full h-full px-6 py-20 md:px-12 md:py-32 flex flex-col md:flex-row justify-center items-center gap-16 bg-[#E9E5DF] relative overflow-hidden">
+        {/* Optional Quote/Poem Section (you had commented out) */}
+
+        <div className="md:w-1/2 flex flex-col items-center gap-8">
+          <div className="text-center">
+            <p className="text-[12px] md:text-[20px] font-semibold md:font-bold lg:w-4/6 mx-auto font-anek tracking-wider">
+              కామః క్రోధశ్చ, లోభశ్చ దేహే తిష్ఠతి తస్కరాః || జ్ఞాన రత్నాపహారాయ |
+              తస్మాత్ జాగ్రత జాగ్రత ||
+            </p>
+          </div>
+          <p className="text-base md:text-xl font-medium text-center  mx-auto ">
+            Kamah Krodascha Lobhascha Dehae Thishtathi Thaskaraah | <br /> Gnana
+            Ratnapahaaraaya Tasmath Jagratha Jagratha ||{" "}
+          </p>
         </div>
       </div>
 
-      <div className="text-center flex flex-col gap-5 pt-16 font-bold">
-        <div className="flex flex-col gap-4">
-          <p>కామః క్రోధశ్చ, లోభశ్చ దేహే తిష్ఠతి తస్కరాః ||</p>
-          <p>జ్ఞాన రత్నాపహారాయ | తస్మాత్ జాగ్రత జాగ్రత ||</p>
-        </div>
-        <div className="flex flex-col gap-2 font-thin">
-          <p>Kamah Krodascha Lobhascha Dehae Thishtathi Thaskaraah |</p>
-          <p>Gnana Ratnapahaaraaya Tasmath Jagratha Jagratha ||</p>
-        </div>
-      </div>
-
-      <div className="flex flex-col  lg:pt-24 lg:px-36 md:pt-16 md:px-20 px-4 pt-10 text-base text-justify ">
-        <div className="text-center p-2">
-          <h1 className="text-xl font-semibold">
-            SAMAAJA SEVA (Service towards Society)
-          </h1>
-        </div>
+      <div className="flex flex-col  lg:pt-6 lg:px-24 md:pt-10 md:px-20 px-4 pt-10 text-base text-justify ">
         <p>
           Bhu seva (Service towards Land), Jala seva (Service towards Water),
           Jeeva seva (Serving the Living), Vidya seva (Service for Education),
@@ -90,12 +91,12 @@ export default function SamaajaSevaComp() {
         })}
       </div> */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-6 md:p-10 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 md:py-10 max-w-[1280px] mx-auto">
         {SamajasevaData.map((item, index) => {
           return (
             <div
               key={index}
-              className="flex flex-col items-center text-center rounded-md overflow-hidden transition duration-300"
+              className="flex flex-col items-center text-center rounded-md overflow-hidden transition duration-300 h-[272px] lg:w-[405px]"
             >
               {/* Image */}
               <img

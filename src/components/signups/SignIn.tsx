@@ -79,8 +79,8 @@ function SignUpCreate() {
         //   backgroundSize: "cover",
         // }}
       >
-        <div className="flex flex-col  lg:w-2/6 w-4/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10 md:mr-32 mx-4 rounded-xl ">
-          <p className="md:text-2xl text-2xl font-semibold">Sign In</p>
+        <div className="flex flex-col  lg:w-2/6 w-5/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10 md:mr-32 mx-4 rounded-xl ">
+          <p className="md:text-2xl text-2xl font-semibold self-start py-2">Sign In</p>
 
           <div className=" w-full ">
             <form

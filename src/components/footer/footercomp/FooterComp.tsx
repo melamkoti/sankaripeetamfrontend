@@ -18,14 +18,14 @@ export default function FooterComp() {
   <div className="flex flex-col lg:flex-row gap-8 justify-between ">
     
     {/* Quick Links & Information */}
-    <div className="flex flex-col sm:flex-row gap-8 lg:gap-16 lg:w-1/3">
+    <div className="flex flex-col sm:flex-row gap-8 lg:gap-24 lg:w-1/3">
       {/* Quick Links */}
       <ul className="flex flex-col gap-4">
         <li className="text-xl font-semibold">Quick Links</li>
         <div className="flex flex-col gap-3">
           {FooterInfoData.map((item, index) => (
             <li key={index} className="flex items-center gap-2">
-              <img src={footerOmImg} alt="" className="w-4" />
+              {/* <img src={footerOmImg} alt="" className="w-4" /> */}
               <Link to={item.path} className="hover:text-[#ffb600]">{item.name}</Link>
             </li>
           ))}
@@ -38,7 +38,7 @@ export default function FooterComp() {
         <div className="flex flex-col gap-3">
           {FooterOthersData.map((item, index) => (
             <li key={index} className="flex items-center gap-2">
-              <img src={footerOmImg} alt="foo" className="w-4" />
+              {/* <img src={footerOmImg} alt="foo" className="w-4" /> */}
               <Link to={item.path} className="hover:text-[#ffb600]">{item.name}</Link>
             </li>
           ))}
@@ -51,7 +51,7 @@ export default function FooterComp() {
       <h2 className="text-xl font-semibold">Address</h2>
       <div className="flex flex-col gap-3">
         <div className="flex items-start gap-3">
-          <img src={footerLocationImg} className="w-5 mt-1" alt="Location Icon" />
+          {/* <img src={footerLocationImg} className="w-5 mt-1" alt="Location Icon" /> */}
           <p>
             Advytha Ashram, Kamakshi Lakeview, <br />
             opp to Nayara petrol bunk, Kurnool Road, <br />
@@ -59,7 +59,7 @@ export default function FooterComp() {
           </p>
         </div>
         <div className="flex items-start gap-3">
-          <img src={footerLocationImg} className="w-5 mt-1" alt="Location Icon" />
+          {/* <img src={footerLocationImg} className="w-5 mt-1" alt="Location Icon" /> */}
           <p>
             Sundar Nagar, Mangamur Road, Ongole, <br />
             Prakasam District, Andhra Pradesh - 523002.
@@ -69,19 +69,19 @@ export default function FooterComp() {
     </div>
 
     {/* Contact & Socials */}
-    <div className="flex flex-col gap-4 lg:w-1/3">
+    <div className="flex flex-col  lg:w-1/3">
       <p className="text-xl font-semibold">Phone</p>
-      <div className="flex items-center gap-3">
-        <img src={footerCallImg} className="w-5" alt="" />
+      <div className="flex items-center gap-2">
+        {/* <img src={footerCallImg} className="w-5" alt="" /> */}
         <div>
           <p>+91 9989492655</p>
           <p>+91 9985164455</p>
         </div>
       </div>
 
-      <p className="text-xl font-semibold">Email</p>
-      <div className="flex items-center gap-3">
-        <img src={footerMailImg} className="w-5" alt="" />
+      <p className="text-xl font-semibold mt-2">Email</p>
+      <div className="flex items-center gap-2">
+        {/* <img src={footerMailImg} className="w-5" alt="" /> */}
         <div>
           <p>sankaripeetam@gmail.com</p>
           <p>turst.sspc@gmail.com</p>

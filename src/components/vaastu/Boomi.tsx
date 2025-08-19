@@ -30,7 +30,7 @@ const Boomi = () => {
   }, []);
 
   return (
-    <div className=" my-12 md:mt-36 md:p-6 p-2  mx-auto  bg-white shadow-md rounded-lg ">
+    <div className=" my-12 md:mt-36 md:p-6 p-2  mx-auto  bg-white shadow-md rounded-lg font-anek ">
      
       <div className="flex items-center mb-6 text-center mt-8">
         <label className="w-1/4 text-gray-700 font-medium">పాదం :</label>

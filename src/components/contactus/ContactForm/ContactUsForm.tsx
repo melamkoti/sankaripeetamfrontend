@@ -368,17 +368,17 @@ function ContactUsForm() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center lg:p-20 lg:px-28  md:p-4 gap-8 bg-[#fffbf7]  ">
+    <div className="flex flex-col justify-center items-center lg:p-20 lg:px-28  md:p-4 gap-8   ">
       <div className="flex flex-col lg:flex-row rounded-xl  w-full p-2">
         <div className="w-full bg-[#e6e0da]  px-4 rounded-md">
-          <div className="  w-full max-w-3xl mx-auto  p-8 md:p-8 rounded-lg ">
+          <div className="  w-full md:max-w-3xl md:mx-auto  p-2 md:p-8 rounded-lg ">
             <p className=" sm:text-lg  tracking-wide pb-6 text-center ">
               Any question or remarks? Just write us a message!
             </p>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 ">
               {/* Name Fields */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
                 <div className="flex flex-col gap-2">
                   <input
                     {...register("firstName")}
@@ -459,7 +459,7 @@ function ContactUsForm() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  className="bg-[#002a38] text-white px-12 py-3 rounded shadow-md hover:bg-[#001f2a] transition"
+                  className="bg-[#8e512c] text-white px-12 py-3 rounded shadow-md hover:bg-[#BB4F27] transition"
                 >
                   Send Message
                 </motion.button>

@@ -59,7 +59,7 @@ const AllEvents = () => {
         {events.map((event) => (
           <div key={event.id} className="bg-gray-100 p-4 rounded-md shadow-md">
             <h3 className=" text-xl font-semibold">{event.title}</h3>
-            <p className="text-gray-800 text-base leading-relaxed md:text-lg overflow-y-auto max-h-[6.5rem] leading-snug my-2 thin-scrollbar">
+            <p className="text-base leading-relaxed md:text-lg overflow-y-auto max-h-[6.5rem] leading-snug my-2 thin-scrollbar">
               {event.description}
             </p>{" "}
             <div className="flex items-center gap-3 py-2">

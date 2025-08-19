@@ -9,9 +9,8 @@ import { NotFound } from "./components/NotFound";
 import { UserInquiryList } from "./pages/UserInquiry";
 const AdminApp = () => {
   return (
-    <>
+    <div className="bg-gray-200 h-screen">
       <AdminNavbar />
-      <div className="p-2 h-screen">
         <Routes>
           <Route path="" element={<Events />} />
           <Route path="activities" element={<Activities />} />
@@ -21,8 +20,7 @@ const AdminApp = () => {
           <Route path="contactdetails" element={<UserInquiryList />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
-    </>
+    </div>
   );
 };
 

@@ -597,8 +597,8 @@ const Jathakam = () => {
             to="/vastu"
             className={({ isActive }) =>
               isActive
-                 ? " p-3 text-[#D9540F] border-b-4 border-[#D9540F] font-semibold"
-                : "  p-3 text-[#7D7D7D] border-b-2 border-[#7D7D7D] font-semibold"
+                 ? " p-3 text-[#D9540F] border-b-4 border-[#D9540F] font-semibold font-anek"
+                : "  p-3 text-[#7D7D7D] border-b-2 border-[#7D7D7D] font-semibold font-anek"
             }
           >
             <p>గృహ గణితం</p>
@@ -607,15 +607,15 @@ const Jathakam = () => {
             to="/devalaya"
             className={({ isActive }) =>
               isActive
-                ? " p-3 text-[#D9540F] border-b-4 border-[#D9540F] font-semibold"
-                : "  p-3 text-[#7D7D7D] border-b-2 border-[#7D7D7D] font-semibold"
+                ? " p-3 text-[#D9540F] border-b-4 border-[#D9540F] font-semibold font-anek"
+                : "  p-3 text-[#7D7D7D] border-b-2 border-[#7D7D7D] font-semibold font-anek"
             }
           >
             <p>దేవాలయ గణితం</p>
           </NavLink>
         </div>
       </div>
-      <div className="max-w-2xl mx-auto md:p-6 p-2 bg-white shadow-md rounded-lg ">
+      <div className="max-w-2xl mx-auto md:p-6 p-2 bg-white shadow-md rounded-lg font-anek">
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2">
             ఆయాది పదం :

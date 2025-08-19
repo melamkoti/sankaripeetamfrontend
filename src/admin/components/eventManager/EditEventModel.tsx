@@ -25,11 +25,44 @@ const EditEventModal = ({
     image: event.image,
     youtubeLink: event.youtubeLink,
   });
-const EventUpdateService = UserModuleAPI.IndividualEventPut;
+  const EventUpdateService = UserModuleAPI.IndividualEventPut;
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setSelectedFile(file);
+
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.put(`${EventUpdateService}/${event.id}`, formData);
+      const formDataToSend = new FormData();
+      formDataToSend.append("title", formData.title);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("eventDate", formData.eventDate);
+      formDataToSend.append("youtubeLink", formData.youtubeLink);
+
+      if (selectedFile) {
+        formDataToSend.append("image", selectedFile);
+      } else {
+        formDataToSend.append("image", formData.image);
+      }
+
+      await axios.put(`${EventUpdateService}/${event.id}`, formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       toast.success("Event updated successfully!");
       onClose();
     } catch (error) {
@@ -90,18 +123,33 @@ const EventUpdateService = UserModuleAPI.IndividualEventPut;
           </div>
 
           {/* Image */}
+         
           <div>
-            <label htmlFor="image" className="block font-medium mb-1">
-              Image URL
+            <label
+              htmlFor="image"
+              className="block text-sm font-medium mb-1 text-gray-700"
+            >
+              Image
             </label>
+            {previewImage ? (
+              <img
+                src={previewImage}
+                alt="Preview"
+                className="mb-2 h-32 w-full object-cover rounded-md"
+              />
+            ) : (
+              <img
+                src={formData.image}
+                alt="Current"
+                className="mb-2 h-32 w-full object-cover rounded-md"
+              />
+            )}
             <input
-              type="text"
+              type="file"
               id="image"
-              value={formData.image}
-              onChange={(e) =>
-                setFormData({ ...formData, image: e.target.value })
-              }
-              className="w-full border border-gray-300 p-2 rounded-md"
+              onChange={handleFileChange}
+              accept="image/*"
+              className="w-full border border-gray-300 p-2 rounded-md focus:ring-blue-400 focus:outline-none"
             />
           </div>
           <div>

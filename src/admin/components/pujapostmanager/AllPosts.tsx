@@ -55,7 +55,7 @@ const AllPujaCards = () => {
       </h2>
       <div className="grid grid-cols-1  md:grid-cols-2   gap-4">
         {events.map((event) => (
-          <div key={event.id} className="bg-gray-300 p-4 rounded-md shadow-md">
+          <div key={event.id} className="bg-gray-100 p-4 rounded-md shadow-md">
             <img
               src={event.image}
               alt={event.title}
@@ -67,7 +67,7 @@ const AllPujaCards = () => {
               <img src={footerClaenderImg} alt="" />
               <p>{format(new Date(event.date), "dd/MM/yyyy")}</p>
             </p>{" "}
-            <p className="text-gray-800 text-base  md:text-lg overflow-y-auto max-h-[6.5rem] leading-snug mt-6 thin-scrollbar">
+            <p className=" text-base  md:text-lg overflow-y-auto max-h-[6.5rem] leading-snug mt-6 thin-scrollbar">
               {event.description}
             </p>
             <div className="flex  justify-between items-center	mt-4 ">
