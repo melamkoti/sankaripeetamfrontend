@@ -16,7 +16,7 @@ const PujaCard = () => {
   const [footerEventsState, setFooterPostsState] = useState<FooterEventsType[]>(
     []
   );
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
   const AllPostService = UserModuleAPI.AllPostsGet;
   useEffect(() => {
@@ -41,15 +41,16 @@ const PujaCard = () => {
   const handleScrollLeft = () => {
     scrollContainerRef.current?.scrollBy({ left: -300, behavior: "smooth" });
   };
-  const handleCardClick = (date: Date) => {
-    navigate(`/gallery?date=${date.toISOString()}`);
-  };
+  const handleCardClick = (date: Date) =>{
+        navigate(`/allgalleryimages?date=${date.toISOString()}`);
+
+  }
 
   return (
-    <div className="md:p-12 p-6 bg-[#E9E5DF] relative overflow-x-hidden">
+    <div className="md:p-12 p-6  relative overflow-x-hidden">
       {/* Title */}
-      <h1 className="pb-6 md:text-4xl text-2xl font-semibold font-mukta  drop-shadow-md text-center tracking-wide">
-       Our Events Gallery
+      <h1 className="pb-6  text-[24px] md:text-[32px] font-semibold   text-center tracking-wide">
+        Swamiji's  Puja and Pratishta{" "}
       </h1>
 
       {/* Arrows */}
@@ -79,30 +80,27 @@ const PujaCard = () => {
           .map((item, index) => (
             <div
               key={index}
-              className="flex-shrink-0 max-w-[280px] bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer"
+              className="flex-shrink-0 w-[250px] bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer"
               onClick={() => handleCardClick(item.date)}
             >
-              <div className="p-4">
+              <div className="">
                 <img
                   src={item.image}
                   alt={item.title}
                   className="rounded-lg w-full object-cover h-[180px]"
                 />
-                <div className="mt-4 ">
+                <div className="mt-4 text-center p-4">
                   <p className="flex gap-1">
                     <img src={footerClaenderImg} alt="" />
                     <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
                   </p>
-                  <h2 className="text-xl font-semibold font-mukta text-[#D9540F]">
+                  <h2 className="text-xl font-semibold font-mukta text-[#b91c1c]">
                     {item.title}
                   </h2>
 
-                  <p className="text-sm  mt-1 capitalize font-light leading-relaxed  overflow-y-auto max-h-[8.5rem] leading-snug mt-2 thin-scrollbar text-left">
-                    {item.description}
-                  </p>
-                  <p className="text-[#066FAE] font-normal text-sm mt-2 hover:underline md:text-[16px] tracking-tight">
-                     View Gallery →
-                  </p>
+                  <p className="text-sm mt-1 capitalize text-justify line-clamp-5 overflow-hidden text-ellipsis">
+  {item.description}
+</p>
                 </div>
               </div>
             </div>

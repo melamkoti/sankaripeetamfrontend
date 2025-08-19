@@ -3,7 +3,7 @@ import DonationPay from "./DonationPay";
 
 function DonationPaymentPage() {
     return(
-        <div className="main_head  overflow-hidden">
+        <div className="main_head  overflow-hidden  lg:mt-[150px]">
 
             <DonationMain />
             <DonationPay />

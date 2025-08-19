@@ -2,7 +2,7 @@ import aboutfounderimg from "../../../assets/images/footer-logo.svg";
 
 function AboutPeetamComp() {
   return (
-    <div className="bg-[#E9E5DF] p-4  md:p-12 ">
+    <div className=" p-4  md:p-12 ">
       <div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Logo */}
         <div className="flex justify-center ">

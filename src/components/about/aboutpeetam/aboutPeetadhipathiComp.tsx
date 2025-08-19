@@ -2,7 +2,7 @@ import aboutfounderimg from "../../../assets/images/image.png";
 
 function AboutPeetadhipathiComp() {
   return (
-    <div className=" bg-[#E9E5DF] w-full flex flex-col lg:flex-row items-center lg:items-start justify-start p-6 md:p-12 gap-8">
+    <div className="  w-full flex flex-col lg:flex-row items-center lg:items-start justify-start p-6  gap-8  ">
       {/* Image */}
       <div className="w-full lg:w-1/3 flex justify-center">
         <img
@@ -13,10 +13,10 @@ function AboutPeetadhipathiComp() {
       </div>
 
       {/* Content */}
-      <div className="w-full lg:w-2/3 flex flex-col text-center  lg:text-left gap-6 lg:pr-8">
+      <div className="w-full lg:w-2/3 flex flex-col text-center  lg:text-left gap-6 ">
         {/* Telugu Name */}
-        <div>
-          <h2 className=" text-1xl md:text-2xl lg:text-[28px] font-bold text-[#004771] mb-2">
+        <div className="font-anek">
+          <h2 className=" text-1xl md:text-2xl lg:text-[28px] font-bold text-[#004771] mb-2 ">
             బ్రహ్మశ్రీ నెమ్మికంటి నరసయ్య ఆచార్య
           </h2>
           <p className=" text-sm md:text-md lg:text-[18px] font-medium">

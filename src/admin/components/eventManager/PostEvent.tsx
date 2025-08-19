@@ -83,7 +83,7 @@ const PostEvent = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-2 shadow-md rounded-xl border-2">
+    <div className="max-w-md mx-auto bg-white p-4 shadow-md rounded-xl border-2">
       <h2 className="text-lg font-bold mb-4 text-center">Create a New Event</h2>
       <form onSubmit={handleSubmit} className="space-y-2">
         {/* Title */}

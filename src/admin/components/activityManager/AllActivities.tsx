@@ -3,6 +3,7 @@ import axios from "axios";
 import EditActivityModal from "./EditActivityModel";
 import { UserModuleAPI } from "../../../services/AppEndPoints";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 type Activity = {
   id: number;
   title: string;
@@ -15,7 +16,7 @@ type Activity = {
 const AllActivity = () => {
   const [events, setEvents] = useState<Activity[]>([]);
   const [editEvent, setEditEvent] = useState<Activity | null>(null);
-const EventGetService = UserModuleAPI.AllActivityGet;
+  const EventGetService = UserModuleAPI.AllActivityGet;
   const deleteAcitivityService = UserModuleAPI.IndividualActivityDelete;
 
   const fetchEvents = async () => {
@@ -52,34 +53,62 @@ const EventGetService = UserModuleAPI.AllActivityGet;
       <h2 className="text-lg md:text-2xl font-bold mb-4 text-center">
         All Activities
       </h2>
-      <div className="grid grid-cols-1  md:grid-cols-2   gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center">
         {events.map((event) => (
-          <div key={event.id} className={`bg-gray-300 p-4 rounded-md shadow-md `}
-                        style={{ backgroundColor: event.color }}
->
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-12 z-20"
-            />
-            <h3 className="font-bold my-2">{event.title}</h3>
-            <p className="h-24">{event.description}</p>
+          <motion.div
+            key={event.id}
+            whileHover={{ scale: 1.03, transition: { duration: 0.25 } }}
+            className={`  p-4  flex flex-col items-center rounded-md w-full p-4 shadow-md transition-all duration-300
+        ${
+          event.isEnable !== false
+            ? "opacity-100 pointer-events-auto cursor-pointer hover:shadow-lg"
+            : "opacity-30 "
+        }
+        ${event.color === "#ffffff" ? "text-[#44233B]" : "text-white"}
+        h-[400px] /* Fixed height */
+        md:h-[380px] /* Slightly smaller on desktop */
+      `}
+            style={{ backgroundColor: event.color }}
+          >
 
-            <div className="flex  justify-between items-center	mt-4 ">
-              <button
-                onClick={() => setEditEvent(event)}
-                className="bg-yellow-500 text-white px-4 py-1 rounded-md text-sm"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(event.id)}
-                className="bg-red-500 text-white px-4 py-1 rounded-md text-sm"
-              >
-                Delete
-              </button>
+            {/* Image */}
+            <div className="w-20 h-20 overflow-hidden rounded-full border-4 border-white shadow flex-shrink-0">
+              <img
+                src={event.image}
+                alt={event.title}
+                className="w-full h-full object-cover"
+              />
+              
             </div>
-          </div>
+
+            {/* Text Content */}
+            <div className="flex flex-col text-center gap-4 w-full h-full mt-4">
+              <h3 className="text-xl font-semibold text-[#D9540F]">
+                {event.title}
+              </h3>
+
+              {/* Scrollable description */}
+              <div className="font-medium text-sm leading-[30px] md:text-[18px] tracking-wider overflow-y-auto max-h-[120px] pr-2 scrollbar-thin scrollbar-thumb-[#D9540F] scrollbar-track-gray-100 flex-grow">
+                {event.description}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-between w-full mt-auto">
+                <button
+                  onClick={() => setEditEvent(event)}
+                  className="bg-yellow-500 text-white px-4 py-2 rounded-md text-sm hover:bg-yellow-600 transition-colors"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(event.id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded-md text-sm hover:bg-red-600 transition-colors"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </motion.div>
         ))}
       </div>
       {editEvent && (

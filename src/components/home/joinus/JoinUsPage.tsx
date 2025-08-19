@@ -2,7 +2,7 @@ import ValenteerLogo from "../../../assets/images/valanteer.png";
 
 function JoinUsPage() {
   return (
-    <div className="bg-[#E9E5DF] flex flex-col lg:flex-row md:gap-6  md:p-12" >
+    <div className=" flex flex-col md:flex-row md:gap-6 md:px-2  md:py-24 max-w-[1280px]" >
       {/* Subscribe Card */}
       <div className="bg-[#1179B6] text-white md:rounded-lg p-6 md:p-10 flex-1">
         <h2 className="text-2xl font-bold mb-3 md:text-[36px] text-[#E9E5DF]">
@@ -31,7 +31,7 @@ function JoinUsPage() {
           />
           <button
             type="submit"
-            className="inline-flex h-12 px-8 justify-center items-center gap-2 rounded-md font-medium text-white transition w-4/6 md:w-4/6 lg:w-2/6"
+            className="inline-flex h-12 px-8 justify-center items-center gap-2 rounded-md font-medium text-white transition w-4/6 md:w-4/6 lg:w-2/6 mt-2 md:mt-4"
             style={{
               background:
                 "linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), #0A7EB4",

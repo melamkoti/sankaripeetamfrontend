@@ -18,7 +18,7 @@ const AdminNavbar = () => {
   };
   return (
     <div>
-      <nav className="bg-red-600 text-white shadow-sm fixed w-full ">
+      <nav className="bg-red-600 text-white shadow-sm fixed w-full z-50">
         <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo or Dashboard Title */}

@@ -3,7 +3,7 @@ import AboutPeetadhiPathiComp from "./aboutpeetam/aboutPeetadhipathiComp";
 
 function AboutPeetadhiPathiPage() {
   return (
-    <div className="main_head lg:mt-[110px]">
+    <div className="main_head lg:mt-[140px] max-w-[1280px] mx-auto">
       <AboutMain />
       <AboutPeetadhiPathiComp />
     </div>

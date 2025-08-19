@@ -13,13 +13,16 @@ export const NavListData = [
   {
     navLink: "Activities",
     route: "/activities",
-    childNav: ["parihara", "adyatmikam", "samajaseva", "pujalu"],
+    childNav: ["parihara", "adyatmikam", "samajaseva", "AshramaPuja"],
   },
 
   { navLink: "Vaastu", route: "/vastu" },
   { navLink: "Gallery", route: "/gallery" },
+   { navLink: "Ashramas ", route: "/profilepage",
+        childNav: ["Advytha Ashram Ongole", "Swarna Kamashi Ashram Sangareddy", "Tantrakali Ashram Shad Nagar", "kalkadevi Samsthan Chandigahr"],
+
+    },
 
   { navLink: "Contact Us", route: "/contactus" },
 
-  { navLink: "Donate Now", route: "/donate" },
 ];

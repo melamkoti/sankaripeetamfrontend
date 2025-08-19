@@ -4,7 +4,7 @@ import JathakamCard from "./JathakamCard";
 
 function VastuPage() {
   return (
-    <div className="main_head lg:mt-[110px]">
+    <div className="main_head lg:mt-[140px]">
       <JathakamCard />
       <div className="flex flex-col  lg:flex-row item-center justify-center gap-8 mx-4">
         <div>

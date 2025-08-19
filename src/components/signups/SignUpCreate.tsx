@@ -72,12 +72,12 @@ function SignUpCreate() {
    
     <div
      className=" lg:mt-[110px] h-screen flex justify-center items-center bg-gradient-to-br from-[#f3d1c1] via-[#e9a17c] to-[#d6785d]">
-      <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        <div className="flex flex-col  lg:w-2/6 w-5/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10 md:mr-32 mx-4 rounded-xl ">
+        <h2 className="text-2xl font-bold text-gray-800  self-start py-2">
           Create an Account
         </h2>
 
-        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
           {/* Register As */}
           <div className="flex gap-4">
             <span className="block text-[18px] font-medium  mb-1">
@@ -195,7 +195,7 @@ function SignUpCreate() {
           </div>
 
           {/* Terms */}
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-gray-600 py-2">
             By Signing Up, you agree to the{" "}
             <a href="#" className="text-[#FFA12B] underline">
               Terms of Use
