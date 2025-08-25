@@ -4,10 +4,11 @@ const BaseAPIURL = "http://localhost:3000/";
 
 const UserRegisterAPI = {
   RegisterPost: BaseAPIURL + "user/signup",
-  RegisterEmailPost: BaseAPIURL + "user/signupemail",
   SingInPost: BaseAPIURL + "user/login",
   UserDetailsGet: BaseAPIURL + "user/me",
   ForgetPasswordPost: BaseAPIURL + "user/forgot-password",
+  VerifyOTPPost: BaseAPIURL + "user/verifyotp",
+
   ResetPasswordPost: BaseAPIURL + "user/reset-password",
   AllUsersGet: BaseAPIURL + "user",
 };
@@ -41,12 +42,17 @@ const DonationAPI = {
   RazarpayDonationPost: BaseAPIURL + "api/create-order",
   RazarpayVerifyOrderPost: BaseAPIURL + "api/verify-order",
   AllDonationGet: BaseAPIURL + "donation",
+  DonationReceiptPost : BaseAPIURL + "api/receipts/generate",
+  LastReceiptOfDonationIdGet: BaseAPIURL + "api/receipts/lastdonationid"
+
 };
 const GalleryAPI = {
   AllGalleryPost: BaseAPIURL + "api/gallery",
   AllGalleryGet: BaseAPIURL + "api/gallery",
   AllGalleryDelete: BaseAPIURL + "api/gallery",
 };
+
+
 export const UserModuleAPI = {
   ...UserRegisterAPI,
   ...EventsAPI,

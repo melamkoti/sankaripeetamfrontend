@@ -1,6 +1,6 @@
 const Termscondition = () => {
   return (
-    <div className="p-6 max-w-3xl mx-auto text-gray-800 leading-relaxed px-4 pt-[100px]">
+    <div className="p-6 max-w-3xl mx-auto text-gray-800 leading-relaxed px-4 pt-[100px] lg:mt-[130px] main_head">
       <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
 
       <p>Welcome to <strong>[sankaripeetam]</strong>!</p>

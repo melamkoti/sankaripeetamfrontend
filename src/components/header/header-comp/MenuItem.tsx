@@ -3,13 +3,23 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { z } from "zod";
 
+// navSchema.ts
+
 export const navSchema = z.object({
   navLink: z.string(),
   route: z.string(),
-  childNav: z.string().array().optional(),
+  childNav: z
+    .array(
+      z.object({
+        name: z.string(),
+        route: z.string(),
+        district: z.string().optional(), // only needed for Ashramas
+      })
+    )
+    .optional(),
 });
 
-type NavSchema = z.infer<typeof navSchema>;
+export type NavSchema = z.infer<typeof navSchema>;
 
 const variants = {
   open: {
@@ -42,8 +52,6 @@ export const MenuItem = ({
     if (item.childNav) {
       e.preventDefault();
       setIsDropdownOpen((prev) => !prev);
-      const firstChildRoute = `${item.route}/${item.childNav[0]}`;
-      navigate(firstChildRoute);
     } else {
       navigate(item.route);
       closeMenu();
@@ -51,34 +59,42 @@ export const MenuItem = ({
   };
 
   return (
-    <motion.div
-      variants={variants}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <NavLink
-        to={item.route}
-        className="nav-li shadow-md px-4 py-2 mb-4 text-sm font-semibold text-[#1C1E53] "
-        onClick={handleItemClick}
+    
+      <motion.div
+        variants={variants}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
-        {item.navLink}
-      </NavLink>
+        {/* Parent link */}
+        <NavLink
+          to={item.route}
+          className="nav-li  px-4 py-2 mb-2 block text-sm font-semibold text-[#1C1E53]"
+          onClick={handleItemClick}
+        >
+          {item.navLink}
+        </NavLink>
 
-      {item.childNav && isDropdownOpen && (
-        <div className="pl-4">
-          {item.childNav.map((child, index) => (
-            <NavLink
-              key={index}
-              to={`${item.route}/${child}`}
-              className="block text-sm text-[#1C1E53] p-2 border-slate-400"
-              onClick={closeMenu}
-            >
-              {child}
-            </NavLink>
-          ))}
-        </div>
-      )}
-      
-    </motion.div>
+        {/* Dropdown children */}
+        {item.childNav && isDropdownOpen && (
+          <div className="pl-6 border-l border-slate-200">
+            {item.childNav.map((child, index) => (
+              <NavLink
+                key={index}
+                to={`${item.route}/${child.route}`}
+                className="block text-sm text-[#1C1E53] py-2 hover:pl-2 transition"
+                onClick={closeMenu}
+              >
+                {child.name}
+                {child.district && (
+                  <span className="ml-2 text-xs text-gray-500">
+                    ({child.district})
+                  </span>
+                )}
+              </NavLink>
+            ))}
+          </div>
+        )}
+      </motion.div>
+    
   );
 };

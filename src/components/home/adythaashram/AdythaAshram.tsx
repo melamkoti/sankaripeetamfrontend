@@ -3,7 +3,7 @@ import aboutusmain from "../../../assets/images/contraction.png";
 const CardSlider: React.FC = () => {
   return (
     <div className="relative w-full overflow-hidden bg-[#E9E5DF] py-16">
-      <div className="text-center">
+      <div className="text-center my-4 md:my-6">
         <h2 className="text-2xl md:text-[32px] font-semibold ">
           Ashram Projects
         </h2>

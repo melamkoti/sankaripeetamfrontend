@@ -46,6 +46,7 @@ function SignUpCreate() {
         // Navigate based on user role
         if (role === "Admin") {
           navigate("/admin/");
+          toast.success("welcome to admin page");
         } else {
           navigate("/donationpayment");
         }
@@ -71,112 +72,112 @@ function SignUpCreate() {
   }
 
   return (
-      
-    <div className=" lg:mt-[110px] h-screen flex justify-center items-center bg-gradient-to-br from-[#f3d1c1] via-[#e9a17c] to-[#d6785d]"
-        // style={{
-        //   backgroundImage: `url(${signinimg})`,
-        //   backgroundPosition: "center",
-        //   backgroundSize: "cover",
-        // }}
-      >
-        <div className="flex flex-col  lg:w-2/6 w-5/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10 md:mr-32 mx-4 rounded-xl ">
-          <p className="md:text-2xl text-2xl font-semibold self-start py-2">Sign In</p>
+    <div
+      className=" lg:mt-[110px] h-screen flex justify-center items-center bg-gradient-to-br from-[#f3d1c1] via-[#e9a17c] to-[#d6785d]"
+      // style={{
+      //   backgroundImage: `url(${signinimg})`,
+      //   backgroundPosition: "center",
+      //   backgroundSize: "cover",
+      // }}
+    >
+      <div className="flex flex-col  lg:w-2/6 w-5/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10  mx-4 rounded-xl ">
+        <p className=" text-2xl font-semibold self-start py-2">Sign In</p>
 
-          <div className=" w-full ">
-            <form
-              className="w-full flex flex-col md:gap-2"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-col gap-1 relative">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-normal text-[#666]"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    {...register("email")}
-                    placeholder="Enter your Email"
-                    id="email"
-                    className=" border outline-none border-slate-400 focus:border-[#FFA12B]  rounded-md p-2 bg-transparent"
-                  />
-                  {errors.email && (
-                    <p className="text-red-600 text-xs absolute -bottom-4 left-1">
-                      {errors.email.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-1 relative">
-                  <label
-                    htmlFor="password"
-                    className="text-sm font-normal text-[#666]"
-                  >
-                    Password
-                  </label>
-
-                  <div className="relative">
-                    <input
-                      {...register("password")}
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter Your Password"
-                      id="password"
-                      className="border outline-none border-slate-400 focus:border-[#FFA12B] w-full p-2 rounded-md bg-transparent "
-                    />
-                    <button
-                      type="button"
-                      onClick={togglepassword}
-                      className="absolute right-4 bottom-3.5 "
-                    >
-                      <img
-                        src={showPassword ? eyeshow : eyehide}
-                        alt=""
-                        className="w-4"
-                      />
-                    </button>
-                  </div>
-
-                  {errors.password && (
-                    <p className="text-red-600 text-xs absolute bottom-2 left-1">
-                      {errors.password.message}
-                    </p>
-                  )}
-                  <div className="flex justify-end">
-                    <NavLink
-                      to="/forgot"
-                      className="text-[#FFA12B] text-sm underline underline-offset-2  w-fit"
-                    >
-                      Forgot your Password?
-                    </NavLink>
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full flex flex-col justify-center items-center gap-1">
-                <motion.button
-                  className="bg-[#8E512C] w-full  rounded-3xl p-2 font-semibold text-white mt-2"
-                  type="submit"
-                  whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
-                  whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
+        <div className=" w-full ">
+          <form
+            className="w-full flex flex-col md:gap-2"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1 relative">
+                <label
+                  htmlFor="email"
+                  className="text-sm font-normal text-[#202020]"
                 >
-                  Sign In
-                </motion.button>
-
-                <p className="mx-auto md:mt-4  text-sm md:text-sm">
-                  Don't have an account?{" "}
-                  <NavLink
-                    to={"/signup"}
-                    className="text-[#FFA12B] underline underline-offset-2"
-                  >
-                    Sign Up
-                  </NavLink>
-                </p>
+                  Email Address
+                </label>
+                <input
+                  {...register("email")}
+                  placeholder="Enter your Email"
+                  id="email"
+                  className="text-sm  text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] bg-transparent"
+                />
+                {errors.email && (
+                  <p className="text-red-600 text-xs absolute -bottom-4 left-1">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
-            </form>
-          </div>
+
+              <div className="flex flex-col gap-1 relative">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-normal text-[#202020]"
+                >
+                  Password
+                </label>
+
+                <div className="relative">
+                  <input
+                    {...register("password")}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter Your Password"
+                    id="password"
+                    className="text-sm outline-none text-[#939393] bg-[#F7F6F4]   w-full  rounded-md px-[20px] py-[12px] bg-transparent"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglepassword}
+                    className="absolute right-4 bottom-3.5 "
+                  >
+                    <img
+                      src={showPassword ? eyeshow : eyehide}
+                      alt=""
+                      className="w-4"
+                    />
+                  </button>
+                </div>
+
+                {errors.password && (
+                  <p className="text-red-600 text-xs absolute bottom-2 left-1">
+                    {errors.password.message}
+                  </p>
+                )}
+                <div className="flex justify-end">
+                  <NavLink
+                    to="/forgot"
+                    className="text-[#FFA12B] text-sm underline underline-offset-2  w-fit"
+                  >
+                    Forgot your Password?
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full flex flex-col justify-center items-center gap-1">
+              <motion.button
+                className="bg-[#8E512C] w-full  rounded-md p-2 font-semibold text-white mt-2"
+                type="submit"
+                whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
+              >
+                Sign In
+              </motion.button>
+
+              <p className="mx-auto md:mt-4  text-sm md:text-sm">
+                Don't have an account?{" "}
+                <NavLink
+                  to={"/signup"}
+                  className="text-[#FFA12B] underline underline-offset-2"
+                >
+                  Sign Up
+                </NavLink>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
+    </div>
   );
 }
 

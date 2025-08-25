@@ -4,6 +4,7 @@ import DonationImg3 from "../../../assets/images/donate-3.jpeg";
 import DonationImg4 from "../../../assets/images/donate-4.jpeg";
 import DonationImg5 from "../../../assets/images/donate-5.jpeg";
 import DonationImg6 from "../../../assets/images/donate-6.png";
+import Virkshaseva from "../../../assets/images/vrukshaseva.png"
 export const DonationsCardData = [
   {
     id: 1,
@@ -48,4 +49,12 @@ export const DonationsCardData = [
     content:
       "Soil rejuvenation involves restoring the health and fertility of soil through sustainable practices such as organic farming, crop rotation, composting, and reducing chemical inputs. By focusing on enriching the soil's natural nutrients and promoting biodiversity, soil rejuvenation ensures long-term agricultural productivity, combats land degradation, and supports a balanced ecosystem.",
   },
+  {
+    id: 7,
+
+    img: Virkshaseva,
+    title: "VrukshaSeva",
+    content:
+      "Vruksha Seva translates to 'tree service' or 'tree care,' emphasizing the protection and nurturing of trees as a form of environmental and spiritual duty."
+  }
 ];

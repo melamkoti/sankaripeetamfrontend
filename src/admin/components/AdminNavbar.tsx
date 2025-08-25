@@ -18,7 +18,7 @@ const AdminNavbar = () => {
   };
   return (
     <div>
-      <nav className="bg-red-600 text-white shadow-sm fixed w-full z-50">
+      <nav className="bg-red-600 text-white shadow-sm fixed max-w-[1440px] w-full z-50 mx-auto">
         <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo or Dashboard Title */}
@@ -82,6 +82,16 @@ const AdminNavbar = () => {
                   Users List
                 </NavLink>
                 <NavLink
+                  to="/admin/manuval"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "bg-red-700 px-3 py-2 rounded-md text-sm font-medium"
+                      : "text-white hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  }
+                >
+                  Receipt
+                </NavLink>
+                <NavLink
                   to="/admin/contactdetails"
                   className={({ isActive }) =>
                     isActive
@@ -138,7 +148,7 @@ const AdminNavbar = () => {
                     : "text-white hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 }
               >
-                  Puja Cards
+                Puja Cards
               </NavLink>
               <NavLink
                 to="/admin/activities"
@@ -172,6 +182,16 @@ const AdminNavbar = () => {
                 }
               >
                 Users List
+              </NavLink>
+              <NavLink
+                to="/admin/manuval"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-red-700 px-3 py-2 rounded-md text-sm font-medium"
+                    : "text-white hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                }
+              >
+                Receipt
               </NavLink>
               <NavLink
                 to="/admin/contactdetails"

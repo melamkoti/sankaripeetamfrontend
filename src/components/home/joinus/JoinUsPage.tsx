@@ -31,7 +31,7 @@ function JoinUsPage() {
           />
           <button
             type="submit"
-            className="inline-flex h-12 px-8 justify-center items-center gap-2 rounded-md font-medium text-white transition w-4/6 md:w-4/6 lg:w-2/6 mt-2 md:mt-4"
+            className="inline-flex h-12 px-8 justify-center items-center gap-2 rounded-md font-medium text-[#E9E5DF] transition w-4/6 md:w-4/6 lg:w-3/6 mt-2 md:mt-4"
             style={{
               background:
                 "linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), #0A7EB4",
@@ -62,7 +62,7 @@ function JoinUsPage() {
             online meditations and events from Yogoda Satsanga Society of India.
           </p>
         </div>
-        <button className="bg-[#E9E5DF] text-[#4A5A20] tracking-tight py-3 px-6 rounded-md font-medium hover:bg-gray-200 transition w-4/6 md:w-4/6 lg:w-2/6 ">
+        <button className="bg-[#E9E5DF] text-[#4A5A20] tracking-tight py-3 px-6 rounded-md font-medium hover:bg-gray-200 transition w-4/6 md:w-4/6 lg:w-3/6 ">
           Register here
         </button>
       </div>

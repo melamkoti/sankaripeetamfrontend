@@ -22,10 +22,10 @@ export default function DonationsComp() {
   };
 
   return (
-    <div className="flex flex-col gap-6 ">
+    <div className="flex flex-col gap-6 max-w-[1280px] mx-auto">
       <div className="flex justify-center items-center py-4 bg-[#E9E5DF] ">
         <div
-          className="w-[90%] rounded-xl bg-center bg-cover bg-no-repeat 
+          className="w-full rounded-xl bg-center bg-cover bg-no-repeat 
              h-[200px] sm:h-[300px] md:h-[500px] lg:h-[740px] relative"
           style={{
             backgroundImage: `url(${DonationsBannerImg})`,
@@ -38,13 +38,13 @@ export default function DonationsComp() {
         </div>
       </div>
       <div className="mx-auto text-center p-12 ">
-        <h1 className="text-3xl font-bold">DONATE US TO HELP</h1>
+        <h1 className=" text-2xl md:text-3xl font-bold">DONATE US TO HELP</h1>
         <p className="text-[12px] font-bold tracking-wider text-[#DB4242]">
           Make a Donation
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 pb-8 mx-auto max-w-7xl px-4">
+      <div className="grid grid-cols-1 gap-6 pb-8 mx-auto  px-4">
         {DonationsCardData.map((item, index) => (
           <div
             key={item.id}
@@ -52,7 +52,7 @@ export default function DonationsComp() {
               index % 2 !== 0 ? "md:flex-row-reverse" : ""
             } bg-[#F8F8F8] rounded-lg overflow-hidden shadow-md`}
           >
-            <div className="md:w-[300px] w-full">
+            <div className="md:w-[400px] md:h-[300px] w-full">
               <img
                 className="w-full h-full object-cover aspect-[4/3] md:aspect-auto"
                 src={item.img}

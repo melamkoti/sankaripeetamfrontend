@@ -30,9 +30,10 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange = () => {} }) => {
           key={index}
           ref={(el) => (inputs.current[index] = el)}
           type="text"
-          maxLength={1}
+           maxLength={1}
+
           onChange={(e) => handleChange(e, index)}
-          className="w-12 h-12 border-2 border-[#FFA12B] rounded-lg text-center text-lg outline-none focus:border-[#FFA12B] focus:bg-orange-100"
+          className="w-12 h-12 border-2 border-[#fdae51] rounded-lg text-center text-lg outline-none focus:border-[#FFA12B] focus:bg-orange-100"
         />
       ))}
     </div>
@@ -40,3 +41,6 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange = () => {} }) => {
 };
 
 export default OTPInput;
+
+
+

@@ -11,7 +11,7 @@ type Contact = {
   createdAt: string;
   updatedAt: string;
 };
-export const UserInquiryList = () => {
+function  UserInquiryList() {
   const [contact, setContact] = useState<Contact[]>([]);
   const userInquirydetailsservice = UserModuleAPI.ContactDetailsGet;
 
@@ -68,3 +68,4 @@ export const UserInquiryList = () => {
 
   );
 };
+export default UserInquiryList;
