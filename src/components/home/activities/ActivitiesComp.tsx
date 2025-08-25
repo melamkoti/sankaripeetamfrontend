@@ -24,7 +24,7 @@ function ActivitiesComp() {
   return (
     <div className="flex flex-col w-full p-4 md:p-12 lg:p-20 gap-4 ">
       {/* Heading */}
-      <div className="text-center mt-4">
+      <div className="text-center my-4 md:my-6">
         <h2 className="text-2xl md:text-[32px] font-semibold ">
           Sanathana Sankari Peetam - Activities
         </h2>

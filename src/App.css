@@ -49,3 +49,42 @@ select {
   background-position: right 1rem center;
   background-size: 1em;
 }
+
+
+
+
+body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 146px; /* Initial padding for the full header */
+            transition: padding-top 0.3s ease;
+        }
+        body.scrolled {
+            padding-top: 56px; /* Reduced padding when header is hidden */
+        }
+        .font-oswald {
+            font-family: 'Oswald', sans-serif;
+        }
+        .font-telugu {
+            font-family: 'Tiro Telugu', serif;
+        }
+        .navbar-hidden {
+            transform: translateY(-100%);
+        }
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            transition: transform 0.3s ease;
+        }
+        .logo {
+            transition: all 0.3s ease;
+        }
+        .scrolled .logo {
+            width: 40px;
+            height: 40px;
+        }
+        .content-section {
+            height: 200vh;
+            background: linear-gradient(to bottom, #f8fafc, #cbd5e1);
+        }

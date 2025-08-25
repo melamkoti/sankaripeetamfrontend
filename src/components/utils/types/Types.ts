@@ -13,13 +13,16 @@ export const IconPropSchema = z.object({
 
 export type IconPropType = z.infer<typeof IconPropSchema>;
 
+export interface ChildNavItem {
+  name: string;
+  route: string;
+  district?: string;
+}
+
 export interface NavListItem {
   navLink: string;
   route: string;
-  childNav?: string[];
-  isImage?: boolean;
-  imageSrc?: string;
-  altText?: string;
+  childNav?: ChildNavItem[];
 }
 
 export interface Content {

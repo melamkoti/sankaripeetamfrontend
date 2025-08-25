@@ -72,8 +72,8 @@ function SignUpCreate() {
    
     <div
      className=" lg:mt-[110px] h-screen flex justify-center items-center bg-gradient-to-br from-[#f3d1c1] via-[#e9a17c] to-[#d6785d]">
-        <div className="flex flex-col  lg:w-2/6 w-5/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10 md:mr-32 mx-4 rounded-xl ">
-        <h2 className="text-2xl font-bold text-gray-800  self-start py-2">
+        <div className="flex flex-col  lg:w-2/6 w-5/6 md:w-3/6 justify-center items-center bg-white opacity-90 gap-2 p-4 z-10  mx-4 rounded-xl ">
+        <h2 className="text-2xl font-semibold  self-start py-2">
           Create an Account
         </h2>
 
@@ -115,13 +115,13 @@ function SignUpCreate() {
           {/* Secret Key (Admin only) */}
           {selectedRole === "Admin" && (
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-normal text-[#202020]">
                 Secret Key
               </label>
               <input
                 {...register("secretKey")}
                 placeholder="Enter your Secret Key"
-                className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-[#FFA12B] focus:border-[#FFA12B] outline-none"
+                className=" text-[#939393] bg-[#F7F6F4]   text-sm outline-none w-full  rounded-md px-[20px] py-[8px] bg-transparent"
               />
               {errors.secretKey && (
                 <p className="text-red-500 text-xs mt-1">
@@ -133,13 +133,13 @@ function SignUpCreate() {
 
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-normal text-[#202020]">
               Full Name
             </label>
             <input
               {...register("name")}
               placeholder="Enter your Name"
-              className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-[#FFA12B] focus:border-[#FFA12B] outline-none"
+                  className=" text-sm w-full text-[#939393] bg-[#F7F6F4] outline-none    rounded-md px-[20px] py-[8px] bg-transparent"
             />
             {errors.name && (
               <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
@@ -148,13 +148,13 @@ function SignUpCreate() {
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-normal text-[#202020]">
               Email Address
             </label>
             <input
               {...register("email")}
               placeholder="Enter your Email"
-              className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-[#FFA12B] focus:border-[#FFA12B] outline-none"
+                  className=" text-sm w-full text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[8px] bg-transparent"
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">
@@ -165,7 +165,7 @@ function SignUpCreate() {
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-normal text-[#202020]">
               Password
             </label>
             <div className="relative">
@@ -173,7 +173,7 @@ function SignUpCreate() {
                 {...register("password")}
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter Your Password"
-                className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-[#FFA12B] focus:border-[#FFA12B] outline-none"
+                className=" text-sm block w-full text-[#939393] bg-[#F7F6F4]     outline-none rounded-md px-[20px] py-[8px] bg-transparent"
               />
               <button
                 type="button"

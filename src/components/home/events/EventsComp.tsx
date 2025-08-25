@@ -44,7 +44,7 @@ function EventsComp() {
     <div className="bg-[#E9E5DF] p-4 md:px-8 flex flex-col items-center gap-4  ">
       {/* Header */}
 
-      <div className="text-center mt-4">
+      <div className="text-center my-4 md:my-6">
         <h2 className="text-2xl md:text-[32px] font-semibold ">Events</h2>
         <p className=" text-sm md:text-[20px] font-normal mt-2">
           {" "}

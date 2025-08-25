@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 
 import { useEffect, useState } from "react";
 import { UserModuleAPI } from "../../services/AppEndPoints";
@@ -76,8 +75,7 @@ const GalleryMain = () => {
               (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
             )
             .map((item, index) => (
-              <motion.div
-                whileHover={{ scale: 1.03, transition: { duration: 0.25 } }}
+              <div
                 key={index}
                 className="flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden cursor-pointer lg:min-h-[292px] lg:max-h-[292px]"
                 onClick={() => handleCardClick(item.date)}
@@ -86,7 +84,7 @@ const GalleryMain = () => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="md:w-1/4 w-full h-[292px] object-cover"
+                  className="md:w-2/4 w-full h-[292px] object-cover"
                 />
 
                 {/* Right Content */}
@@ -137,7 +135,7 @@ const GalleryMain = () => {
                     </button>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
         </div>
       </div>

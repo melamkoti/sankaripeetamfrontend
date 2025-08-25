@@ -1,7 +1,4 @@
-import footerCallImg from "../../../assets/images/footer-phone.svg";
-import footerMailImg from "../../../assets/images/footer-mail.svg";
-import footerLocationImg from "../../../assets/images/footer-location.svg";
-import footerOmImg from "../../../assets/images/footer-om.svg";
+
 import footerInsta from "../../../assets/svg/footer-insta.svg";
 import footerWhatsApp from "../../../assets/svg/footer-whatsapp.svg";
 import footerYouTube from "../../../assets/svg/footer-youtube.svg";
@@ -89,7 +86,7 @@ export default function FooterComp() {
       </div>
 
       {/* Social Icons */}
-      <div className="flex gap-3 mt-2">
+      <div className="flex gap-4 mt-6">
         <NavLink to="https://www.instagram.com/narasaiah_acharya?igsh=aThtbzIxeTIxYjZu&utm_source=qr" target="_blank"
           className="p-2 bg-[#D9D9D9] rounded-full cursor-pointer hover:scale-110 transition">
           <img className="w-6" src={footerInsta} alt="Instagram" />

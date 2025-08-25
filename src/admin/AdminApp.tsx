@@ -1,25 +1,25 @@
-import AdminNavbar from "./components/AdminNavbar";
+// import AdminNavbar from "./components/AdminNavbar";
 import { Routes, Route } from "react-router-dom";
 import Events from "./pages/Events";
 import Post from "./pages/Post";
 import Activities from "./pages/Activities";
 import Users from "./pages/Users";
-import Gallery from "./pages/Gallery"
-import { NotFound } from "./components/NotFound";
-import { UserInquiryList } from "./pages/UserInquiry";
+import Gallery from "./pages/Gallery";
+import UserInquiryList from "./pages/UserInquiry";
+import ManuvalDonationReceipt from "../admin/components/manuvalReceipt/AdminManualReceipt";
 const AdminApp = () => {
   return (
-    <div className="bg-gray-200 h-screen">
-      <AdminNavbar />
-        <Routes>
-          <Route path="" element={<Events />} />
-          <Route path="activities" element={<Activities />} />
-          <Route path="post" element={<Post />} />
-          <Route path="users" element={<Users />} />
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="contactdetails" element={<UserInquiryList />}/>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+    <div className="">
+      {/* <AdminNavbar /> */}
+      <Routes>
+        <Route path="" element={<Events />} />
+        <Route path="activities" element={<Activities />} />
+        <Route path="post" element={<Post />} />
+        <Route path="users" element={<Users />} />
+        <Route path="gallery" element={<Gallery />} />
+        <Route path="contactdetails" element={<UserInquiryList />} />
+        <Route path="manuval" element={<ManuvalDonationReceipt />} />
+      </Routes>
     </div>
   );
 };

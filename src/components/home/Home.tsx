@@ -1,5 +1,5 @@
 import ActivitiesPage from "./activities/ActivitiesPage";
-import AdythaAshramPage from "./construtionCard/CardSlider";
+import AdythaAshramPage from "./adythaashram/AdythaAshram";
 import EventsPage from "./events/EventsPage";
 import FounderComp from "./founder/FounderComp";
 import SlokamComp from "./founder/Slokam";

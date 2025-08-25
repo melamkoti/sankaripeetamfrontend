@@ -56,14 +56,14 @@ const PujaCard = () => {
       {/* Arrows */}
       <button
         onClick={handleScrollLeft}
-        className="absolute top-1/2 left-2 transform -translate-y-1/2 z-20 bg-white hover:bg-[#ffdf7f] transition-all duration-300 rounded-full p-3 shadow-xl"
+        className="absolute top-1/2 left-2 transform -translate-y-1/2 z-20 bg-white hover:bg-[#fdae51] transition-all duration-300 rounded-full p-3 shadow-xl"
       >
         <img src={LeftYarrow} alt="Scroll Left" className="w-5 h-5" />
       </button>
 
       <button
         onClick={handleScrollRight}
-        className="absolute top-1/2 right-2 transform -translate-y-1/2 z-20 bg-white hover:bg-[#ffdf7f] transition-all duration-300 rounded-full p-3 shadow-xl"
+        className="absolute top-1/2 right-2 transform -translate-y-1/2 z-20 bg-white hover:bg-[#fdae51] transition-all duration-300 rounded-full p-3 shadow-xl"
       >
         <img src={RightYarrow} alt="Scroll Right" className="w-5 h-5" />
       </button>
@@ -87,7 +87,7 @@ const PujaCard = () => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="rounded-lg w-full object-cover h-[180px]"
+                  className="rounded-t-lg w-full object-cover h-[180px]"
                 />
                 <div className="mt-4 text-center p-4">
                   <p className="flex gap-1">
