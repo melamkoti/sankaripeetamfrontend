@@ -183,12 +183,14 @@ const AdminNavbar = () => {
               >
                 Users List
               </NavLink>
+
               <NavLink
                 to="/admin/manuval"
+                onClick={toggleMenu}
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-red-700 px-3 py-2 rounded-md text-sm font-medium"
-                    : "text-white hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    ? "bg-red-700 block px-3 py-2 rounded-md text-base font-medium"
+                    : "text-white hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 }
               >
                 Receipt

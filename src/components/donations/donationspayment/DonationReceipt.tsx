@@ -244,12 +244,20 @@ const DonationReceipt = ({
             <h2 className="text-lg sm:text-xl font-bold underline">
               DONATION RECEIPT
             </h2>
-            <p className="text-xs sm:text-sm  mt-2 ">
-              Receipt No:{" "}
-              <span className=" font-semibold">
-                {receiptId || "Generating..."}
-              </span>
-            </p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mt-1">
+              <p className="text-xs sm:text-sm  mt-2 ">
+                Receipt No:{" "}
+                <span className=" font-semibold">
+                  {receiptId || "Generating..."}
+                </span>
+              </p>
+              <p className="text-xs sm:text-sm  mt-2">
+                Transaction ID: 
+                <span className=" font-semibold">
+                 {paymentData?.razorpay_payment_id || "N/A"}
+                </span>
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-6">
@@ -350,7 +358,8 @@ const DonationReceipt = ({
             onClick={handlePrint}
             className="px-4 sm:px-6 py-2 bg-green-600 text-white rounded-lg shadow text-xs sm:text-base no-print"
           >
-            Print           </motion.button>
+            Print{" "}
+          </motion.button>
           {/* Save Receipt */}
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -358,7 +367,7 @@ const DonationReceipt = ({
             onClick={handleDownload}
             className="px-4 sm:px-6 py-2 bg-orange-600 text-white rounded-lg shadow text-xs sm:text-base no-print"
           >
-            Download 
+            Download
           </motion.button>
           {/* Share Receipt */}
           <motion.button
@@ -367,7 +376,7 @@ const DonationReceipt = ({
             onClick={handleShare}
             className="px-4 sm:px-6 py-2 bg-blue-600 text-white rounded-lg shadow text-xs sm:text-base no-print"
           >
-            Share 
+            Share
           </motion.button>
 
           {/* Close */}

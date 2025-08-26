@@ -100,7 +100,7 @@ function SetPassword() {
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 id="newpassword"
-                  className="text-sm text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] bg-transparent"
+                  className="text-sm text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] "
               />
               <button
                 type="button"
@@ -135,7 +135,7 @@ function SetPassword() {
                 type={showReenterPassword ? "text" : "password"}
                 placeholder="Re-enter your password"
                 id="confirmPassword"
-                  className="text-sm text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] bg-transparent"
+                  className="text-sm text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] "
               />
               <button
                 type="button"

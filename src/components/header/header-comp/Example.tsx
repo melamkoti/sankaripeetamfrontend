@@ -1,73 +1,50 @@
-import { useRef, useEffect, useState, RefObject } from "react";
-import { motion, useCycle } from "framer-motion";
-import { useDimensions } from "./UseDimensions";
-import { MenuToggle } from "./MenuToggle";
-import { Navigation } from "./Navigation";
-
-const sidebar = {
-  open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
-    transition: {
-      type: "spring",
-      stiffness: 20,
-      restDelta: 2,
-    },
-  }),
-  closed: {
-    clipPath: "circle(30px at 40px 40px)",
-    transition: {
-      delay: 0.5,
-      type: "spring",
-      stiffness: 400,
-      damping: 40,
-    },
-  },
-};
+import { useRef, useEffect, useState } from "react";
+import { MenuItem } from "./MenuItem";
+import { NavListMobileData } from "./Navigation";
 
 export const Example = () => {
-  const [isOpen, toggleOpen] = useCycle(false, true);
-  const containerRef: RefObject<HTMLDivElement> = useRef(null);
-  const { height } = useDimensions(containerRef);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // close menu when clicking outside
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      const targetNode = event.target as Node;
       if (
         containerRef.current &&
-        !containerRef.current.contains(targetNode) &&
-        isOpen
+        !containerRef.current.contains(event.target as Node)
       ) {
-        toggleOpen();
+        setIsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [containerRef, isOpen, toggleOpen]);
-
-  const onAnimationStart = () => {
-    setIsAnimating(true);
-  };
-
-  const onAnimationComplete = () => {
-    setIsAnimating(false);
-  };
+  }, []);
 
   return (
-    <motion.nav
-      initial={false}
-      animate={isOpen ? "open" : "closed"}
-      custom={height}
+    <nav
       ref={containerRef}
-      className="absolute top-2 right-2"
-      onAnimationStart={onAnimationStart}
-      onAnimationComplete={onAnimationComplete}
+      className={`absolute top-2 right-2  ${!isOpen && "bg-none"} `}
     >
-      <motion.div className="background" variants={sidebar} />
-      {isOpen || isAnimating ? <Navigation closeMenu={toggleOpen} /> : null}
-      <MenuToggle toggle={toggleOpen} />
-    </motion.nav>
+      {/* Toggle button */}
+      <button onClick={() => setIsOpen((prev) => !prev)} className="p-3 ">
+        {isOpen ? "✖" : "☰"}
+      </button>
+
+      {/* Sidebar */}
+      {isOpen && (
+        <div className="fixed top-12 right-0  mt-2 w-64 bg-white shadow-lg   p-4 overflow-y-auto h-full">
+          {NavListMobileData.map((item, idx) => (
+            <MenuItem
+              key={idx}
+              item={item}
+              closeMenu={() => setIsOpen(false)}
+            />
+          ))}
+        </div>
+      )}
+    </nav>
   );
 };
+

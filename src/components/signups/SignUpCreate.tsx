@@ -121,7 +121,7 @@ function SignUpCreate() {
               <input
                 {...register("secretKey")}
                 placeholder="Enter your Secret Key"
-                className=" text-[#939393] bg-[#F7F6F4]   text-sm outline-none w-full  rounded-md px-[20px] py-[8px] bg-transparent"
+                className=" text-[#939393] bg-[#F7F6F4]   text-sm outline-none w-full  rounded-md px-[20px] py-[8px] "
               />
               {errors.secretKey && (
                 <p className="text-red-500 text-xs mt-1">
@@ -139,7 +139,7 @@ function SignUpCreate() {
             <input
               {...register("name")}
               placeholder="Enter your Name"
-                  className=" text-sm w-full text-[#939393] bg-[#F7F6F4] outline-none    rounded-md px-[20px] py-[8px] bg-transparent"
+                  className=" text-sm w-full text-[#939393] bg-[#F7F6F4] outline-none    rounded-md px-[20px] py-[8px] "
             />
             {errors.name && (
               <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
@@ -154,7 +154,7 @@ function SignUpCreate() {
             <input
               {...register("email")}
               placeholder="Enter your Email"
-                  className=" text-sm w-full text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[8px] bg-transparent"
+                  className=" text-sm w-full text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[8px] "
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">
@@ -173,7 +173,7 @@ function SignUpCreate() {
                 {...register("password")}
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter Your Password"
-                className=" text-sm block w-full text-[#939393] bg-[#F7F6F4]     outline-none rounded-md px-[20px] py-[8px] bg-transparent"
+                className=" text-sm block w-full text-[#939393] bg-[#F7F6F4]     outline-none rounded-md px-[20px] py-[8px] "
               />
               <button
                 type="button"

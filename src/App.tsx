@@ -41,6 +41,7 @@ import AdythaAshram from "./components/adythaAsharam/AdythaAshram";
 import AdythaAshramPage from "./components/ourbranches/AdythaAshram";
 import NotFound from "./components/PageNotFound";
 import AdminNav  from "./admin/components/AdminNavbar";
+import MobileUserProfile from "./components/user/MobileProfile";
 const authRoutes = [
   "/signup",
   "/login",
@@ -90,6 +91,8 @@ function App() {
             <Route path="peetadhipathi" element={<Aboutpeetadhipathi />} />
           </Route>
           <Route path="/events" element={<UpComingEvents />} />
+
+          
           <Route path="/activities" element={""}>
             <Route path="parihara" element={<PariharaPooja />} />
             <Route path="adyatmikam" element={<Adyatmikam />} />
@@ -104,7 +107,9 @@ function App() {
           <Route path="/donate" element={<DonateNow />} />
           <Route path="/donationpayment" element={<DonationPaymentPage />} />
           <Route path="/advythaashram" element={<AdythaAshram />} />
+          <Route path="/mobileuserprofile" element={<MobileUserProfile />} />
 
+          {/* Our Branches Routes */}
           <Route path="/branch" element={""}>
             <Route
               path="Advytha_Ashram_Ongole"

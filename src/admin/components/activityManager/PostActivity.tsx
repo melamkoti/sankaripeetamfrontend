@@ -7,7 +7,7 @@ const ActivitiesForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [color, setColor] = useState("#ffffff");
+  const [link, setLink] = useState("");
   const [isEnable, setIsEnable] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +15,7 @@ const ActivitiesForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !description || !image || !color) {
+    if (!title || !description || !image || !link) {
       alert("All fields are required!");
       return;
     }
@@ -24,14 +24,14 @@ const ActivitiesForm = () => {
       setTitle("");
       setDescription("");
       setImage(null);
-      setColor("#ffffff");
+      setLink("");
       setIsEnable(true);
     };
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     formData.append("image", image);
-    formData.append("color", color);
+    formData.append("color", link);
     formData.append("isEnable", isEnable.toString());
 
     setLoading(true);
@@ -112,17 +112,17 @@ const ActivitiesForm = () => {
         {/* Color Field */}
         <div>
           <label
-            htmlFor="color"
+            htmlFor="link"
             className="block font-medium mb-1 text-gray-600"
           >
-            Card Color (Hex)
+            Url Link
           </label>
           <input
             type="text"
-            id="color"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-            placeholder="#ffffff"
+            id="link"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            placeholder="url link"
             className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
