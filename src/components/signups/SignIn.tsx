@@ -100,7 +100,7 @@ function SignUpCreate() {
                   {...register("email")}
                   placeholder="Enter your Email"
                   id="email"
-                  className="text-sm  text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] bg-transparent"
+                  className="text-sm  text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] "
                 />
                 {errors.email && (
                   <p className="text-red-600 text-xs absolute -bottom-4 left-1">
@@ -123,7 +123,7 @@ function SignUpCreate() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter Your Password"
                     id="password"
-                    className="text-sm outline-none text-[#939393] bg-[#F7F6F4]   w-full  rounded-md px-[20px] py-[12px] bg-transparent"
+                    className="text-sm outline-none text-[#939393] bg-[#F7F6F4]   w-full  rounded-md px-[20px] py-[12px] "
                   />
                   <button
                     type="button"

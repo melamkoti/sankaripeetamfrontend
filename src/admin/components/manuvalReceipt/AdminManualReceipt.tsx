@@ -116,6 +116,8 @@ const AdminManualReceipt = () => {
   }
 
   return (
+    <div className="my-4 ">
+      <h1 className="lg:text-center text-lg px-4 font-semibold">Manuval receipt Generate</h1>
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-8 p-4 lg:p-12 lg:w-[60vw] mx-2 lg:mx-auto my-4 bg-white rounded-lg shadow-lg"
@@ -271,6 +273,7 @@ const AdminManualReceipt = () => {
         {isSubmitting ? "Processing..." : `Generate Receipt`}
       </motion.button>
     </form>
+    </div>
   );
 };
 

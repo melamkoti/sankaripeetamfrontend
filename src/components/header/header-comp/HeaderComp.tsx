@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import LogoImg from "../../../assets/images/footer-logo.svg";
 import NavListComp from "./NavListComp";
-import { Example } from "./Example.tsx";
+import { Example } from "./Example";
 import { useEffect, useRef, useState, useContext } from "react";
 import UserProfile from "../../user/UserProfile.tsx";
 import { useLocation } from "react-router-dom";

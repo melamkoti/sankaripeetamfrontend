@@ -11,7 +11,7 @@ type Contact = {
   createdAt: string;
   updatedAt: string;
 };
-function  UserInquiryList() {
+function UserInquiryList() {
   const [contact, setContact] = useState<Contact[]>([]);
   const userInquirydetailsservice = UserModuleAPI.ContactDetailsGet;
 
@@ -32,40 +32,43 @@ function  UserInquiryList() {
     return date.toLocaleString();
   };
   return (
-    <div className="main_head p-4">
-  <h1 className="text-2xl font-bold text-center mb-4">Users Inquiry Details</h1>
+    <div className="my-4 ">
+      <h1 className="lg:text-center text-lg px-4 pb-2 font-semibold">
+        Users Inquiry Details
+      </h1>
 
-  {/* Scrollable container */}
-  <div className="overflow-y-auto max-h-[500px] border rounded-md">
-    <table className="table-auto w-full bg-white text-sm">
-      <thead className="sticky top-0 bg-gray-100 ">
-        <tr>
-          <th className="border px-4 py-2">No</th>
-          <th className="border px-4 py-2">Name</th>
-          <th className="border px-4 py-2">Email</th>
-          <th className="border px-4 py-2">Phone Number</th>
-          <th className="border px-4 py-2">Message</th>
-          <th className="border px-4 py-2">CreatedAt</th>
-        </tr>
-      </thead>
-      <tbody>
-        {contact.map((user, index) => (
-          <tr key={index} className="hover:bg-gray-50">
-            <td className="border px-4 py-2">{index + 1}</td>
-            <td className="border px-4 py-2">
-              {user.firstName} {user.lastName}
-            </td>
-            <td className="border px-4 py-2">{user.email}</td>
-            <td className="border px-4 py-2">{user.phoneNumber}</td>
-            <td className="border px-4 py-2">{user.message}</td>
-            <td className="border px-4 py-2">{formatDate(user.createdAt)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
-
+      {/* Scrollable container */}
+      <div className="overflow-y-auto max-h-[500px] border rounded-md">
+        <table className="table-auto w-full bg-white text-sm">
+          <thead className="sticky top-0 bg-gray-100 ">
+            <tr>
+              <th className="border px-4 py-2">No</th>
+              <th className="border px-4 py-2">Name</th>
+              <th className="border px-4 py-2">Email</th>
+              <th className="border px-4 py-2">Phone</th>
+              <th className="border px-4 py-2">Message</th>
+              <th className="border px-4 py-2">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {contact.map((user, index) => (
+              <tr key={index} className="hover:bg-gray-50">
+                <td className="border px-4 py-2">{index + 1}</td>
+                <td className="border px-4 py-2">
+                  {user.firstName} {user.lastName}
+                </td>
+                <td className="border px-4 py-2">{user.email}</td>
+                <td className="border px-4 py-2">{user.phoneNumber}</td>
+                <td className="border px-4 py-2">{user.message}</td>
+                <td className="border px-4 py-2">
+                  {formatDate(user.createdAt)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
-};
+}
 export default UserInquiryList;

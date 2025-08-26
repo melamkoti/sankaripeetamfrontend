@@ -79,7 +79,7 @@ function ForgotPassword() {
                 {...register("email")}
                 placeholder="Enter your Email"
                 id="email"
-                  className="text-sm text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] bg-transparent"
+                  className="text-sm text-[#939393] bg-[#F7F6F4] outline-none w-full    rounded-md px-[20px] py-[12px] "
               />
               {errors.email && (
                 <p className="text-red-600 text-sm absolute -bottom-5 left-2">

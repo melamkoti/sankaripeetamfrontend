@@ -150,19 +150,19 @@ const EditActivityModel = ({
           {/* Color */}
           <div>
             <label
-              htmlFor="color"
+              htmlFor="link"
               className="block text-sm font-medium mb-1 text-gray-700"
             >
-              Card Color (Hex Code)
+              Card Link
             </label>
             <input
               type="text"
-              id="color"
+              id="link"
               value={formData.color}
               onChange={(e) =>
                 setFormData({ ...formData, color: e.target.value })
               }
-              placeholder="#ffffff"
+              placeholder="url link"
               className="w-full border border-gray-300 p-2 rounded-md focus:ring-blue-400 focus:outline-none"
             />
           </div>

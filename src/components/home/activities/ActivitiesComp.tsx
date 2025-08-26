@@ -44,9 +44,8 @@ function ActivitiesComp() {
             ? "opacity-100 pointer-events-auto cursor-pointer hover:shadow-lg"
             : "opacity-30 pointer-events-none cursor-not-allowed"
         }
-        ${item.color === "#ffffff" ? "text-[#44233B]" : ""}
+        
       `}
-            style={{ backgroundColor: item.color }}
           >
             {/* Image */}
             <div className="flex-shrink-0 w-24 h-24 md:w-40 md:h-40 overflow-hidden rounded-full  shadow">
@@ -72,7 +71,7 @@ function ActivitiesComp() {
               </div>
 
               <a
-                href="/activities/parihara"
+                href={item.color}
                 className="text-[#066FAE] font-normal text-sm hover:underline md:text-[18px] tracking-tight self-center md:self-start"
               >
                 For More Details →
