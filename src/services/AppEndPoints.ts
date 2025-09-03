@@ -1,6 +1,6 @@
 //-------------BASEURL's----------------
-const BaseAPIURL = "http://localhost:3000/";
-// const BaseAPIURL = "https://api.sankaripeetam.org/";
+// const BaseAPIURL = "http://localhost:3000/";
+const BaseAPIURL = "https://api.sankaripeetam.org/";
 
 const UserRegisterAPI = {
   RegisterPost: BaseAPIURL + "user/signup",

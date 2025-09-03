@@ -7,7 +7,7 @@ export default function App() {
   return (
   <div className="relative w-full overflow-hidden ">
   {/* Mobile-specific banner */}
-  <div className="relative w-[390px] sm:w-full h-[182.813px] md:h-[80%] flex-shrink-0" style={{ aspectRatio: '32/15' }}>
+  <div className="relative w-full  h-[182.813px] md:h-[80%] flex-shrink-0" style={{ aspectRatio: '32/15' }}>
     <img 
       src={BannerImage}
       alt="Banner Background"
@@ -16,7 +16,7 @@ export default function App() {
     
     
     {/* Founder images top-right - mobile version */}
-    <div className="absolute top-4 right-6 gap-2 md:top-6 md:right-12 z-10 flex md:gap-6">
+    <div className="absolute top-4 right-4 gap-2 md:top-6 md:right-12 z-10 flex md:gap-6">
       {[1, 2, 3].map((_, i) => (
         <div
           key={i}
