@@ -222,7 +222,7 @@ const DonationReceipt = ({
           </div>
 
           {/* Addresses */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 text-[10px] sm:text-xs mb-4">
+          <div className="grid grid-cols-3 sm:grid-cols-3 gap-2 sm:gap-4 text-[10px] sm:text-xs mb-4">
             <div className="text-center sm:text-left">
               <p>REGD. NO. 106/2019</p>
               <p>PAN : AAYTS2349L</p>
@@ -241,10 +241,10 @@ const DonationReceipt = ({
 
           {/* Receipt Header */}
           <div className="text-center mb-4 border-b pb-2">
-            <h2 className="text-lg sm:text-xl font-bold underline">
+            <h2 className="text-lg md:text-xl font-bold underline">
               DONATION RECEIPT
             </h2>
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mt-1">
+            <div className="flex flex-row justify-evenly items-center gap-2 sm:gap-4 mt-1">
               <p className="text-xs sm:text-sm  mt-2 ">
                 Receipt No:{" "}
                 <span className=" font-semibold">
@@ -260,7 +260,7 @@ const DonationReceipt = ({
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-6">
+          <div className="flex flex-row gap-4 sm:gap-6 mb-6">
             {/* Payment Details */}
             <div className="flex-1 border rounded-lg p-3 sm:p-4">
               <h3 className="text-base sm:text-lg font-semibold text-orange-600 mb-2">
@@ -288,19 +288,19 @@ const DonationReceipt = ({
                 Donor Information
               </h3>
               <div className="space-y-3 text-sm sm:text-base">
-                <div className="flex flex-col sm:flex-row sm:justify-between">
+                <div className="flex  flex-row sm:justify-between">
                   <span className="font-medium">Name:</span>
                   <span className="break-words">
                     {donationData?.donationDetails?.name || "N/A"}
                   </span>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between">
+                <div className="flex flex-row justify-between">
                   <span className="font-medium">Email:</span>
                   <span className="break-words">
                     {donationData?.donationDetails?.email || "N/A"}
                   </span>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between">
+                <div className="flex flex-row justify-between">
                   <span className="font-medium">Phone:</span>
                   <span>{donationData?.donationDetails?.phone || "N/A"}</span>
                 </div>
@@ -320,7 +320,7 @@ const DonationReceipt = ({
               Donation Details
             </h3>
             <div className="space-y-2 text-sm sm:text-base">
-              <div className="flex flex-col sm:flex-row sm:justify-between">
+              <div className="flex flex-row justify-between">
                 <span className="font-medium">Category:</span>
                 <span>{donationData?.donationDetails?.category || "N/A"}</span>
               </div>
